@@ -1,1 +1,0 @@
-# credal-typescript-sdk
