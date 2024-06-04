@@ -65,7 +65,7 @@ When the API returns a non-success status code (4xx or 5xx response),
 a subclass of [CredalError](./src/errors/CredalError.ts) will be thrown:
 
 ```ts
-import { CredalError } from "@credal/sdk;
+import { CredalError } from "@credal/sdk";
 
 ...
 
@@ -145,7 +145,7 @@ running in an unsupported environment, this provides a way for you to break the 
 ensure the SDK works. 
 
 ```ts
-import { CredalClient } from "@credal/sdk;
+import { CredalClient } from "@credal/sdk";
 
 const credal = new CredalClient({
   apiKey: "...",
