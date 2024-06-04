@@ -32,8 +32,13 @@ npm install @credal/sdk
 ```typescript
 import { CredalClient } from "@credal/sdk";
 
-const client = new CredalClient({
+const credal = new CredalClient({
   apiKey: process.env.CREDAL_API_KEY,
+});
+
+await credal.copilots.sendMessage({
+    message: "Is Credal SOC 2 compliant?",
+    userEmail: "ravin@credal.ai"
 });
 ```
 
@@ -62,8 +67,10 @@ a subclass of [CredalError](./src/errors/CredalError.ts) will be thrown:
 ```ts
 import { CredalError } from "@credal/sdk;
 
+...
+
 try {
-  await credal.trigger(...);
+  await credal.copilots.sendMessage(...);
 } catch (err) {
   if (err instanceof CredalError) {
     console.log(err.statusCode); 
@@ -88,7 +95,7 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior. 
 
 ```ts
-const response = await credal.trigger(..., {
+const response = await credal.copilots.sendMessage(..., {
   maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -99,7 +106,7 @@ The SDK defaults to a 60 second timout. Use the `timeoutInSeconds` option to
 configure this behavior. 
 
 ```ts
-const response = await credal.trigger(..., {
+const response = await credal.copilots.sendMessage(..., {
   timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -111,7 +118,7 @@ in an abort signal.
 
 ```ts
 const controller = new AbortController();
-const response = await credal.trigger(..., {
+const response = await credal.copilots.sendMessage(..., {
   abortSignal: controller.signal,
 });
 controller.abort(); // aborts the request
