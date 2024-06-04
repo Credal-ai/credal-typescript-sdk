@@ -65,8 +65,6 @@ a subclass of [CredalError](./src/errors/CredalError.ts) will be thrown:
 ```ts
 import { CredalError } from "@credal/sdk";
 
-...
-
 try {
   await credal.copilots.sendMessage(...);
 } catch (err) {
