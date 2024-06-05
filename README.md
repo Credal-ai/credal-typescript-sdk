@@ -52,10 +52,8 @@ import them under the `Credal` namespace:
 ```ts
 import { Credal } from "@credal/sdk"; 
 
-const settings: CredalClient.ChannelSettings = {
-  providerId: "slack",
-  integrationIdentifier: "...",
-  credentials: { ... }
+const metadata: Credal.DocumentMetadataPatch = {
+  resourceIdentifier: "..."
 };
 ```
 
@@ -66,8 +64,6 @@ a subclass of [CredalError](./src/errors/CredalError.ts) will be thrown:
 
 ```ts
 import { CredalError } from "@credal/sdk";
-
-...
 
 try {
   await credal.copilots.sendMessage(...);
