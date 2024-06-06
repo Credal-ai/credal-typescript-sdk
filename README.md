@@ -44,6 +44,17 @@ await credal.copilots.sendMessage({
 
 Docs for the API endpoints available through the SDK can be found [here](https://docs.credal.ai/getting-started/overview). 
 
+## Self Hosted
+
+If you're on a self-hosted Credal instance, then you can customize the base url of the SDK. 
+
+```typescript
+const credal = new CredalClient({
+    apiKey: process.env.CREDAL_API_KEY,
+    environment: "https://<custom-domain>/api",
+  });
+```
+
 ## Request and Response Types
 
 The SDK exports all request and response types as TypeScript interfaces. Simply 
