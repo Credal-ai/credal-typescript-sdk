@@ -85,6 +85,76 @@ await credal.copilots.createConversation({
 </dl>
 </details>
 
+<details><summary> <code>credal.copilots.<a href="./src/api/resources/copilots/client/Client.ts">provideMessageFeedback</a>({ ...params }) -> void</code> </summary>
+
+<dl>
+
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await credal.copilots.provideMessageFeedback({
+    userEmail: "ravin@credal.ai",
+    messageId: "dd721cd8-4bf2-4b94-9869-258df3dab9dc",
+    messageFeedback: {
+        feedback: Credal.FeedbackEnum.Negative,
+        suggestedAnswer: "Yes, Credal is SOC 2 compliant.",
+    },
+});
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+**request: `Credal.ProvideMessageFeedbackRequest`**
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+**requestOptions: `Copilots.RequestOptions`**
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+</details>
+
 <details><summary> <code>credal.copilots.<a href="./src/api/resources/copilots/client/Client.ts">sendMessage</a>({ ...params }) -> Credal.SendAgentMessageResponse</code> </summary>
 
 <dl>
