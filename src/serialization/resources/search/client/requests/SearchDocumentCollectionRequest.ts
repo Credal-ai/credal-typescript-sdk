@@ -15,7 +15,7 @@ export const SearchDocumentCollectionRequest: core.serialization.Schema<
     documentCollectionId: core.serialization.string(),
     searchQuery: core.serialization.string(),
     userEmail: core.serialization.string(),
-    structuredQueryFilters: core.serialization.list(SingleFieldFilter),
+    structuredQueryFilters: core.serialization.list(SingleFieldFilter).optional(),
     searchOptions: DocumentCollectionSearchOptions.optional(),
     metadataFilterExpression: core.serialization.string().optional(),
 });
@@ -25,7 +25,7 @@ export declare namespace SearchDocumentCollectionRequest {
         documentCollectionId: string;
         searchQuery: string;
         userEmail: string;
-        structuredQueryFilters: SingleFieldFilter.Raw[];
+        structuredQueryFilters?: SingleFieldFilter.Raw[] | null;
         searchOptions?: DocumentCollectionSearchOptions.Raw | null;
         metadataFilterExpression?: string | null;
     }
