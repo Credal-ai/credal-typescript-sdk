@@ -11,4 +11,6 @@ export interface MessageReply {
     warnings: string[];
     activitySourceIdsForAudit: string[];
     insertedAuditLog: Credal.InsertedAuditLog;
+    referencedSources: Credal.ReferencedSource[];
+    messageId: string;
 }
