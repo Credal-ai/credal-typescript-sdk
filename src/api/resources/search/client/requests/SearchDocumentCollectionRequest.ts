@@ -37,7 +37,7 @@ export interface SearchDocumentCollectionRequest {
      * The structured query filters to apply to the search query.
      *
      */
-    structuredQueryFilters: Credal.SingleFieldFilter[];
+    structuredQueryFilters?: Credal.SingleFieldFilter[];
     searchOptions?: Credal.DocumentCollectionSearchOptions;
     /**
      * Legacy metadata filter expression to apply to the search query. Use structuredQueryFilters instead.
