@@ -4,6 +4,7 @@
 
 import * as Credal from "../../../index";
 
-export interface ResourceListPage {
-    resources: Credal.ResourceIdentifier[];
+export interface AuthorizedResource {
+    credalId: string;
+    externalId: Credal.ExternalResourceId;
 }
