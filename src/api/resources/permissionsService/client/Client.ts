@@ -56,7 +56,7 @@ export class PermissionsService {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -108,9 +108,8 @@ export class PermissionsService {
      * @example
      *     await credal.permissionsService.checkBulkResourcesAuthorizationForUser({
      *         resourceIdentifiers: [{
-     *                 type: "external-resource-id",
-     *                 externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
-     *                 resourceType: Credal.ResourceType.GoogleDriveItem
+     *                 type: "url",
+     *                 url: "https://docs.google.com/document/d/170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr/edit"
      *             }, {
      *                 type: "external-resource-id",
      *                 externalResourceId: "sfsdfvr54UvyslPVWkQFOA0dfsdfsdflgNycFmdZJQr",
@@ -133,7 +132,7 @@ export class PermissionsService {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -190,7 +189,7 @@ export class PermissionsService {
     public async listCachedAuthorizedResourcesForUser(
         request: Credal.ListCachedAuthorizedResourcesForUserRequest,
         requestOptions?: PermissionsService.RequestOptions
-    ): Promise<Credal.ResourceListPage> {
+    ): Promise<Credal.AuthorizedResourceListPage> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
@@ -201,7 +200,7 @@ export class PermissionsService {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -214,7 +213,7 @@ export class PermissionsService {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.ResourceListPage.parseOrThrow(_response.body, {
+            return await serializers.AuthorizedResourceListPage.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

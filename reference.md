@@ -633,9 +633,8 @@ Admin endpoint to check whether the specified user is authorized to read the spe
 await credal.permissionsService.checkBulkResourcesAuthorizationForUser({
     resourceIdentifiers: [
         {
-            type: "external-resource-id",
-            externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
-            resourceType: Credal.ResourceType.GoogleDriveItem,
+            type: "url",
+            url: "https://docs.google.com/document/d/170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr/edit",
         },
         {
             type: "external-resource-id",
@@ -690,7 +689,7 @@ await credal.permissionsService.checkBulkResourcesAuthorizationForUser({
 </dl>
 </details>
 
-<details><summary> <code>credal.permissionsService.<a href="./src/api/resources/permissionsService/client/Client.ts">listCachedAuthorizedResourcesForUser</a>({ ...params }) -> Credal.ResourceListPage</code> </summary>
+<details><summary> <code>credal.permissionsService.<a href="./src/api/resources/permissionsService/client/Client.ts">listCachedAuthorizedResourcesForUser</a>({ ...params }) -> Credal.AuthorizedResourceListPage</code> </summary>
 
 <dl>
 

@@ -8,9 +8,8 @@ import * as Credal from "../../../../index";
  * @example
  *     {
  *         resourceIdentifiers: [{
- *                 type: "external-resource-id",
- *                 externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
- *                 resourceType: Credal.ResourceType.GoogleDriveItem
+ *                 type: "url",
+ *                 url: "https://docs.google.com/document/d/170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr/edit"
  *             }, {
  *                 type: "external-resource-id",
  *                 externalResourceId: "sfsdfvr54UvyslPVWkQFOA0dfsdfsdflgNycFmdZJQr",

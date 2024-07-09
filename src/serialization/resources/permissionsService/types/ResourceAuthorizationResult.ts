@@ -5,19 +5,21 @@
 import * as serializers from "../../../index";
 import * as Credal from "../../../../api/index";
 import * as core from "../../../../core";
-import { ResourceIdentifier } from "../../common/types/ResourceIdentifier";
+import { ExternalResourceId } from "../../common/types/ExternalResourceId";
 
 export const ResourceAuthorizationResult: core.serialization.ObjectSchema<
     serializers.ResourceAuthorizationResult.Raw,
     Credal.ResourceAuthorizationResult
 > = core.serialization.object({
-    resourceIdentifier: ResourceIdentifier,
+    externalResourceId: ExternalResourceId,
+    inputUrl: core.serialization.string().optional(),
     authorized: core.serialization.boolean(),
 });
 
 export declare namespace ResourceAuthorizationResult {
     interface Raw {
-        resourceIdentifier: ResourceIdentifier.Raw;
+        externalResourceId: ExternalResourceId.Raw;
+        inputUrl?: string | null;
         authorized: boolean;
     }
 }

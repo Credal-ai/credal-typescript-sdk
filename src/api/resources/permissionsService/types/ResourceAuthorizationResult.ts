@@ -5,6 +5,7 @@
 import * as Credal from "../../../index";
 
 export interface ResourceAuthorizationResult {
-    resourceIdentifier: Credal.ResourceIdentifier;
+    externalResourceId: Credal.ExternalResourceId;
+    inputUrl?: string;
     authorized: boolean;
 }
