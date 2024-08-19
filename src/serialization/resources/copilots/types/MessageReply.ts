@@ -19,6 +19,7 @@ export const MessageReply: core.serialization.ObjectSchema<serializers.MessageRe
         activitySourceIdsForAudit: core.serialization.list(core.serialization.string()),
         insertedAuditLog: core.serialization.property("inserted_audit_log", InsertedAuditLog),
         referencedSources: core.serialization.list(ReferencedSource),
+        sourcesInDataContext: core.serialization.list(ReferencedSource),
         messageId: core.serialization.string(),
     });
 
@@ -31,6 +32,7 @@ export declare namespace MessageReply {
         activitySourceIdsForAudit: string[];
         inserted_audit_log: InsertedAuditLog.Raw;
         referencedSources: ReferencedSource.Raw[];
+        sourcesInDataContext: ReferencedSource.Raw[];
         messageId: string;
     }
 }
