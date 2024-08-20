@@ -16,7 +16,6 @@ export const MessageReply: core.serialization.ObjectSchema<serializers.MessageRe
         conversationId: core.serialization.string(),
         response: ResponseChunk,
         warnings: core.serialization.list(core.serialization.string()),
-        activitySourceIdsForAudit: core.serialization.list(core.serialization.string()),
         insertedAuditLog: core.serialization.property("inserted_audit_log", InsertedAuditLog),
         referencedSources: core.serialization.list(ReferencedSource),
         sourcesInDataContext: core.serialization.list(ReferencedSource),
@@ -29,7 +28,6 @@ export declare namespace MessageReply {
         conversationId: string;
         response: ResponseChunk.Raw;
         warnings: string[];
-        activitySourceIdsForAudit: string[];
         inserted_audit_log: InsertedAuditLog.Raw;
         referencedSources: ReferencedSource.Raw[];
         sourcesInDataContext: ReferencedSource.Raw[];
