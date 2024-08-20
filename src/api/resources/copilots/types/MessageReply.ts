@@ -9,7 +9,6 @@ export interface MessageReply {
     conversationId: string;
     response: Credal.ResponseChunk;
     warnings: string[];
-    activitySourceIdsForAudit: string[];
     insertedAuditLog: Credal.InsertedAuditLog;
     referencedSources: Credal.ReferencedSource[];
     sourcesInDataContext: Credal.ReferencedSource[];
