@@ -7,7 +7,7 @@ import * as Credal from "../../../../index";
 /**
  * @example
  *     {
- *         documentCollectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+ *         collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
  *         searchQuery: "ABC Corp",
  *         structuredQueryFilters: [{
  *                 field: "status",
@@ -26,7 +26,7 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface SearchDocumentCollectionRequest {
-    documentCollectionId: string;
+    collectionId?: string;
     searchQuery: string;
     /**
      * The email of the user making the search request for permissions reduction.

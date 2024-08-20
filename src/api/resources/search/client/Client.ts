@@ -34,7 +34,7 @@ export class Search {
      *
      * @example
      *     await credal.search.searchDocumentCollection({
-     *         documentCollectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+     *         collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         searchQuery: "ABC Corp",
      *         structuredQueryFilters: [{
      *                 field: "status",
@@ -66,7 +66,7 @@ export class Search {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

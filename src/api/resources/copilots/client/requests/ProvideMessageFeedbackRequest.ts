@@ -9,6 +9,7 @@ import * as Credal from "../../../../index";
  *     {
  *         userEmail: "ravin@credal.ai",
  *         messageId: "dd721cd8-4bf2-4b94-9869-258df3dab9dc",
+ *         agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
  *         messageFeedback: {
  *             feedback: Credal.FeedbackEnum.Negative,
  *             suggestedAnswer: "Yes, Credal is SOC 2 compliant."
@@ -16,6 +17,11 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface ProvideMessageFeedbackRequest {
+    /**
+     * Credal-generated agent ID to specify which agent to route the request to. This is required for all new API keys going forward.
+     *
+     */
+    agentId?: string;
     /**
      * The user profile you want to use when providing feedback.
      *
