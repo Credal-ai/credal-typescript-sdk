@@ -10,11 +10,13 @@ export const CreateConversationRequest: core.serialization.Schema<
     serializers.CreateConversationRequest.Raw,
     Credal.CreateConversationRequest
 > = core.serialization.object({
+    agentId: core.serialization.string().optional(),
     userEmail: core.serialization.string(),
 });
 
 export declare namespace CreateConversationRequest {
     interface Raw {
+        agentId?: string | null;
         userEmail: string;
     }
 }

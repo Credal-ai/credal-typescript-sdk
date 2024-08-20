@@ -10,6 +10,7 @@ export const SendMessageRequest: core.serialization.Schema<
     serializers.SendMessageRequest.Raw,
     Credal.SendMessageRequest
 > = core.serialization.object({
+    agentId: core.serialization.string().optional(),
     message: core.serialization.string(),
     userEmail: core.serialization.string(),
     conversationId: core.serialization.string().optional(),
@@ -17,6 +18,7 @@ export const SendMessageRequest: core.serialization.Schema<
 
 export declare namespace SendMessageRequest {
     interface Raw {
+        agentId?: string | null;
         message: string;
         userEmail: string;
         conversationId?: string | null;

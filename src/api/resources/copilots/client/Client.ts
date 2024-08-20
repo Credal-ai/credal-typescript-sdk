@@ -34,6 +34,7 @@ export class Copilots {
      *
      * @example
      *     await credal.copilots.createConversation({
+     *         agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         userEmail: "ravin@credal.ai"
      *     })
      */
@@ -51,7 +52,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -100,6 +101,7 @@ export class Copilots {
      *     await credal.copilots.provideMessageFeedback({
      *         userEmail: "ravin@credal.ai",
      *         messageId: "dd721cd8-4bf2-4b94-9869-258df3dab9dc",
+     *         agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         messageFeedback: {
      *             feedback: Credal.FeedbackEnum.Negative,
      *             suggestedAnswer: "Yes, Credal is SOC 2 compliant."
@@ -120,7 +122,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -164,6 +166,7 @@ export class Copilots {
      *
      * @example
      *     await credal.copilots.sendMessage({
+     *         agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         message: "Is Credal SOC 2 compliant?",
      *         userEmail: "ravin@credal.ai"
      *     })
@@ -182,7 +185,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

@@ -38,6 +38,7 @@ OPTIONAL. Create a new conversation with the Copilot. The conversation ID can be
 
 ```ts
 await credal.copilots.createConversation({
+    agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
     userEmail: "ravin@credal.ai",
 });
 ```
@@ -105,6 +106,7 @@ await credal.copilots.createConversation({
 await credal.copilots.provideMessageFeedback({
     userEmail: "ravin@credal.ai",
     messageId: "dd721cd8-4bf2-4b94-9869-258df3dab9dc",
+    agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
     messageFeedback: {
         feedback: Credal.FeedbackEnum.Negative,
         suggestedAnswer: "Yes, Credal is SOC 2 compliant.",
@@ -173,6 +175,7 @@ await credal.copilots.provideMessageFeedback({
 
 ```ts
 await credal.copilots.sendMessage({
+    agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
     message: "Is Credal SOC 2 compliant?",
     userEmail: "ravin@credal.ai",
 });
@@ -814,7 +817,7 @@ Search across all documents in a document collection using the document metadata
 
 ```ts
 await credal.search.searchDocumentCollection({
-    documentCollectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+    collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
     searchQuery: "ABC Corp",
     structuredQueryFilters: [
         {
