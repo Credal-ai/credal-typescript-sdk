@@ -12,7 +12,7 @@ export const SearchDocumentCollectionRequest: core.serialization.Schema<
     serializers.SearchDocumentCollectionRequest.Raw,
     Credal.SearchDocumentCollectionRequest
 > = core.serialization.object({
-    collectionId: core.serialization.string().optional(),
+    collectionId: core.serialization.string(),
     searchQuery: core.serialization.string(),
     userEmail: core.serialization.string(),
     structuredQueryFilters: core.serialization.list(SingleFieldFilter).optional(),
@@ -22,7 +22,7 @@ export const SearchDocumentCollectionRequest: core.serialization.Schema<
 
 export declare namespace SearchDocumentCollectionRequest {
     interface Raw {
-        collectionId?: string | null;
+        collectionId: string;
         searchQuery: string;
         userEmail: string;
         structuredQueryFilters?: SingleFieldFilter.Raw[] | null;
