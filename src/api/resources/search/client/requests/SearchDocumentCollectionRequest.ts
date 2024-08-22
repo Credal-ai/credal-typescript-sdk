@@ -26,7 +26,7 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface SearchDocumentCollectionRequest {
-    collectionId?: string;
+    collectionId: string;
     searchQuery: string;
     /**
      * The email of the user making the search request for permissions reduction.

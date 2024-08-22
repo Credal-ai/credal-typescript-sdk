@@ -11,7 +11,7 @@ export const ProvideMessageFeedbackRequest: core.serialization.Schema<
     serializers.ProvideMessageFeedbackRequest.Raw,
     Credal.ProvideMessageFeedbackRequest
 > = core.serialization.object({
-    agentId: core.serialization.string().optional(),
+    agentId: core.serialization.string(),
     userEmail: core.serialization.string(),
     messageId: core.serialization.string(),
     messageFeedback: MessageFeedback,
@@ -19,7 +19,7 @@ export const ProvideMessageFeedbackRequest: core.serialization.Schema<
 
 export declare namespace ProvideMessageFeedbackRequest {
     interface Raw {
-        agentId?: string | null;
+        agentId: string;
         userEmail: string;
         messageId: string;
         messageFeedback: MessageFeedback.Raw;
