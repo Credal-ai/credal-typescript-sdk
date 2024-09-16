@@ -12,7 +12,7 @@
  */
 export interface SendMessageRequest {
     /**
-     * Credal-generated agent ID to specify which agent to route the request to. This is required for all new API keys going forward.
+     * Credal-generated Copilot ID to specify which agent to route the request to.
      *
      */
     agentId: string;

@@ -1,5 +1,97 @@
 ## Copilots
 
+<details><summary> <code>credal.copilots.<a href="./src/api/resources/copilots/client/Client.ts">createCopilot</a>({ ...params }) -> Credal.CreateCopilotResponse</code> </summary>
+
+<dl>
+
+<dd>
+
+#### 📝 Description
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+Create a new copilot. The API key used will be added to the copilot for future Requests
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await credal.copilots.createCopilot({
+    name: "Customer Copilot",
+    description: "This copilot is used to answer customer requests based on internal documentation.",
+    collaborators: [
+        {
+            email: "test@gmail.com",
+            role: Credal.Role.Editor,
+        },
+    ],
+});
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+**request: `Credal.CreateCopilotRequest`**
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+**requestOptions: `Copilots.RequestOptions`**
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+</details>
+
 <details><summary> <code>credal.copilots.<a href="./src/api/resources/copilots/client/Client.ts">createConversation</a>({ ...params }) -> Credal.CreateConversationResponse</code> </summary>
 
 <dl>
@@ -16,7 +108,7 @@
 
 <dd>
 
-OPTIONAL. Create a new conversation with the Copilot. The conversation ID can be used in the sendMessage endpoint. The sendMessage endpoint automatically creates new conversations upon first request, but calling this endpoint can simplify certain use cases where it is helpful for the application to have the conversation ID before the first message is sent.
+OPTIONAL. Create a new conversation with the Copilot. The conversation ID can be used in the `sendMessage` endpoint. The `sendMessage` endpoint automatically creates new conversations upon first request, but calling this endpoint can simplify certain use cases where it is helpful for the application to have the conversation ID before the first message is sent.
 
 </dd>
 
@@ -200,6 +292,337 @@ await credal.copilots.sendMessage({
 <dd>
 
 **request: `Credal.SendMessageRequest`**
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+**requestOptions: `Copilots.RequestOptions`**
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+</details>
+
+<details><summary> <code>credal.copilots.<a href="./src/api/resources/copilots/client/Client.ts">addCollectionToCopilot</a>({ ...params }) -> void</code> </summary>
+
+<dl>
+
+<dd>
+
+#### 📝 Description
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+Link a collection with a copilot. The API Key used must be added to both the collection and the copilot beforehand.
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await credal.copilots.addCollectionToCopilot({
+    copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+    collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e",
+});
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+**request: `Credal.AddCollectionToCopilotRequest`**
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+**requestOptions: `Copilots.RequestOptions`**
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+</details>
+
+<details><summary> <code>credal.copilots.<a href="./src/api/resources/copilots/client/Client.ts">removeCollectionFromCopilot</a>({ ...params }) -> void</code> </summary>
+
+<dl>
+
+<dd>
+
+#### 📝 Description
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+Unlink a collection with a copilot. The API Key used must be added to both the collection and the copilot beforehand.
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await credal.copilots.removeCollectionFromCopilot({
+    copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+    collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e",
+});
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+**request: `Credal.RemoveCollectionFromCopilotRequest`**
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+**requestOptions: `Copilots.RequestOptions`**
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+</details>
+
+<details><summary> <code>credal.copilots.<a href="./src/api/resources/copilots/client/Client.ts">updateConfiguration</a>({ ...params }) -> void</code> </summary>
+
+<dl>
+
+<dd>
+
+#### 📝 Description
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+Update the configuration for a copilot
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await credal.copilots.updateConfiguration({
+    copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+    configuration: {
+        name: "Customer Copilot",
+        description: "This copilot is used to answer customer requests based on internal documentation.",
+        prompt: "You are a polite, helpful assistant used to answer customer requests.",
+        aiEndpointConfiguration: {
+            baseUrl: "https://api.openai.com/v1/",
+            apiKey: "<YOUR_API_KEY_HERE>",
+        },
+    },
+});
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+**request: `Credal.UpdateConfigurationRequest`**
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+**requestOptions: `Copilots.RequestOptions`**
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+</details>
+
+<details><summary> <code>credal.copilots.<a href="./src/api/resources/copilots/client/Client.ts">deleteCopilot</a>({ ...params }) -> Credal.DeleteCopilotResponse</code> </summary>
+
+<dl>
+
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await credal.copilots.deleteCopilot({
+    id: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
+});
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+**request: `Credal.DeleteCopilotRequest`**
 
 </dd>
 
@@ -423,7 +846,7 @@ await credal.documentCatalog.metadata({
 
 <dd>
 
-Add documents to a document collection. Note that the documents must already exist in the document catalog to use this endpoint. If you want to upload a new document to a collection, use the uploadDocumentContents endpoint.
+Add documents to a document collection. Note that the documents must already exist in the document catalog to use this endpoint. If you want to upload a new document to a collection, use the `uploadDocumentContents` endpoint.
 
 </dd>
 
@@ -480,6 +903,280 @@ await credal.documentCollections.addDocumentsToCollection({
 <dd>
 
 **request: `Credal.AddDocumentsToCollectionRequest`**
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+**requestOptions: `DocumentCollections.RequestOptions`**
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+</details>
+
+<details><summary> <code>credal.documentCollections.<a href="./src/api/resources/documentCollections/client/Client.ts">removeDocumentsFromCollection</a>({ ...params }) -> void</code> </summary>
+
+<dl>
+
+<dd>
+
+#### 📝 Description
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+Remove documents from a collection
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await credal.documentCollections.removeDocumentsFromCollection({
+    collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+    resourceIdentifiers: [
+        {
+            type: "external-resource-id",
+            externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
+            resourceType: Credal.ResourceType.GoogleDriveItem,
+        },
+        {
+            type: "external-resource-id",
+            externalResourceId: "398KAHdfkjsdf09r54UvyslPVWkQFOA0lOiu34in923",
+            resourceType: Credal.ResourceType.GoogleDriveItem,
+        },
+    ],
+});
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+**request: `Credal.RemoveDocumentsFromCollectionRequest`**
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+**requestOptions: `DocumentCollections.RequestOptions`**
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+</details>
+
+<details><summary> <code>credal.documentCollections.<a href="./src/api/resources/documentCollections/client/Client.ts">createCollection</a>({ ...params }) -> Credal.CreateCollectionResponse</code> </summary>
+
+<dl>
+
+<dd>
+
+#### 📝 Description
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+Create a new copilot. The API key used will be added to the copilot for future Requests
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await credal.documentCollections.createCollection({
+    name: "Customer Collection",
+    description: "This collection is used to answer customer requests based on internal documentation.",
+    collaborators: [
+        {
+            email: "test@gmail.com",
+            role: Credal.Role.Editor,
+        },
+    ],
+});
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+**request: `Credal.CreateCollectionRequest`**
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+**requestOptions: `DocumentCollections.RequestOptions`**
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+</details>
+
+<details><summary> <code>credal.documentCollections.<a href="./src/api/resources/documentCollections/client/Client.ts">deleteCollection</a>({ ...params }) -> Credal.DeleteCollectionResponse</code> </summary>
+
+<dl>
+
+<dd>
+
+#### 📝 Description
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+Delete the collection.
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await credal.documentCollections.deleteCollection({
+    collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
+});
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+**request: `Credal.DeleteCollectionRequest`**
 
 </dd>
 

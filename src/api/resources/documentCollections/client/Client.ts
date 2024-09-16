@@ -27,7 +27,7 @@ export class DocumentCollections {
     constructor(protected readonly _options: DocumentCollections.Options = {}) {}
 
     /**
-     * Add documents to a document collection. Note that the documents must already exist in the document catalog to use this endpoint. If you want to upload a new document to a collection, use the uploadDocumentContents endpoint.
+     * Add documents to a document collection. Note that the documents must already exist in the document catalog to use this endpoint. If you want to upload a new document to a collection, use the `uploadDocumentContents` endpoint.
      *
      * @param {Credal.AddDocumentsToCollectionRequest} request
      * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
@@ -60,7 +60,7 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.10",
+                "X-Fern-SDK-Version": "0.0.11",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -74,6 +74,215 @@ export class DocumentCollections {
         });
         if (_response.ok) {
             return;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError();
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Remove documents from a collection
+     *
+     * @param {Credal.RemoveDocumentsFromCollectionRequest} request
+     * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await credal.documentCollections.removeDocumentsFromCollection({
+     *         collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+     *         resourceIdentifiers: [{
+     *                 type: "external-resource-id",
+     *                 externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
+     *                 resourceType: Credal.ResourceType.GoogleDriveItem
+     *             }, {
+     *                 type: "external-resource-id",
+     *                 externalResourceId: "398KAHdfkjsdf09r54UvyslPVWkQFOA0lOiu34in923",
+     *                 resourceType: Credal.ResourceType.GoogleDriveItem
+     *             }]
+     *     })
+     */
+    public async removeDocumentsFromCollection(
+        request: Credal.RemoveDocumentsFromCollectionRequest,
+        requestOptions?: DocumentCollections.RequestOptions
+    ): Promise<void> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
+                "/v0/documentCollections/removeDocumentsFromCollection"
+            ),
+            method: "DELETE",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@credal/sdk",
+                "X-Fern-SDK-Version": "0.0.11",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: await serializers.RemoveDocumentsFromCollectionRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError();
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Create a new copilot. The API key used will be added to the copilot for future Requests
+     *
+     * @param {Credal.CreateCollectionRequest} request
+     * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await credal.documentCollections.createCollection({
+     *         name: "Customer Collection",
+     *         description: "This collection is used to answer customer requests based on internal documentation.",
+     *         collaborators: [{
+     *                 email: "test@gmail.com",
+     *                 role: Credal.Role.Editor
+     *             }]
+     *     })
+     */
+    public async createCollection(
+        request: Credal.CreateCollectionRequest,
+        requestOptions?: DocumentCollections.RequestOptions
+    ): Promise<Credal.CreateCollectionResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
+                "/v0/documentCollections/createCollection"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@credal/sdk",
+                "X-Fern-SDK-Version": "0.0.11",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: await serializers.CreateCollectionRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return await serializers.CreateCollectionResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError();
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Delete the collection.
+     *
+     * @param {Credal.DeleteCollectionRequest} request
+     * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await credal.documentCollections.deleteCollection({
+     *         collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a"
+     *     })
+     */
+    public async deleteCollection(
+        request: Credal.DeleteCollectionRequest,
+        requestOptions?: DocumentCollections.RequestOptions
+    ): Promise<Credal.DeleteCollectionResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
+                "/v0/documentCollections/deleteCollection"
+            ),
+            method: "DELETE",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@credal/sdk",
+                "X-Fern-SDK-Version": "0.0.11",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: await serializers.DeleteCollectionRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return await serializers.DeleteCollectionResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {

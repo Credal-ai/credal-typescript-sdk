@@ -9,3 +9,7 @@ export * from "./MessageBlocked";
 export * from "./PolicyTrigger";
 export * from "./FeedbackEnum";
 export * from "./MessageFeedback";
+export * from "./Configuration";
+export * from "./AiEndpointConfiguration";
+export * from "./CreateCopilotResponse";
+export * from "./DeleteCopilotResponse";
