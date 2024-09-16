@@ -27,7 +27,78 @@ export class Copilots {
     constructor(protected readonly _options: Copilots.Options = {}) {}
 
     /**
-     * OPTIONAL. Create a new conversation with the Copilot. The conversation ID can be used in the sendMessage endpoint. The sendMessage endpoint automatically creates new conversations upon first request, but calling this endpoint can simplify certain use cases where it is helpful for the application to have the conversation ID before the first message is sent.
+     * Create a new copilot. The API key used will be added to the copilot for future Requests
+     *
+     * @param {Credal.CreateCopilotRequest} request
+     * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await credal.copilots.createCopilot({
+     *         name: "Customer Copilot",
+     *         description: "This copilot is used to answer customer requests based on internal documentation.",
+     *         collaborators: [{
+     *                 email: "test@gmail.com",
+     *                 role: Credal.Role.Editor
+     *             }]
+     *     })
+     */
+    public async createCopilot(
+        request: Credal.CreateCopilotRequest,
+        requestOptions?: Copilots.RequestOptions
+    ): Promise<Credal.CreateCopilotResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
+                "/v0/copilots/createCopilot"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@credal/sdk",
+                "X-Fern-SDK-Version": "0.0.11",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: await serializers.CreateCopilotRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return await serializers.CreateCopilotResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError();
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * OPTIONAL. Create a new conversation with the Copilot. The conversation ID can be used in the `sendMessage` endpoint. The `sendMessage` endpoint automatically creates new conversations upon first request, but calling this endpoint can simplify certain use cases where it is helpful for the application to have the conversation ID before the first message is sent.
      *
      * @param {Credal.CreateConversationRequest} request
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
@@ -52,7 +123,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.10",
+                "X-Fern-SDK-Version": "0.0.11",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -122,7 +193,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.10",
+                "X-Fern-SDK-Version": "0.0.11",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -185,7 +256,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.10",
+                "X-Fern-SDK-Version": "0.0.11",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -197,6 +268,270 @@ export class Copilots {
         });
         if (_response.ok) {
             return await serializers.SendAgentMessageResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError();
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Link a collection with a copilot. The API Key used must be added to both the collection and the copilot beforehand.
+     *
+     * @param {Credal.AddCollectionToCopilotRequest} request
+     * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await credal.copilots.addCollectionToCopilot({
+     *         copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+     *         collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e"
+     *     })
+     */
+    public async addCollectionToCopilot(
+        request: Credal.AddCollectionToCopilotRequest,
+        requestOptions?: Copilots.RequestOptions
+    ): Promise<void> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
+                "/v0/copilots/addCollectionToCopilot"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@credal/sdk",
+                "X-Fern-SDK-Version": "0.0.11",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: await serializers.AddCollectionToCopilotRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError();
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Unlink a collection with a copilot. The API Key used must be added to both the collection and the copilot beforehand.
+     *
+     * @param {Credal.RemoveCollectionFromCopilotRequest} request
+     * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await credal.copilots.removeCollectionFromCopilot({
+     *         copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+     *         collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e"
+     *     })
+     */
+    public async removeCollectionFromCopilot(
+        request: Credal.RemoveCollectionFromCopilotRequest,
+        requestOptions?: Copilots.RequestOptions
+    ): Promise<void> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
+                "/v0/copilots/removeCollectionFromCopilot"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@credal/sdk",
+                "X-Fern-SDK-Version": "0.0.11",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: await serializers.RemoveCollectionFromCopilotRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError();
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Update the configuration for a copilot
+     *
+     * @param {Credal.UpdateConfigurationRequest} request
+     * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await credal.copilots.updateConfiguration({
+     *         copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+     *         configuration: {
+     *             name: "Customer Copilot",
+     *             description: "This copilot is used to answer customer requests based on internal documentation.",
+     *             prompt: "You are a polite, helpful assistant used to answer customer requests.",
+     *             aiEndpointConfiguration: {
+     *                 baseUrl: "https://api.openai.com/v1/",
+     *                 apiKey: "<YOUR_API_KEY_HERE>"
+     *             }
+     *         }
+     *     })
+     */
+    public async updateConfiguration(
+        request: Credal.UpdateConfigurationRequest,
+        requestOptions?: Copilots.RequestOptions
+    ): Promise<void> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
+                "/v0/copilots/updateConfiguration"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@credal/sdk",
+                "X-Fern-SDK-Version": "0.0.11",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: await serializers.UpdateConfigurationRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError();
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {Credal.DeleteCopilotRequest} request
+     * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await credal.copilots.deleteCopilot({
+     *         id: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a"
+     *     })
+     */
+    public async deleteCopilot(
+        request: Credal.DeleteCopilotRequest,
+        requestOptions?: Copilots.RequestOptions
+    ): Promise<Credal.DeleteCopilotResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
+                "/v0/copilots/deleteCopilot"
+            ),
+            method: "DELETE",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@credal/sdk",
+                "X-Fern-SDK-Version": "0.0.11",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: await serializers.DeleteCopilotRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return await serializers.DeleteCopilotResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
