@@ -14,6 +14,7 @@ export const ResourceType: core.serialization.Schema<serializers.ResourceType.Ra
         "ZENDESK_ARTICLE",
         "ZENDESK_GROUP",
         "ZENDESK_ARTICLE_SECTION",
+        "ZENDESK_ARTICLE_CATEGORY",
         "CONFLUENCE_PAGE",
         "CONFLUENCE_SPACE",
         "JIRA_TICKET",
@@ -22,6 +23,9 @@ export const ResourceType: core.serialization.Schema<serializers.ResourceType.Ra
         "BOX_FILE",
         "BOX_FOLDER",
         "NOTION_PAGE",
+        "NOTION_DATABASE",
+        "SLACK_CHANNEL",
+        "MONGO_COLLECTION_SYNC",
         "UNKNOWN",
     ]);
 
@@ -33,6 +37,7 @@ export declare namespace ResourceType {
         | "ZENDESK_ARTICLE"
         | "ZENDESK_GROUP"
         | "ZENDESK_ARTICLE_SECTION"
+        | "ZENDESK_ARTICLE_CATEGORY"
         | "CONFLUENCE_PAGE"
         | "CONFLUENCE_SPACE"
         | "JIRA_TICKET"
@@ -41,5 +46,8 @@ export declare namespace ResourceType {
         | "BOX_FILE"
         | "BOX_FOLDER"
         | "NOTION_PAGE"
+        | "NOTION_DATABASE"
+        | "SLACK_CHANNEL"
+        | "MONGO_COLLECTION_SYNC"
         | "UNKNOWN";
 }
