@@ -1201,6 +1201,208 @@ await credal.documentCollections.deleteCollection({
 </dl>
 </details>
 
+<details><summary> <code>credal.documentCollections.<a href="./src/api/resources/documentCollections/client/Client.ts">createMongoCollectionSync</a>({ ...params }) -> Credal.MongoCollectionSyncResponse</code> </summary>
+
+<dl>
+
+<dd>
+
+#### 📝 Description
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+Credal lets you easily sync your MongoDB data for use in Collections and Copilots. Create a new sync from a MongoDB collection to a Credal collection.
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await credal.documentCollections.createMongoCollectionSync({
+    mongoUri: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
+    collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
+    config: {
+        syncName: "My sales transcripts",
+        collectionName: "myCollection",
+        filterExpression: {
+            status: {
+                $ne: "disabled",
+            },
+        },
+        sourceFields: {
+            body: "body",
+            sourceName: "meetingName",
+            sourceSystemUpdated: "transcriptDatetime",
+            sourceUrl: "link",
+        },
+    },
+});
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+**request: `Credal.CreateMongoCollectionSyncRequest`**
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+**requestOptions: `DocumentCollections.RequestOptions`**
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+</details>
+
+<details><summary> <code>credal.documentCollections.<a href="./src/api/resources/documentCollections/client/Client.ts">updateMongoCollectionSync</a>({ ...params }) -> Credal.MongoCollectionSyncResponse</code> </summary>
+
+<dl>
+
+<dd>
+
+#### 📝 Description
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+Credal lets you easily sync your MongoDB data for use in Collections and Copilots. Update an existing sync from a MongoDB collection to a Credal collection via the `mongoCredentialId`, to disambiguate between multiple potential syncs to a given collection.
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await credal.documentCollections.updateMongoCollectionSync({
+    mongoUri: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
+    mongoCredentialId: "5988ed76-6ee1-11ef-97dd-1fca54b7c4bc",
+    config: {
+        syncName: "My recent summarized sales transcripts",
+        collectionName: "myCollection",
+        filterExpression: {
+            transcriptDatetime: {
+                $gt: "2023-01-01T00:00:00.000Z",
+            },
+        },
+        sourceFields: {
+            body: "transcriptSummary",
+            sourceName: "meetingName",
+            sourceSystemUpdated: "transcriptDatetime",
+            sourceUrl: "link",
+        },
+    },
+});
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+**request: `Credal.UpdateMongoCollectionSyncRequest`**
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+**requestOptions: `DocumentCollections.RequestOptions`**
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+</details>
+
 ## PermissionsService
 
 <details><summary> <code>credal.permissionsService.<a href="./src/api/resources/permissionsService/client/Client.ts">checkResourceAuthorizationForUser</a>({ ...params }) -> Credal.CheckResourceAuthorizationResponse</code> </summary>
