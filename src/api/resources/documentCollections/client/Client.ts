@@ -60,7 +60,7 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.11",
+                "X-Fern-SDK-Version": "0.0.12",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -132,7 +132,7 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.11",
+                "X-Fern-SDK-Version": "0.0.12",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -200,7 +200,7 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.11",
+                "X-Fern-SDK-Version": "0.0.12",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -266,7 +266,7 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.11",
+                "X-Fern-SDK-Version": "0.0.12",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -278,6 +278,174 @@ export class DocumentCollections {
         });
         if (_response.ok) {
             return await serializers.DeleteCollectionResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError();
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Credal lets you easily sync your MongoDB data for use in Collections and Copilots. Create a new sync from a MongoDB collection to a Credal collection.
+     *
+     * @param {Credal.CreateMongoCollectionSyncRequest} request
+     * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await credal.documentCollections.createMongoCollectionSync({
+     *         mongoUri: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
+     *         collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
+     *         config: {
+     *             syncName: "My sales transcripts",
+     *             collectionName: "myCollection",
+     *             filterExpression: {
+     *                 "status": {
+     *                     "$ne": "disabled"
+     *                 }
+     *             },
+     *             sourceFields: {
+     *                 body: "body",
+     *                 sourceName: "meetingName",
+     *                 sourceSystemUpdated: "transcriptDatetime",
+     *                 sourceUrl: "link"
+     *             }
+     *         }
+     *     })
+     */
+    public async createMongoCollectionSync(
+        request: Credal.CreateMongoCollectionSyncRequest,
+        requestOptions?: DocumentCollections.RequestOptions
+    ): Promise<Credal.MongoCollectionSyncResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
+                "/v0/documentCollections/mongodb/createMongoSync"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@credal/sdk",
+                "X-Fern-SDK-Version": "0.0.12",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: await serializers.CreateMongoCollectionSyncRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return await serializers.MongoCollectionSyncResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError();
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Credal lets you easily sync your MongoDB data for use in Collections and Copilots. Update an existing sync from a MongoDB collection to a Credal collection via the `mongoCredentialId`, to disambiguate between multiple potential syncs to a given collection.
+     *
+     * @param {Credal.UpdateMongoCollectionSyncRequest} request
+     * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await credal.documentCollections.updateMongoCollectionSync({
+     *         mongoUri: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
+     *         mongoCredentialId: "5988ed76-6ee1-11ef-97dd-1fca54b7c4bc",
+     *         config: {
+     *             syncName: "My recent summarized sales transcripts",
+     *             collectionName: "myCollection",
+     *             filterExpression: {
+     *                 "transcriptDatetime": {
+     *                     "$gt": "2023-01-01T00:00:00.000Z"
+     *                 }
+     *             },
+     *             sourceFields: {
+     *                 body: "transcriptSummary",
+     *                 sourceName: "meetingName",
+     *                 sourceSystemUpdated: "transcriptDatetime",
+     *                 sourceUrl: "link"
+     *             }
+     *         }
+     *     })
+     */
+    public async updateMongoCollectionSync(
+        request: Credal.UpdateMongoCollectionSyncRequest,
+        requestOptions?: DocumentCollections.RequestOptions
+    ): Promise<Credal.MongoCollectionSyncResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
+                "/v0/documentCollections/mongodb/updateMongoSync"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@credal/sdk",
+                "X-Fern-SDK-Version": "0.0.12",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: await serializers.UpdateMongoCollectionSyncRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return await serializers.MongoCollectionSyncResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
