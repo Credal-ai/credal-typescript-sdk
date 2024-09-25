@@ -9,6 +9,7 @@ export type ResourceType =
     | "ZENDESK_ARTICLE"
     | "ZENDESK_GROUP"
     | "ZENDESK_ARTICLE_SECTION"
+    | "ZENDESK_ARTICLE_CATEGORY"
     | "CONFLUENCE_PAGE"
     | "CONFLUENCE_SPACE"
     | "JIRA_TICKET"
@@ -17,6 +18,9 @@ export type ResourceType =
     | "BOX_FILE"
     | "BOX_FOLDER"
     | "NOTION_PAGE"
+    | "NOTION_DATABASE"
+    | "SLACK_CHANNEL"
+    | "MONGO_COLLECTION_SYNC"
     | "UNKNOWN";
 
 export const ResourceType = {
@@ -26,6 +30,7 @@ export const ResourceType = {
     ZendeskArticle: "ZENDESK_ARTICLE",
     ZendeskGroup: "ZENDESK_GROUP",
     ZendeskArticleSection: "ZENDESK_ARTICLE_SECTION",
+    ZendeskArticleCategory: "ZENDESK_ARTICLE_CATEGORY",
     ConfluencePage: "CONFLUENCE_PAGE",
     ConfluenceSpace: "CONFLUENCE_SPACE",
     JiraTicket: "JIRA_TICKET",
@@ -34,5 +39,8 @@ export const ResourceType = {
     BoxFile: "BOX_FILE",
     BoxFolder: "BOX_FOLDER",
     NotionPage: "NOTION_PAGE",
+    NotionDatabase: "NOTION_DATABASE",
+    SlackChannel: "SLACK_CHANNEL",
+    MongoCollectionSync: "MONGO_COLLECTION_SYNC",
     Unknown: "UNKNOWN",
 } as const;
