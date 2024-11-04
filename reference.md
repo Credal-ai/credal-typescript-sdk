@@ -270,6 +270,16 @@ await credal.copilots.sendMessage({
     agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
     message: "Is Credal SOC 2 compliant?",
     userEmail: "ravin@credal.ai",
+    inputVariables: [
+        {
+            name: "input1",
+            urls: ["https://drive.google.com/file/d/123456/view"],
+        },
+        {
+            name: "input2",
+            urls: ["https://drive.google.com/file/d/123457/view", "https://drive.google.com/file/d/123458/view"],
+        },
+    ],
 });
 ```
 
@@ -292,6 +302,67 @@ await credal.copilots.sendMessage({
 <dd>
 
 **request: `Credal.SendMessageRequest`**
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+**requestOptions: `Copilots.RequestOptions`**
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+</details>
+
+<details><summary> <code>credal.copilots.<a href="./src/api/resources/copilots/client/Client.ts">streamMessage</a>({ ...params }) -> core.Stream<Credal.StreamingChunk></code> </summary>
+
+<dl>
+
+<dd>
+
+#### 📝 Description
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+This endpoint allows you to send a message to a specific copilot and get the response back as a streamed set of Server-Sent Events.
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+**request: `Credal.StreamMessageRequest`**
 
 </dd>
 

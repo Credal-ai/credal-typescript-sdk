@@ -7,16 +7,16 @@ import * as Credal from "../../../../api/index";
 import * as core from "../../../../core";
 import { Operator } from "../../common/types/Operator";
 
-export const SingleFieldFilter: core.serialization.ObjectSchema<
-    serializers.SingleFieldFilter.Raw,
-    Credal.SingleFieldFilter
+export const DatetimeFieldSchema: core.serialization.ObjectSchema<
+    serializers.DatetimeFieldSchema.Raw,
+    Credal.DatetimeFieldSchema
 > = core.serialization.object({
     field: core.serialization.string(),
     operator: Operator,
     value: core.serialization.string(),
 });
 
-export declare namespace SingleFieldFilter {
+export declare namespace DatetimeFieldSchema {
     interface Raw {
         field: string;
         operator: Operator.Raw;

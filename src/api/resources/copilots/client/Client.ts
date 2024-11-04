@@ -8,6 +8,7 @@ import * as Credal from "../../../index";
 import * as serializers from "../../../../serialization/index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
+import * as stream from "stream";
 
 export declare namespace Copilots {
     interface Options {
@@ -56,7 +57,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.13",
+                "X-Fern-SDK-Version": "0.0.14",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -123,7 +124,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.13",
+                "X-Fern-SDK-Version": "0.0.14",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -193,7 +194,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.13",
+                "X-Fern-SDK-Version": "0.0.14",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -239,7 +240,14 @@ export class Copilots {
      *     await credal.copilots.sendMessage({
      *         agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         message: "Is Credal SOC 2 compliant?",
-     *         userEmail: "ravin@credal.ai"
+     *         userEmail: "ravin@credal.ai",
+     *         inputVariables: [{
+     *                 name: "input1",
+     *                 urls: ["https://drive.google.com/file/d/123456/view"]
+     *             }, {
+     *                 name: "input2",
+     *                 urls: ["https://drive.google.com/file/d/123457/view", "https://drive.google.com/file/d/123458/view"]
+     *             }]
      *     })
      */
     public async sendMessage(
@@ -256,7 +264,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.13",
+                "X-Fern-SDK-Version": "0.0.14",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -272,6 +280,75 @@ export class Copilots {
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
                 breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError();
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * This endpoint allows you to send a message to a specific copilot and get the response back as a streamed set of Server-Sent Events.
+     */
+    public async streamMessage(
+        request: Credal.StreamMessageRequest,
+        requestOptions?: Copilots.RequestOptions
+    ): Promise<core.Stream<Credal.StreamingChunk>> {
+        const _response = await (this._options.fetcher ?? core.fetcher)<stream.Readable>({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
+                "/v0/copilots/streamMessage"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@credal/sdk",
+                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: await serializers.StreamMessageRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            responseType: "streaming",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return new core.Stream({
+                stream: _response.body,
+                parse: async (data) => {
+                    return await serializers.StreamingChunk.parseOrThrow(data, {
+                        unrecognizedObjectKeys: "passthrough",
+                        allowUnrecognizedUnionMembers: true,
+                        allowUnrecognizedEnumValues: true,
+                        breadcrumbsPrefix: ["response"],
+                    });
+                },
+                signal: requestOptions?.abortSignal,
+                eventShape: {
+                    type: "sse",
+                    streamTerminator: "[DONE]",
+                },
             });
         }
 
@@ -323,7 +400,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.13",
+                "X-Fern-SDK-Version": "0.0.14",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -387,7 +464,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.13",
+                "X-Fern-SDK-Version": "0.0.14",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -459,7 +536,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.13",
+                "X-Fern-SDK-Version": "0.0.14",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -520,7 +597,7 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.13",
+                "X-Fern-SDK-Version": "0.0.14",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
