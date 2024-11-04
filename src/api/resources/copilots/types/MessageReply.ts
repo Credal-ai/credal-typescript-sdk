@@ -12,5 +12,6 @@ export interface MessageReply {
     insertedAuditLog: Credal.InsertedAuditLog;
     referencedSources: Credal.ReferencedSource[];
     sourcesInDataContext: Credal.ReferencedSource[];
+    webSearchResults: Credal.WebSearchResult[];
     messageId: string;
 }

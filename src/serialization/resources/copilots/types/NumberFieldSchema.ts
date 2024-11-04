@@ -7,19 +7,19 @@ import * as Credal from "../../../../api/index";
 import * as core from "../../../../core";
 import { Operator } from "../../common/types/Operator";
 
-export const SingleFieldFilter: core.serialization.ObjectSchema<
-    serializers.SingleFieldFilter.Raw,
-    Credal.SingleFieldFilter
+export const NumberFieldSchema: core.serialization.ObjectSchema<
+    serializers.NumberFieldSchema.Raw,
+    Credal.NumberFieldSchema
 > = core.serialization.object({
     field: core.serialization.string(),
     operator: Operator,
-    value: core.serialization.string(),
+    value: core.serialization.number(),
 });
 
-export declare namespace SingleFieldFilter {
+export declare namespace NumberFieldSchema {
     interface Raw {
         field: string;
         operator: Operator.Raw;
-        value: string;
+        value: number;
     }
 }

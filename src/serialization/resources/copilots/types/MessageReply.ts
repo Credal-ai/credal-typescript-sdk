@@ -9,6 +9,7 @@ import { PolicyTrigger } from "./PolicyTrigger";
 import { ResponseChunk } from "./ResponseChunk";
 import { InsertedAuditLog } from "./InsertedAuditLog";
 import { ReferencedSource } from "./ReferencedSource";
+import { WebSearchResult } from "./WebSearchResult";
 
 export const MessageReply: core.serialization.ObjectSchema<serializers.MessageReply.Raw, Credal.MessageReply> =
     core.serialization.object({
@@ -19,6 +20,7 @@ export const MessageReply: core.serialization.ObjectSchema<serializers.MessageRe
         insertedAuditLog: core.serialization.property("inserted_audit_log", InsertedAuditLog),
         referencedSources: core.serialization.list(ReferencedSource),
         sourcesInDataContext: core.serialization.list(ReferencedSource),
+        webSearchResults: core.serialization.list(WebSearchResult),
         messageId: core.serialization.string(),
     });
 
@@ -31,6 +33,7 @@ export declare namespace MessageReply {
         inserted_audit_log: InsertedAuditLog.Raw;
         referencedSources: ReferencedSource.Raw[];
         sourcesInDataContext: ReferencedSource.Raw[];
+        webSearchResults: WebSearchResult.Raw[];
         messageId: string;
     }
 }

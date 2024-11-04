@@ -7,22 +7,22 @@ import * as Credal from "../../../../../api/index";
 import * as core from "../../../../../core";
 import { InputVariable } from "../../types/InputVariable";
 
-export const SendMessageRequest: core.serialization.Schema<
-    serializers.SendMessageRequest.Raw,
-    Credal.SendMessageRequest
+export const StreamMessageRequest: core.serialization.Schema<
+    serializers.StreamMessageRequest.Raw,
+    Credal.StreamMessageRequest
 > = core.serialization.object({
-    agentId: core.serialization.string(),
+    copilotId: core.serialization.string(),
     message: core.serialization.string(),
-    userEmail: core.serialization.string(),
+    email: core.serialization.string(),
     conversationId: core.serialization.string().optional(),
     inputVariables: core.serialization.list(InputVariable).optional(),
 });
 
-export declare namespace SendMessageRequest {
+export declare namespace StreamMessageRequest {
     interface Raw {
-        agentId: string;
+        copilotId: string;
         message: string;
-        userEmail: string;
+        email: string;
         conversationId?: string | null;
         inputVariables?: InputVariable.Raw[] | null;
     }
