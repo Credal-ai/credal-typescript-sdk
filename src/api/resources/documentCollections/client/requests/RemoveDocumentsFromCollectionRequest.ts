@@ -11,11 +11,11 @@ import * as Credal from "../../../../index";
  *         resourceIdentifiers: [{
  *                 type: "external-resource-id",
  *                 externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
- *                 resourceType: Credal.ResourceType.GoogleDriveItem
+ *                 resourceType: "GOOGLE_DRIVE_ITEM"
  *             }, {
  *                 type: "external-resource-id",
  *                 externalResourceId: "398KAHdfkjsdf09r54UvyslPVWkQFOA0lOiu34in923",
- *                 resourceType: Credal.ResourceType.GoogleDriveItem
+ *                 resourceType: "GOOGLE_DRIVE_ITEM"
  *             }]
  *     }
  */

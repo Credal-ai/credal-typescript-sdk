@@ -11,7 +11,7 @@ import * as Credal from "../../../../index";
  *         searchQuery: "ABC Corp",
  *         structuredQueryFilters: [{
  *                 field: "status",
- *                 operator: Credal.Operator.Equal,
+ *                 operator: "==",
  *                 value: "Open"
  *             }],
  *         userEmail: "jack@credal.ai",

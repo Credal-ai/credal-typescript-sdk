@@ -17,8 +17,11 @@ export declare namespace Search {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
         abortSignal?: AbortSignal;
     }
 }
@@ -33,12 +36,12 @@ export class Search {
      * @param {Search.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.search.searchDocumentCollection({
+     *     await client.search.searchDocumentCollection({
      *         collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         searchQuery: "ABC Corp",
      *         structuredQueryFilters: [{
      *                 field: "status",
-     *                 operator: Credal.Operator.Equal,
+     *                 operator: "==",
      *                 value: "Open"
      *             }],
      *         userEmail: "jack@credal.ai",
@@ -66,20 +69,20 @@ export class Search {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.SearchDocumentCollectionRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "strip",
-            }),
+            requestType: "json",
+            body: serializers.SearchDocumentCollectionRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.SearchDocumentCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.SearchDocumentCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

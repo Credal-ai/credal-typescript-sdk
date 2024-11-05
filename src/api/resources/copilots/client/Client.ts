@@ -18,8 +18,11 @@ export declare namespace Copilots {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
         abortSignal?: AbortSignal;
     }
 }
@@ -34,12 +37,12 @@ export class Copilots {
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.copilots.createCopilot({
+     *     await client.copilots.createCopilot({
      *         name: "Customer Copilot",
      *         description: "This copilot is used to answer customer requests based on internal documentation.",
      *         collaborators: [{
      *                 email: "test@gmail.com",
-     *                 role: Credal.Role.Editor
+     *                 role: "editor"
      *             }]
      *     })
      */
@@ -57,18 +60,20 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.CreateCopilotRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            requestType: "json",
+            body: serializers.CreateCopilotRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.CreateCopilotResponse.parseOrThrow(_response.body, {
+            return serializers.CreateCopilotResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -105,7 +110,7 @@ export class Copilots {
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.copilots.createConversation({
+     *     await client.copilots.createConversation({
      *         agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         userEmail: "ravin@credal.ai"
      *     })
@@ -124,18 +129,20 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.CreateConversationRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            requestType: "json",
+            body: serializers.CreateConversationRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.CreateConversationResponse.parseOrThrow(_response.body, {
+            return serializers.CreateConversationResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -170,12 +177,12 @@ export class Copilots {
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.copilots.provideMessageFeedback({
+     *     await client.copilots.provideMessageFeedback({
      *         userEmail: "ravin@credal.ai",
      *         messageId: "dd721cd8-4bf2-4b94-9869-258df3dab9dc",
      *         agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         messageFeedback: {
-     *             feedback: Credal.FeedbackEnum.Negative,
+     *             feedback: "NEGATIVE",
      *             suggestedAnswer: "Yes, Credal is SOC 2 compliant."
      *         }
      *     })
@@ -194,14 +201,14 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.ProvideMessageFeedbackRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "strip",
-            }),
+            requestType: "json",
+            body: serializers.ProvideMessageFeedbackRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -237,7 +244,7 @@ export class Copilots {
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.copilots.sendMessage({
+     *     await client.copilots.sendMessage({
      *         agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         message: "Is Credal SOC 2 compliant?",
      *         userEmail: "ravin@credal.ai",
@@ -264,18 +271,20 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.SendMessageRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            requestType: "json",
+            body: serializers.SendMessageRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.SendAgentMessageResponse.parseOrThrow(_response.body, {
+            return serializers.SendAgentMessageResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -322,13 +331,15 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.StreamMessageRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
-            responseType: "streaming",
+            requestType: "json",
+            body: serializers.StreamMessageRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            responseType: "sse",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -337,7 +348,7 @@ export class Copilots {
             return new core.Stream({
                 stream: _response.body,
                 parse: async (data) => {
-                    return await serializers.StreamingChunk.parseOrThrow(data, {
+                    return serializers.StreamingChunk.parseOrThrow(data, {
                         unrecognizedObjectKeys: "passthrough",
                         allowUnrecognizedUnionMembers: true,
                         allowUnrecognizedEnumValues: true,
@@ -381,7 +392,7 @@ export class Copilots {
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.copilots.addCollectionToCopilot({
+     *     await client.copilots.addCollectionToCopilot({
      *         copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e"
      *     })
@@ -400,14 +411,14 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.AddCollectionToCopilotRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "strip",
-            }),
+            requestType: "json",
+            body: serializers.AddCollectionToCopilotRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -445,7 +456,7 @@ export class Copilots {
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.copilots.removeCollectionFromCopilot({
+     *     await client.copilots.removeCollectionFromCopilot({
      *         copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e"
      *     })
@@ -464,12 +475,14 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.RemoveCollectionFromCopilotRequest.jsonOrThrow(request, {
+            requestType: "json",
+            body: serializers.RemoveCollectionFromCopilotRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -509,7 +522,7 @@ export class Copilots {
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.copilots.updateConfiguration({
+     *     await client.copilots.updateConfiguration({
      *         copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         configuration: {
      *             name: "Customer Copilot",
@@ -536,14 +549,14 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.UpdateConfigurationRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "strip",
-            }),
+            requestType: "json",
+            body: serializers.UpdateConfigurationRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -579,7 +592,7 @@ export class Copilots {
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.copilots.deleteCopilot({
+     *     await client.copilots.deleteCopilot({
      *         id: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a"
      *     })
      */
@@ -597,18 +610,20 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.DeleteCopilotRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            requestType: "json",
+            body: serializers.DeleteCopilotRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.DeleteCopilotResponse.parseOrThrow(_response.body, {
+            return serializers.DeleteCopilotResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

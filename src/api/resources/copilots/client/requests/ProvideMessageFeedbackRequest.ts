@@ -11,7 +11,7 @@ import * as Credal from "../../../../index";
  *         messageId: "dd721cd8-4bf2-4b94-9869-258df3dab9dc",
  *         agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
  *         messageFeedback: {
- *             feedback: Credal.FeedbackEnum.Negative,
+ *             feedback: "NEGATIVE",
  *             suggestedAnswer: "Yes, Credal is SOC 2 compliant."
  *         }
  *     }

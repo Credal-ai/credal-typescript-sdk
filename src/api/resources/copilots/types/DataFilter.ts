@@ -6,6 +6,6 @@ import * as Credal from "../../../index";
 
 export interface DataFilter {
     semanticSearchTerms: string[];
-    webSearchResults: string[];
+    webSearchTerm: string[];
     filteredDataSourcesPerCollection: Credal.CollectionFilteredData[];
 }

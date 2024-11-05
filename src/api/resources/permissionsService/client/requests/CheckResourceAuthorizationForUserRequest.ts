@@ -10,7 +10,7 @@ import * as Credal from "../../../../index";
  *         resourceIdentifier: {
  *             type: "external-resource-id",
  *             externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
- *             resourceType: Credal.ResourceType.GoogleDriveItem
+ *             resourceType: "GOOGLE_DRIVE_ITEM"
  *         },
  *         userEmail: "john.smith@foo.com"
  *     }

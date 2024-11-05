@@ -5,5 +5,5 @@
 import * as Credal from "../../../index";
 
 export interface FinalChunk {
-    referencedSources: Credal.ReferencedSource[];
+    sources: Credal.ReferencedSource[];
 }
