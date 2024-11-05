@@ -11,7 +11,7 @@ import * as Credal from "../../../../index";
  *         description: "This copilot is used to answer customer requests based on internal documentation.",
  *         collaborators: [{
  *                 email: "test@gmail.com",
- *                 role: Credal.Role.Editor
+ *                 role: "editor"
  *             }]
  *     }
  */

@@ -13,7 +13,7 @@ import * as Credal from "../../../../index";
  *             }, {
  *                 type: "external-resource-id",
  *                 externalResourceId: "sfsdfvr54UvyslPVWkQFOA0dfsdfsdflgNycFmdZJQr",
- *                 resourceType: Credal.ResourceType.ZendeskTicket
+ *                 resourceType: "ZENDESK_TICKET"
  *             }],
  *         userEmail: "john.smith@foo.com"
  *     }

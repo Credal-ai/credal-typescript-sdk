@@ -9,11 +9,11 @@ import { ReferencedSource } from "./ReferencedSource";
 
 export const FinalChunk: core.serialization.ObjectSchema<serializers.FinalChunk.Raw, Credal.FinalChunk> =
     core.serialization.object({
-        referencedSources: core.serialization.list(ReferencedSource),
+        sources: core.serialization.list(ReferencedSource),
     });
 
 export declare namespace FinalChunk {
     interface Raw {
-        referencedSources: ReferencedSource.Raw[];
+        sources: ReferencedSource.Raw[];
     }
 }

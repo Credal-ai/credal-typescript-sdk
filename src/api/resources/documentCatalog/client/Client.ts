@@ -17,8 +17,11 @@ export declare namespace DocumentCatalog {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
         abortSignal?: AbortSignal;
     }
 }
@@ -31,7 +34,7 @@ export class DocumentCatalog {
      * @param {DocumentCatalog.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.documentCatalog.uploadDocumentContents({
+     *     await client.documentCatalog.uploadDocumentContents({
      *         documentName: "My Document",
      *         documentContents: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
      *         documentExternalId: "73eead26-d124-4940-b329-5f068a0a8db9",
@@ -53,20 +56,20 @@ export class DocumentCatalog {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.UploadDocumentContentsRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "strip",
-            }),
+            requestType: "json",
+            body: serializers.UploadDocumentContentsRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.UploadDocumentResponse.parseOrThrow(_response.body, {
+            return serializers.UploadDocumentResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -103,7 +106,7 @@ export class DocumentCatalog {
      * @param {DocumentCatalog.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.documentCatalog.metadata({
+     *     await client.documentCatalog.metadata({
      *         sources: [{
      *                 metadata: {
      *                     "Department": "HR",
@@ -112,7 +115,7 @@ export class DocumentCatalog {
      *                 resourceIdentifier: {
      *                     type: "external-resource-id",
      *                     externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
-     *                     resourceType: Credal.ResourceType.GoogleDriveItem
+     *                     resourceType: "GOOGLE_DRIVE_ITEM"
      *                 }
      *             }, {
      *                 metadata: {
@@ -122,7 +125,7 @@ export class DocumentCatalog {
      *                 resourceIdentifier: {
      *                     type: "external-resource-id",
      *                     externalResourceId: "123456",
-     *                     resourceType: Credal.ResourceType.ZendeskTicket
+     *                     resourceType: "ZENDESK_TICKET"
      *                 }
      *             }],
      *         uploadAsUserEmail: "ben@credal.ai"
@@ -142,14 +145,14 @@ export class DocumentCatalog {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.DocumentMetadataPatchRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "strip",
-            }),
+            requestType: "json",
+            body: serializers.DocumentMetadataPatchRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

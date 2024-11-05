@@ -11,7 +11,7 @@ import * as Credal from "../../../../index";
  *         description: "This collection is used to answer customer requests based on internal documentation.",
  *         collaborators: [{
  *                 email: "test@gmail.com",
- *                 role: Credal.Role.Editor
+ *                 role: "editor"
  *             }]
  *     }
  */

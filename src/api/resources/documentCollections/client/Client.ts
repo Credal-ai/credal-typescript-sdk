@@ -17,8 +17,11 @@ export declare namespace DocumentCollections {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
         abortSignal?: AbortSignal;
     }
 }
@@ -33,16 +36,16 @@ export class DocumentCollections {
      * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.documentCollections.addDocumentsToCollection({
+     *     await client.documentCollections.addDocumentsToCollection({
      *         collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         resourceIdentifiers: [{
      *                 type: "external-resource-id",
      *                 externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
-     *                 resourceType: Credal.ResourceType.GoogleDriveItem
+     *                 resourceType: "GOOGLE_DRIVE_ITEM"
      *             }, {
      *                 type: "external-resource-id",
      *                 externalResourceId: "398KAHdfkjsdf09r54UvyslPVWkQFOA0lOiu34in923",
-     *                 resourceType: Credal.ResourceType.GoogleDriveItem
+     *                 resourceType: "GOOGLE_DRIVE_ITEM"
      *             }]
      *     })
      */
@@ -60,14 +63,14 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.AddDocumentsToCollectionRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "strip",
-            }),
+            requestType: "json",
+            body: serializers.AddDocumentsToCollectionRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -105,16 +108,16 @@ export class DocumentCollections {
      * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.documentCollections.removeDocumentsFromCollection({
+     *     await client.documentCollections.removeDocumentsFromCollection({
      *         collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
      *         resourceIdentifiers: [{
      *                 type: "external-resource-id",
      *                 externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
-     *                 resourceType: Credal.ResourceType.GoogleDriveItem
+     *                 resourceType: "GOOGLE_DRIVE_ITEM"
      *             }, {
      *                 type: "external-resource-id",
      *                 externalResourceId: "398KAHdfkjsdf09r54UvyslPVWkQFOA0lOiu34in923",
-     *                 resourceType: Credal.ResourceType.GoogleDriveItem
+     *                 resourceType: "GOOGLE_DRIVE_ITEM"
      *             }]
      *     })
      */
@@ -132,12 +135,14 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.RemoveDocumentsFromCollectionRequest.jsonOrThrow(request, {
+            requestType: "json",
+            body: serializers.RemoveDocumentsFromCollectionRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -177,12 +182,12 @@ export class DocumentCollections {
      * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.documentCollections.createCollection({
+     *     await client.documentCollections.createCollection({
      *         name: "Customer Collection",
      *         description: "This collection is used to answer customer requests based on internal documentation.",
      *         collaborators: [{
      *                 email: "test@gmail.com",
-     *                 role: Credal.Role.Editor
+     *                 role: "editor"
      *             }]
      *     })
      */
@@ -200,18 +205,20 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.CreateCollectionRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            requestType: "json",
+            body: serializers.CreateCollectionRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.CreateCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.CreateCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -248,7 +255,7 @@ export class DocumentCollections {
      * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.documentCollections.deleteCollection({
+     *     await client.documentCollections.deleteCollection({
      *         collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a"
      *     })
      */
@@ -266,18 +273,20 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.DeleteCollectionRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            requestType: "json",
+            body: serializers.DeleteCollectionRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.DeleteCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.DeleteCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -314,7 +323,7 @@ export class DocumentCollections {
      * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.documentCollections.createMongoCollectionSync({
+     *     await client.documentCollections.createMongoCollectionSync({
      *         mongoUri: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
      *         collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
      *         config: {
@@ -348,12 +357,14 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.CreateMongoCollectionSyncRequest.jsonOrThrow(request, {
+            requestType: "json",
+            body: serializers.CreateMongoCollectionSyncRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -361,7 +372,7 @@ export class DocumentCollections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.MongoCollectionSyncResponse.parseOrThrow(_response.body, {
+            return serializers.MongoCollectionSyncResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -398,7 +409,7 @@ export class DocumentCollections {
      * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.documentCollections.updateMongoCollectionSync({
+     *     await client.documentCollections.updateMongoCollectionSync({
      *         mongoUri: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
      *         mongoCredentialId: "5988ed76-6ee1-11ef-97dd-1fca54b7c4bc",
      *         config: {
@@ -432,12 +443,14 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.UpdateMongoCollectionSyncRequest.jsonOrThrow(request, {
+            requestType: "json",
+            body: serializers.UpdateMongoCollectionSyncRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -445,7 +458,7 @@ export class DocumentCollections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.MongoCollectionSyncResponse.parseOrThrow(_response.body, {
+            return serializers.MongoCollectionSyncResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

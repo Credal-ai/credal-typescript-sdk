@@ -17,8 +17,11 @@ export declare namespace PermissionsService {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
         abortSignal?: AbortSignal;
     }
 }
@@ -33,11 +36,11 @@ export class PermissionsService {
      * @param {PermissionsService.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.permissionsService.checkResourceAuthorizationForUser({
+     *     await client.permissionsService.checkResourceAuthorizationForUser({
      *         resourceIdentifier: {
      *             type: "external-resource-id",
      *             externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
-     *             resourceType: Credal.ResourceType.GoogleDriveItem
+     *             resourceType: "GOOGLE_DRIVE_ITEM"
      *         },
      *         userEmail: "john.smith@foo.com"
      *     })
@@ -56,12 +59,14 @@ export class PermissionsService {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.CheckResourceAuthorizationForUserRequest.jsonOrThrow(request, {
+            requestType: "json",
+            body: serializers.CheckResourceAuthorizationForUserRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -69,7 +74,7 @@ export class PermissionsService {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.CheckResourceAuthorizationResponse.parseOrThrow(_response.body, {
+            return serializers.CheckResourceAuthorizationResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -106,14 +111,14 @@ export class PermissionsService {
      * @param {PermissionsService.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.permissionsService.checkBulkResourcesAuthorizationForUser({
+     *     await client.permissionsService.checkBulkResourcesAuthorizationForUser({
      *         resourceIdentifiers: [{
      *                 type: "url",
      *                 url: "https://docs.google.com/document/d/170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr/edit"
      *             }, {
      *                 type: "external-resource-id",
      *                 externalResourceId: "sfsdfvr54UvyslPVWkQFOA0dfsdfsdflgNycFmdZJQr",
-     *                 resourceType: Credal.ResourceType.ZendeskTicket
+     *                 resourceType: "ZENDESK_TICKET"
      *             }],
      *         userEmail: "john.smith@foo.com"
      *     })
@@ -132,12 +137,14 @@ export class PermissionsService {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.CheckBulkResourcesAuthorizationForUserRequest.jsonOrThrow(request, {
+            requestType: "json",
+            body: serializers.CheckBulkResourcesAuthorizationForUserRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -145,7 +152,7 @@ export class PermissionsService {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.CheckBulkResourcesAuthorizationResponse.parseOrThrow(_response.body, {
+            return serializers.CheckBulkResourcesAuthorizationResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -182,7 +189,7 @@ export class PermissionsService {
      * @param {PermissionsService.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await credal.permissionsService.listCachedAuthorizedResourcesForUser({
+     *     await client.permissionsService.listCachedAuthorizedResourcesForUser({
      *         userEmail: "john.smith@foo.com"
      *     })
      */
@@ -200,12 +207,14 @@ export class PermissionsService {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.14",
+                "X-Fern-SDK-Version": "0.0.15",
+                "User-Agent": "@credal/sdk/0.0.15",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.ListCachedAuthorizedResourcesForUserRequest.jsonOrThrow(request, {
+            requestType: "json",
+            body: serializers.ListCachedAuthorizedResourcesForUserRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -213,7 +222,7 @@ export class PermissionsService {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.AuthorizedResourceListPage.parseOrThrow(_response.body, {
+            return serializers.AuthorizedResourceListPage.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

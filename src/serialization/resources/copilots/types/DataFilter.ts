@@ -10,14 +10,14 @@ import { CollectionFilteredData } from "./CollectionFilteredData";
 export const DataFilter: core.serialization.ObjectSchema<serializers.DataFilter.Raw, Credal.DataFilter> =
     core.serialization.object({
         semanticSearchTerms: core.serialization.list(core.serialization.string()),
-        webSearchResults: core.serialization.list(core.serialization.string()),
+        webSearchTerm: core.serialization.list(core.serialization.string()),
         filteredDataSourcesPerCollection: core.serialization.list(CollectionFilteredData),
     });
 
 export declare namespace DataFilter {
     interface Raw {
         semanticSearchTerms: string[];
-        webSearchResults: string[];
+        webSearchTerm: string[];
         filteredDataSourcesPerCollection: CollectionFilteredData.Raw[];
     }
 }
