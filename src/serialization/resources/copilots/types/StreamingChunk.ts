@@ -11,8 +11,34 @@ import { FinalChunk } from "./FinalChunk";
 import { BlockedChunk } from "./BlockedChunk";
 
 export const StreamingChunk: core.serialization.Schema<serializers.StreamingChunk.Raw, Credal.StreamingChunk> =
-    core.serialization.undiscriminatedUnion([InitialChunk, DataChunk, FinalChunk, BlockedChunk]);
+    core.serialization
+        .union("event", {
+            initial: InitialChunk,
+            data_chunk: DataChunk,
+            final_chunk: FinalChunk,
+            blocked: BlockedChunk,
+        })
+        .transform<Credal.StreamingChunk>({
+            transform: (value) => value,
+            untransform: (value) => value,
+        });
 
 export declare namespace StreamingChunk {
-    type Raw = InitialChunk.Raw | DataChunk.Raw | FinalChunk.Raw | BlockedChunk.Raw;
+    type Raw = StreamingChunk.Initial | StreamingChunk.DataChunk | StreamingChunk.FinalChunk | StreamingChunk.Blocked;
+
+    interface Initial extends InitialChunk.Raw {
+        event: "initial";
+    }
+
+    interface DataChunk extends DataChunk.Raw {
+        event: "data_chunk";
+    }
+
+    interface FinalChunk extends FinalChunk.Raw {
+        event: "final_chunk";
+    }
+
+    interface Blocked extends BlockedChunk.Raw {
+        event: "blocked";
+    }
 }

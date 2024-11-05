@@ -4,4 +4,26 @@
 
 import * as Credal from "../../../index";
 
-export type StreamingChunk = Credal.InitialChunk | Credal.DataChunk | Credal.FinalChunk | Credal.BlockedChunk;
+export type StreamingChunk =
+    | Credal.StreamingChunk.Initial
+    | Credal.StreamingChunk.DataChunk
+    | Credal.StreamingChunk.FinalChunk
+    | Credal.StreamingChunk.Blocked;
+
+export declare namespace StreamingChunk {
+    interface Initial extends Credal.InitialChunk {
+        event: "initial";
+    }
+
+    interface DataChunk extends Credal.DataChunk {
+        event: "data_chunk";
+    }
+
+    interface FinalChunk extends Credal.FinalChunk {
+        event: "final_chunk";
+    }
+
+    interface Blocked extends Credal.BlockedChunk {
+        event: "blocked";
+    }
+}
