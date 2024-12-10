@@ -12,10 +12,10 @@ import * as Credal from "../../../../index";
  *         userEmail: "ravin@credal.ai",
  *         inputVariables: [{
  *                 name: "input1",
- *                 urls: ["https://drive.google.com/file/d/123456/view"]
+ *                 ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c24"]
  *             }, {
  *                 name: "input2",
- *                 urls: ["https://drive.google.com/file/d/123457/view", "https://drive.google.com/file/d/123458/view"]
+ *                 ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c25", "82e4b12a-6990-45d4-8ebd-85c00e030c26"]
  *             }]
  *     }
  */

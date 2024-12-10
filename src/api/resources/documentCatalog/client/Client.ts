@@ -56,8 +56,8 @@ export class DocumentCatalog {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.16",
-                "User-Agent": "@credal/sdk/0.0.16",
+                "X-Fern-SDK-Version": "0.0.17",
+                "User-Agent": "@credal/sdk/0.0.17",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -70,6 +70,75 @@ export class DocumentCatalog {
         });
         if (_response.ok) {
             return serializers.UploadDocumentResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError();
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Sync a document from a source URL. Does not support recursive web search. Reach out to a Credal representative for access.
+     *
+     * @param {Credal.SyncSourceByUrlRequest} request
+     * @param {DocumentCatalog.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.documentCatalog.syncSourceByUrl({
+     *         sourceUrl: "https://drive.google.com/file/d/123456/view",
+     *         uploadAsUserEmail: "ria@credal.ai"
+     *     })
+     */
+    public async syncSourceByUrl(
+        request: Credal.SyncSourceByUrlRequest,
+        requestOptions?: DocumentCatalog.RequestOptions
+    ): Promise<Credal.SyncSourceByUrlResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
+                "/v0/catalog/syncSourceByUrl"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@credal/sdk",
+                "X-Fern-SDK-Version": "0.0.17",
+                "User-Agent": "@credal/sdk/0.0.17",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.SyncSourceByUrlRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SyncSourceByUrlResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -145,8 +214,8 @@ export class DocumentCatalog {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.16",
-                "User-Agent": "@credal/sdk/0.0.16",
+                "X-Fern-SDK-Version": "0.0.17",
+                "User-Agent": "@credal/sdk/0.0.17",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

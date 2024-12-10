@@ -9,12 +9,12 @@ import * as core from "../../../../core";
 export const InputVariable: core.serialization.ObjectSchema<serializers.InputVariable.Raw, Credal.InputVariable> =
     core.serialization.object({
         name: core.serialization.string(),
-        urls: core.serialization.list(core.serialization.string()),
+        ids: core.serialization.list(core.serialization.string()),
     });
 
 export declare namespace InputVariable {
     interface Raw {
         name: string;
-        urls: string[];
+        ids: string[];
     }
 }
