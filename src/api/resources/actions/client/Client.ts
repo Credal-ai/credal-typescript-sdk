@@ -9,7 +9,7 @@ import * as serializers from "../../../../serialization/index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
-export declare namespace Search {
+export declare namespace Actions {
     interface Options {
         environment?: core.Supplier<environments.CredalEnvironment | string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
@@ -26,43 +26,36 @@ export declare namespace Search {
     }
 }
 
-export class Search {
-    constructor(protected readonly _options: Search.Options = {}) {}
+export class Actions {
+    constructor(protected readonly _options: Actions.Options = {}) {}
 
     /**
-     * Search across all documents in a document collection using the document metadata and contents.
+     * Invoke an action, asking for human confirmation if necessary
      *
-     * @param {Credal.SearchDocumentCollectionRequest} request
-     * @param {Search.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {Credal.InvokeActionRequest} request
+     * @param {Actions.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.search.searchDocumentCollection({
-     *         collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
-     *         searchQuery: "ABC Corp",
-     *         structuredQueryFilters: [{
-     *                 field: "status",
-     *                 operator: "==",
-     *                 value: "Open"
-     *             }],
-     *         userEmail: "jack@credal.ai",
-     *         searchOptions: {
-     *             maxChunks: 10,
-     *             mergeContents: true,
-     *             threshold: 0.8,
-     *             enableSmartFiltering: true,
-     *             enableQueryExtraction: true,
-     *             enableReranking: true
-     *         }
+     *     await client.actions.invokeAction({
+     *         actionId: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+     *         userEmail: "string",
+     *         requireHumanConfirmation: true,
+     *         humanConfirmationChannel: {
+     *             type: "directMessage",
+     *             channelId: "string"
+     *         },
+     *         justification: "string",
+     *         auditLogId: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
      *     })
      */
-    public async searchDocumentCollection(
-        request: Credal.SearchDocumentCollectionRequest,
-        requestOptions?: Search.RequestOptions
-    ): Promise<Credal.SearchDocumentCollectionResponse> {
+    public async invokeAction(
+        request: Credal.InvokeActionRequest,
+        requestOptions?: Actions.RequestOptions
+    ): Promise<Credal.InvokeActionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/search/searchDocumentCollection"
+                "/v0/actions/invokeAction"
             ),
             method: "POST",
             headers: {
@@ -76,13 +69,13 @@ export class Search {
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.SearchDocumentCollectionRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.InvokeActionRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.SearchDocumentCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.InvokeActionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

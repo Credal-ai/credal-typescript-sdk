@@ -1,5 +1,80 @@
 # Reference
 
+## Actions
+
+<details><summary><code>client.actions.<a href="/src/api/resources/actions/client/Client.ts">invokeAction</a>({ ...params }) -> Credal.InvokeActionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Invoke an action, asking for human confirmation if necessary
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.actions.invokeAction({
+    actionId: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+    userEmail: "string",
+    requireHumanConfirmation: true,
+    humanConfirmationChannel: {
+        type: "directMessage",
+        channelId: "string",
+    },
+    justification: "string",
+    auditLogId: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Credal.InvokeActionRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Actions.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Copilots
 
 <details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">createCopilot</a>({ ...params }) -> Credal.CreateCopilotResponse</code></summary>
@@ -216,11 +291,11 @@ await client.copilots.sendMessage({
     inputVariables: [
         {
             name: "input1",
-            urls: ["https://drive.google.com/file/d/123456/view"],
+            ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c24"],
         },
         {
             name: "input2",
-            urls: ["https://drive.google.com/file/d/123457/view", "https://drive.google.com/file/d/123458/view"],
+            ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c25", "82e4b12a-6990-45d4-8ebd-85c00e030c26"],
         },
     ],
 });
@@ -293,11 +368,11 @@ const response = await client.copilots.streamMessage({
     inputVariables: [
         {
             name: "input1",
-            urls: ["https://drive.google.com/file/d/123456/view"],
+            ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c24"],
         },
         {
             name: "input2",
-            urls: ["https://drive.google.com/file/d/123457/view", "https://drive.google.com/file/d/123458/view"],
+            ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c25", "82e4b12a-6990-45d4-8ebd-85c00e030c26"],
         },
     ],
 });
@@ -633,6 +708,72 @@ await client.documentCatalog.uploadDocumentContents({
 <dd>
 
 **request:** `Credal.UploadDocumentContentsRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DocumentCatalog.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.documentCatalog.<a href="/src/api/resources/documentCatalog/client/Client.ts">syncSourceByUrl</a>({ ...params }) -> Credal.SyncSourceByUrlResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sync a document from a source URL. Does not support recursive web search. Reach out to a Credal representative for access.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.documentCatalog.syncSourceByUrl({
+    sourceUrl: "https://drive.google.com/file/d/123456/view",
+    uploadAsUserEmail: "ria@credal.ai",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Credal.SyncSourceByUrlRequest`
 
 </dd>
 </dl>
