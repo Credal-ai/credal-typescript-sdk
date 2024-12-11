@@ -12,6 +12,7 @@ export const InvokeActionRequest: core.serialization.Schema<
     Credal.InvokeActionRequest
 > = core.serialization.object({
     actionId: core.serialization.string(),
+    actionInputs: core.serialization.unknown(),
     userEmail: core.serialization.string(),
     requireHumanConfirmation: core.serialization.boolean().optional(),
     humanConfirmationChannel: HumanConfirmationChannel,
@@ -22,6 +23,7 @@ export const InvokeActionRequest: core.serialization.Schema<
 export declare namespace InvokeActionRequest {
     interface Raw {
         actionId: string;
+        actionInputs?: unknown;
         userEmail: string;
         requireHumanConfirmation?: boolean | null;
         humanConfirmationChannel: HumanConfirmationChannel.Raw;

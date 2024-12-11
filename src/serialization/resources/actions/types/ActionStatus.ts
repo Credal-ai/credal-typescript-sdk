@@ -9,7 +9,8 @@ import * as core from "../../../../core";
 export const ActionStatus: core.serialization.Schema<serializers.ActionStatus.Raw, Credal.ActionStatus> =
     core.serialization.enum_([
         "PENDING_APPROVAL",
-        "IN_PROGRESS",
+        "APPROVED_IN_PROGRESS",
+        "NO_APPROVAL_NEEDED_IN_PROGRESS",
         "APPROVED_SUCCEEDED",
         "APPROVED_FAILED",
         "NO_APPROVAL_NEEDED_SUCCEEDED",
@@ -19,7 +20,8 @@ export const ActionStatus: core.serialization.Schema<serializers.ActionStatus.Ra
 export declare namespace ActionStatus {
     type Raw =
         | "PENDING_APPROVAL"
-        | "IN_PROGRESS"
+        | "APPROVED_IN_PROGRESS"
+        | "NO_APPROVAL_NEEDED_IN_PROGRESS"
         | "APPROVED_SUCCEEDED"
         | "APPROVED_FAILED"
         | "NO_APPROVAL_NEEDED_SUCCEEDED"

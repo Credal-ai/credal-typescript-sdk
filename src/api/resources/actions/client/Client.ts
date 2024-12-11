@@ -37,15 +37,19 @@ export class Actions {
      *
      * @example
      *     await client.actions.invokeAction({
-     *         actionId: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-     *         userEmail: "string",
+     *         actionId: "2b5cf2b8-3df3-11ef-9a96-332d4470d189",
+     *         actionInputs: {
+     *             "textToAppend": "If you need more help, please contact your direct manager."
+     *         },
+     *         userEmail: "ben@credal.ai",
      *         requireHumanConfirmation: true,
      *         humanConfirmationChannel: {
-     *             type: "directMessage",
-     *             channelId: "string"
+     *             type: "slackThread",
+     *             channelId: "ABC123",
+     *             threadTimestamp: "123456789"
      *         },
-     *         justification: "string",
-     *         auditLogId: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+     *         justification: "The user directly asked to update the Relocations Confluence document with this text.",
+     *         auditLogId: "3df3f2b8-3df3-11ef-9a96-332d447011ef"
      *     })
      */
     public async invokeAction(
@@ -62,8 +66,8 @@ export class Actions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.17",
-                "User-Agent": "@credal/sdk/0.0.17",
+                "X-Fern-SDK-Version": "0.0.18",
+                "User-Agent": "@credal/sdk/0.0.18",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
