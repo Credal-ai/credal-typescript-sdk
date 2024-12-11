@@ -4,8 +4,7 @@
 
 export type ActionStatus =
     | "PENDING_APPROVAL"
-    | "APPROVED_IN_PROGRESS"
-    | "NO_APPROVAL_NEEDED_IN_PROGRESS"
+    | "IN_PROGRESS"
     | "APPROVED_SUCCEEDED"
     | "APPROVED_FAILED"
     | "NO_APPROVAL_NEEDED_SUCCEEDED"
@@ -13,8 +12,7 @@ export type ActionStatus =
 
 export const ActionStatus = {
     PendingApproval: "PENDING_APPROVAL",
-    ApprovedInProgress: "APPROVED_IN_PROGRESS",
-    NoApprovalNeededInProgress: "NO_APPROVAL_NEEDED_IN_PROGRESS",
+    InProgress: "IN_PROGRESS",
     ApprovedSucceeded: "APPROVED_SUCCEEDED",
     ApprovedFailed: "APPROVED_FAILED",
     NoApprovalNeededSucceeded: "NO_APPROVAL_NEEDED_SUCCEEDED",
