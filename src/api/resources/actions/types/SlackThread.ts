@@ -4,5 +4,5 @@
 
 export interface SlackThread {
     channelId: string;
-    threadTimestamp: number;
+    threadTimestamp: string;
 }
