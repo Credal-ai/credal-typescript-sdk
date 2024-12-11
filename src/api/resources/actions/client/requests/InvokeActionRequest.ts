@@ -7,19 +7,28 @@ import * as Credal from "../../../../index";
 /**
  * @example
  *     {
- *         actionId: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
- *         userEmail: "string",
+ *         actionId: "2b5cf2b8-3df3-11ef-9a96-332d4470d189",
+ *         actionInputs: {
+ *             "textToAppend": "If you need more help, please contact your direct manager."
+ *         },
+ *         userEmail: "ben@credal.ai",
  *         requireHumanConfirmation: true,
  *         humanConfirmationChannel: {
- *             type: "directMessage",
- *             channelId: "string"
+ *             type: "slackThread",
+ *             channelId: "ABC123",
+ *             threadTimestamp: "123456789"
  *         },
- *         justification: "string",
- *         auditLogId: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+ *         justification: "The user directly asked to update the Relocations Confluence document with this text.",
+ *         auditLogId: "3df3f2b8-3df3-11ef-9a96-332d447011ef"
  *     }
  */
 export interface InvokeActionRequest {
     actionId: string;
+    /**
+     * The inputs needed to execute the action
+     *
+     */
+    actionInputs?: unknown;
     /**
      * The user who we should take the action on behalf of
      *

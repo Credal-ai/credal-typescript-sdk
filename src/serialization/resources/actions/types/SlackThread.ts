@@ -9,12 +9,12 @@ import * as core from "../../../../core";
 export const SlackThread: core.serialization.ObjectSchema<serializers.SlackThread.Raw, Credal.SlackThread> =
     core.serialization.object({
         channelId: core.serialization.string(),
-        threadTimestamp: core.serialization.number(),
+        threadTimestamp: core.serialization.string(),
     });
 
 export declare namespace SlackThread {
     interface Raw {
         channelId: string;
-        threadTimestamp: number;
+        threadTimestamp: string;
     }
 }
