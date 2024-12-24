@@ -155,10 +155,3 @@ const credal = new CredalClient({
   fetcher: // provide your implementation here
 });
 ```
-
-
-# Beta Status
-
-This SDK is in beta, and there may be breaking changes between versions without a major 
-version update. Therefore, we recommend pinning the package version to a specific version. 
-This way, you can install the same version each time without breaking changes.
