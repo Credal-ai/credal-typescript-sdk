@@ -1,17 +1,13 @@
 <div align="center">  
   <img src="./credal-dark-logo.svg" width="400" />
-  <h1>Credal Typescript SDK</h1>
-
-  <p>
-    <strong>The Credal Typescript Library provides convenient access to the Credal API from applications written in Typescript.</strong>
-  </p>
-
-  <br>
-  <div>
-    <a href="https://buildwithfern.com/"><img src="https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen">     
-  </div>
-  <br>
 </div>
+
+# Credal Typescript Library
+
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](/?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fcredal-ai%2Fcredal-typescript-sdk)
+[![npm shield](https://img.shields.io/npm/v/@credal/sdk)](https://www.npmjs.com/package/@credal/sdk)
+
+The Credal TypeScript library provides convenient access to the Credal API from TypeScript/JavaScript.
 
 # Documentation
 
