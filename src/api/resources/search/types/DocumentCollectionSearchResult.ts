@@ -7,6 +7,8 @@ import * as Credal from "../../../index";
 export interface DocumentCollectionSearchResult {
     documentId: string;
     documentName: string;
+    documentUrl: string;
+    documentExternalId: string;
     documentMetadata: Record<string, string>;
     chunks: Credal.SearchResultChunk[];
     mergedContents?: string;
