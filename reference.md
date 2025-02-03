@@ -239,6 +239,7 @@ await client.copilots.provideMessageFeedback({
     messageFeedback: {
         feedback: "NEGATIVE",
         suggestedAnswer: "Yes, Credal is SOC 2 compliant.",
+        descriptiveFeedback: "The response should be extremely clear and concise.",
     },
 });
 ```
