@@ -7,4 +7,5 @@ import * as Credal from "../../../index";
 export interface MessageFeedback {
     feedback: Credal.FeedbackEnum;
     suggestedAnswer?: string;
+    descriptiveFeedback?: string;
 }

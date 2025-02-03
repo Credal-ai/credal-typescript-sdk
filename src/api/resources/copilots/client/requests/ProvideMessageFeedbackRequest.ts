@@ -12,7 +12,8 @@ import * as Credal from "../../../../index";
  *         agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
  *         messageFeedback: {
  *             feedback: "NEGATIVE",
- *             suggestedAnswer: "Yes, Credal is SOC 2 compliant."
+ *             suggestedAnswer: "Yes, Credal is SOC 2 compliant.",
+ *             descriptiveFeedback: "The response should be extremely clear and concise."
  *         }
  *     }
  */

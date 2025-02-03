@@ -11,11 +11,13 @@ export const MessageFeedback: core.serialization.ObjectSchema<serializers.Messag
     core.serialization.object({
         feedback: FeedbackEnum,
         suggestedAnswer: core.serialization.string().optional(),
+        descriptiveFeedback: core.serialization.string().optional(),
     });
 
 export declare namespace MessageFeedback {
     interface Raw {
         feedback: FeedbackEnum.Raw;
         suggestedAnswer?: string | null;
+        descriptiveFeedback?: string | null;
     }
 }
