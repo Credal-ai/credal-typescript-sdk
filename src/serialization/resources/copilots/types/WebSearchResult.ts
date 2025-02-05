@@ -10,13 +10,13 @@ export const WebSearchResult: core.serialization.ObjectSchema<serializers.WebSea
     core.serialization.object({
         title: core.serialization.string(),
         url: core.serialization.string(),
-        content: core.serialization.string(),
+        contents: core.serialization.string(),
     });
 
 export declare namespace WebSearchResult {
     interface Raw {
         title: string;
         url: string;
-        content: string;
+        contents: string;
     }
 }
