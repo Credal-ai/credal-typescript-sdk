@@ -25,5 +25,6 @@ export * from "./DataFilter";
 export * from "./InitialChunk";
 export * from "./DataChunk";
 export * from "./FinalChunk";
+export * from "./EndOfMessageChunk";
 export * from "./BlockedChunk";
 export * from "./StreamingChunk";

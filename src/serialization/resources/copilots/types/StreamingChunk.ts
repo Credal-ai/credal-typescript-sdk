@@ -7,6 +7,7 @@ import * as Credal from "../../../../api/index";
 import * as core from "../../../../core";
 import { InitialChunk } from "./InitialChunk";
 import { DataChunk } from "./DataChunk";
+import { EndOfMessageChunk } from "./EndOfMessageChunk";
 import { FinalChunk } from "./FinalChunk";
 import { BlockedChunk } from "./BlockedChunk";
 
@@ -15,6 +16,7 @@ export const StreamingChunk: core.serialization.Schema<serializers.StreamingChun
         .union("event", {
             initial: InitialChunk,
             data_chunk: DataChunk,
+            end_of_message: EndOfMessageChunk,
             final_chunk: FinalChunk,
             blocked: BlockedChunk,
         })
@@ -24,7 +26,12 @@ export const StreamingChunk: core.serialization.Schema<serializers.StreamingChun
         });
 
 export declare namespace StreamingChunk {
-    type Raw = StreamingChunk.Initial | StreamingChunk.DataChunk | StreamingChunk.FinalChunk | StreamingChunk.Blocked;
+    type Raw =
+        | StreamingChunk.Initial
+        | StreamingChunk.DataChunk
+        | StreamingChunk.EndOfMessage
+        | StreamingChunk.FinalChunk
+        | StreamingChunk.Blocked;
 
     interface Initial extends InitialChunk.Raw {
         event: "initial";
@@ -32,6 +39,10 @@ export declare namespace StreamingChunk {
 
     interface DataChunk extends DataChunk.Raw {
         event: "data_chunk";
+    }
+
+    interface EndOfMessage extends EndOfMessageChunk.Raw {
+        event: "end_of_message";
     }
 
     interface FinalChunk extends FinalChunk.Raw {
