@@ -7,6 +7,7 @@ import * as Credal from "../../../index";
 export type StreamingChunk =
     | Credal.StreamingChunk.Initial
     | Credal.StreamingChunk.DataChunk
+    | Credal.StreamingChunk.EndOfMessage
     | Credal.StreamingChunk.FinalChunk
     | Credal.StreamingChunk.Blocked;
 
@@ -17,6 +18,10 @@ export declare namespace StreamingChunk {
 
     interface DataChunk extends Credal.DataChunk {
         event: "data_chunk";
+    }
+
+    interface EndOfMessage extends Credal.EndOfMessageChunk {
+        event: "end_of_message";
     }
 
     interface FinalChunk extends Credal.FinalChunk {
