@@ -14,8 +14,8 @@ export const InvokeActionRequest: core.serialization.Schema<
     actionId: core.serialization.string(),
     actionInputs: core.serialization.unknown(),
     userEmail: core.serialization.string(),
-    requireHumanConfirmation: core.serialization.boolean().optional(),
-    humanConfirmationChannel: HumanConfirmationChannel,
+    requireHumanConfirmation: core.serialization.boolean(),
+    humanConfirmationChannel: HumanConfirmationChannel.optional(),
     justification: core.serialization.string(),
     auditLogId: core.serialization.string(),
 });
@@ -25,8 +25,8 @@ export declare namespace InvokeActionRequest {
         actionId: string;
         actionInputs?: unknown;
         userEmail: string;
-        requireHumanConfirmation?: boolean | null;
-        humanConfirmationChannel: HumanConfirmationChannel.Raw;
+        requireHumanConfirmation: boolean;
+        humanConfirmationChannel?: HumanConfirmationChannel.Raw | null;
         justification: string;
         auditLogId: string;
     }
