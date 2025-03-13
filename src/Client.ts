@@ -4,7 +4,6 @@
 
 import * as environments from "./environments";
 import * as core from "./core";
-import { Actions } from "./api/resources/actions/client/Client";
 import { Copilots } from "./api/resources/copilots/client/Client";
 import { DocumentCatalog } from "./api/resources/documentCatalog/client/Client";
 import { DocumentCollections } from "./api/resources/documentCollections/client/Client";
@@ -31,12 +30,6 @@ export declare namespace CredalClient {
 
 export class CredalClient {
     constructor(protected readonly _options: CredalClient.Options = {}) {}
-
-    protected _actions: Actions | undefined;
-
-    public get actions(): Actions {
-        return (this._actions ??= new Actions(this._options));
-    }
 
     protected _copilots: Copilots | undefined;
 
