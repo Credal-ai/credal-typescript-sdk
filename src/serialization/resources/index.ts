@@ -1,5 +1,3 @@
-export * as actions from "./actions";
-export * from "./actions/types";
 export * as common from "./common";
 export * from "./common/types";
 export * as copilots from "./copilots";
@@ -14,7 +12,6 @@ export * as search from "./search";
 export * from "./search/types";
 export * as users from "./users";
 export * from "./users/types";
-export * from "./actions/client/requests";
 export * from "./copilots/client/requests";
 export * from "./documentCatalog/client/requests";
 export * from "./documentCollections/client/requests";
