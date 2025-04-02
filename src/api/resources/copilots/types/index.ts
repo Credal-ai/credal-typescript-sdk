@@ -27,4 +27,6 @@ export * from "./DataChunk";
 export * from "./FinalChunk";
 export * from "./EndOfMessageChunk";
 export * from "./BlockedChunk";
+export * from "./ErrorChunkData";
+export * from "./ErrorChunk";
 export * from "./StreamingChunk";

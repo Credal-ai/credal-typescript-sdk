@@ -10,14 +10,8 @@
  *     }
  */
 export interface CreateConversationRequest {
-    /**
-     * Credal-generated Copilot ID to specify which agent to route the request to.
-     *
-     */
+    /** Credal-generated Copilot ID to specify which agent to route the request to. */
     agentId: string;
-    /**
-     * End-user for the conversation.
-     *
-     */
+    /** End-user for the conversation. */
     userEmail: string;
 }

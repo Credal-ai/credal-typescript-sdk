@@ -10,6 +10,7 @@ import { DataChunk } from "./DataChunk";
 import { EndOfMessageChunk } from "./EndOfMessageChunk";
 import { FinalChunk } from "./FinalChunk";
 import { BlockedChunk } from "./BlockedChunk";
+import { ErrorChunk } from "./ErrorChunk";
 
 export const StreamingChunk: core.serialization.Schema<serializers.StreamingChunk.Raw, Credal.StreamingChunk> =
     core.serialization
@@ -19,6 +20,7 @@ export const StreamingChunk: core.serialization.Schema<serializers.StreamingChun
             end_of_message: EndOfMessageChunk,
             final_chunk: FinalChunk,
             blocked: BlockedChunk,
+            error_chunk: ErrorChunk,
         })
         .transform<Credal.StreamingChunk>({
             transform: (value) => value,
@@ -31,7 +33,8 @@ export declare namespace StreamingChunk {
         | StreamingChunk.DataChunk
         | StreamingChunk.EndOfMessage
         | StreamingChunk.FinalChunk
-        | StreamingChunk.Blocked;
+        | StreamingChunk.Blocked
+        | StreamingChunk.ErrorChunk;
 
     interface Initial extends InitialChunk.Raw {
         event: "initial";
@@ -51,5 +54,9 @@ export declare namespace StreamingChunk {
 
     interface Blocked extends BlockedChunk.Raw {
         event: "blocked";
+    }
+
+    interface ErrorChunk extends ErrorChunk.Raw {
+        event: "error_chunk";
     }
 }

@@ -7,13 +7,11 @@ import * as Credal from "../../../index";
 export type SendMessageResponse =
     /**
      * Returned when there is a reply
-     * fetched from the copilot.
-     *  */
+     * fetched from the copilot. */
     | Credal.SendMessageResponse.AiResponseResult
     /**
      * Returned when Credal detects possible
-     * infosec violations and blocks the message.
-     *  */
+     * infosec violations and blocks the message. */
     | Credal.SendMessageResponse.BlockedResult;
 
 export declare namespace SendMessageResponse {

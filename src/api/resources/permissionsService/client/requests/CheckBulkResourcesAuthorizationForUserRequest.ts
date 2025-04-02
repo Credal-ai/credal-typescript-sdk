@@ -19,19 +19,10 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface CheckBulkResourcesAuthorizationForUserRequest {
-    /**
-     * The set of resource identifier for which you want to check authorization. Currently limited to 20 resources.
-     *
-     */
+    /** The set of resource identifier for which you want to check authorization. Currently limited to 20 resources. */
     resourceIdentifiers: Credal.ResourceIdentifier[];
-    /**
-     * The user email to check authorization for.
-     *
-     */
+    /** The user email to check authorization for. */
     userEmail: string;
-    /**
-     * If specified, Credal will bypass the permissions cache and check current permissions for all resources specified.
-     *
-     */
+    /** If specified, Credal will bypass the permissions cache and check current permissions for all resources specified. */
     disableCache?: boolean;
 }

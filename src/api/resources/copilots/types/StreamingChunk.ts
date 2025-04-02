@@ -9,7 +9,8 @@ export type StreamingChunk =
     | Credal.StreamingChunk.DataChunk
     | Credal.StreamingChunk.EndOfMessage
     | Credal.StreamingChunk.FinalChunk
-    | Credal.StreamingChunk.Blocked;
+    | Credal.StreamingChunk.Blocked
+    | Credal.StreamingChunk.ErrorChunk;
 
 export declare namespace StreamingChunk {
     interface Initial extends Credal.InitialChunk {
@@ -30,5 +31,9 @@ export declare namespace StreamingChunk {
 
     interface Blocked extends Credal.BlockedChunk {
         event: "blocked";
+    }
+
+    interface ErrorChunk extends Credal.ErrorChunk {
+        event: "error_chunk";
     }
 }

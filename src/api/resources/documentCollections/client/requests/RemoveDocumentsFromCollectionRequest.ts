@@ -22,9 +22,6 @@ import * as Credal from "../../../../index";
 export interface RemoveDocumentsFromCollectionRequest {
     /** The ID of the document collection you want to add to. */
     collectionId: string;
-    /**
-     * The set of resource identifier for which you want to remove from the collection
-     *
-     */
+    /** The set of resource identifier for which you want to remove from the collection */
     resourceIdentifiers: Credal.ResourceIdentifier[];
 }
