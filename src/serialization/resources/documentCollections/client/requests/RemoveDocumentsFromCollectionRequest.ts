@@ -16,7 +16,7 @@ export const RemoveDocumentsFromCollectionRequest: core.serialization.Schema<
 });
 
 export declare namespace RemoveDocumentsFromCollectionRequest {
-    interface Raw {
+    export interface Raw {
         collectionId: string;
         resourceIdentifiers: ResourceIdentifier.Raw[];
     }

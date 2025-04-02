@@ -16,7 +16,7 @@ export const Configuration: core.serialization.ObjectSchema<serializers.Configur
     });
 
 export declare namespace Configuration {
-    interface Raw {
+    export interface Raw {
         aiEndpointConfiguration?: AiEndpointConfiguration.Raw | null;
         name?: string | null;
         description?: string | null;

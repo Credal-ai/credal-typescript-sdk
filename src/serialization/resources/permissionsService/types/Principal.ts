@@ -19,13 +19,13 @@ export const Principal: core.serialization.Schema<serializers.Principal.Raw, Cre
     });
 
 export declare namespace Principal {
-    type Raw = Principal.Group | Principal.User;
+    export type Raw = Principal.Group | Principal.User;
 
-    interface Group extends Group.Raw {
+    export interface Group extends Group.Raw {
         type: "group";
     }
 
-    interface User extends User.Raw {
+    export interface User extends User.Raw {
         type: "user";
     }
 }

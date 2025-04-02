@@ -6,12 +6,12 @@ import * as Credal from "../../../index";
 
 export type ResourceIdentifier = Credal.ResourceIdentifier.ExternalResourceId | Credal.ResourceIdentifier.Url;
 
-export declare namespace ResourceIdentifier {
-    interface ExternalResourceId extends Credal.ExternalResourceId {
+export namespace ResourceIdentifier {
+    export interface ExternalResourceId extends Credal.ExternalResourceId {
         type: "external-resource-id";
     }
 
-    interface Url extends Credal.Url {
+    export interface Url extends Credal.Url {
         type: "url";
     }
 }

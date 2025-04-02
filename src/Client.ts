@@ -12,56 +12,55 @@ import { Search } from "./api/resources/search/client/Client";
 import { Users } from "./api/resources/users/client/Client";
 
 export declare namespace CredalClient {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.CredalEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
 export class CredalClient {
-    constructor(protected readonly _options: CredalClient.Options = {}) {}
-
     protected _copilots: Copilots | undefined;
+    protected _documentCatalog: DocumentCatalog | undefined;
+    protected _documentCollections: DocumentCollections | undefined;
+    protected _permissionsService: PermissionsService | undefined;
+    protected _search: Search | undefined;
+    protected _users: Users | undefined;
+
+    constructor(protected readonly _options: CredalClient.Options = {}) {}
 
     public get copilots(): Copilots {
         return (this._copilots ??= new Copilots(this._options));
     }
 
-    protected _documentCatalog: DocumentCatalog | undefined;
-
     public get documentCatalog(): DocumentCatalog {
         return (this._documentCatalog ??= new DocumentCatalog(this._options));
     }
-
-    protected _documentCollections: DocumentCollections | undefined;
 
     public get documentCollections(): DocumentCollections {
         return (this._documentCollections ??= new DocumentCollections(this._options));
     }
 
-    protected _permissionsService: PermissionsService | undefined;
-
     public get permissionsService(): PermissionsService {
         return (this._permissionsService ??= new PermissionsService(this._options));
     }
 
-    protected _search: Search | undefined;
-
     public get search(): Search {
         return (this._search ??= new Search(this._options));
     }
-
-    protected _users: Users | undefined;
 
     public get users(): Users {
         return (this._users ??= new Users(this._options));

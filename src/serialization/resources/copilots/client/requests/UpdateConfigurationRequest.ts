@@ -16,7 +16,7 @@ export const UpdateConfigurationRequest: core.serialization.Schema<
 });
 
 export declare namespace UpdateConfigurationRequest {
-    interface Raw {
+    export interface Raw {
         copilotId: string;
         configuration: Configuration.Raw;
     }

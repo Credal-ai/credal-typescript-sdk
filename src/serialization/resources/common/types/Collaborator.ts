@@ -14,7 +14,7 @@ export const Collaborator: core.serialization.ObjectSchema<serializers.Collabora
     });
 
 export declare namespace Collaborator {
-    interface Raw {
+    export interface Raw {
         email: string;
         role: Role.Raw;
     }

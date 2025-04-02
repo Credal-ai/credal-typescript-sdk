@@ -15,7 +15,7 @@ export const AiEndpointConfiguration: core.serialization.ObjectSchema<
 });
 
 export declare namespace AiEndpointConfiguration {
-    interface Raw {
+    export interface Raw {
         baseUrl: string;
         apiKey: string;
     }

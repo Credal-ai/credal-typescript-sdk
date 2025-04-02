@@ -3,7 +3,6 @@
  */
 
 export type Action = "READ";
-
 export const Action = {
     Read: "READ",
 } as const;

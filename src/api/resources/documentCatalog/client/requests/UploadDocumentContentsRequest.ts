@@ -13,54 +13,24 @@
  *     }
  */
 export interface UploadDocumentContentsRequest {
-    /**
-     * The name of the document you want to upload.
-     *
-     */
+    /** The name of the document you want to upload. */
     documentName: string;
-    /**
-     * The full LLM-formatted text contents of the document you want to upload.
-     *
-     */
+    /** The full LLM-formatted text contents of the document you want to upload. */
     documentContents: string;
-    /**
-     * Users allowed to access the document. Unlike Credal's out of the box connectors which reconcile various permissions models from 3rd party software, for custom uploads the caller is responsible for specifying who can access the document and currently flattening groups if applicable. Documents can also be marked as internal public.
-     *
-     */
+    /** Users allowed to access the document. Unlike Credal's out of the box connectors which reconcile various permissions models from 3rd party software, for custom uploads the caller is responsible for specifying who can access the document and currently flattening groups if applicable. Documents can also be marked as internal public. */
     allowedUsersEmailAddresses: string[];
-    /**
-     * [Legacy] The user on behalf of whom the document should be uploaded. In most cases, this can simply be the email of the developer making the API call. This field will be removed in the future in favor of purely specifying permissions via allowedUsersEmailAddresses.
-     *
-     */
+    /** [Legacy] The user on behalf of whom the document should be uploaded. In most cases, this can simply be the email of the developer making the API call. This field will be removed in the future in favor of purely specifying permissions via allowedUsersEmailAddresses. */
     uploadAsUserEmail: string;
-    /**
-     * The external ID of the document. This is typically the ID as it exists in its original external system. Uploads to the same external ID will update the document in Credal.
-     *
-     */
+    /** The external ID of the document. This is typically the ID as it exists in its original external system. Uploads to the same external ID will update the document in Credal. */
     documentExternalId: string;
-    /**
-     * The external URL of the document you want to upload. If provided Credal will link to this URL.
-     *
-     */
+    /** The external URL of the document you want to upload. If provided Credal will link to this URL. */
     documentExternalUrl?: string;
-    /**
-     * Optional JSON representing any custom metdata for this document
-     *
-     */
+    /** Optional JSON representing any custom metdata for this document */
     customMetadata?: unknown;
-    /**
-     * If specified, document will also be added to a particular document collection
-     *
-     */
+    /** If specified, document will also be added to a particular document collection */
     collectionId?: string;
-    /**
-     * If specified, document contents will be re-uploaded and re-embedded even if the document already exists in Credal
-     *
-     */
+    /** If specified, document contents will be re-uploaded and re-embedded even if the document already exists in Credal */
     forceUpdate?: boolean;
-    /**
-     * If specified, document will be accessible to everyone within the organization of the uploader
-     *
-     */
+    /** If specified, document will be accessible to everyone within the organization of the uploader */
     internalPublic?: boolean;
 }

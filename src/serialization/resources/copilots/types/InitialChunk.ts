@@ -17,7 +17,7 @@ export const InitialChunk: core.serialization.ObjectSchema<serializers.InitialCh
     });
 
 export declare namespace InitialChunk {
-    interface Raw {
+    export interface Raw {
         conversationId: string;
         warnings: string[];
         webSearchResults: WebSearchResult.Raw[];

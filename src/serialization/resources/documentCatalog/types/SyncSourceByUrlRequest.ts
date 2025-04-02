@@ -15,7 +15,7 @@ export const SyncSourceByUrlRequest: core.serialization.ObjectSchema<
 });
 
 export declare namespace SyncSourceByUrlRequest {
-    interface Raw {
+    export interface Raw {
         uploadAsUserEmail: string;
         sourceUrl: string;
     }

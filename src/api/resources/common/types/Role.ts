@@ -3,7 +3,6 @@
  */
 
 export type Role = "viewer" | "editor";
-
 export const Role = {
     Viewer: "viewer",
     Editor: "editor",

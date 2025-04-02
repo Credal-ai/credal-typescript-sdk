@@ -11,24 +11,12 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface ListCachedAuthorizedResourcesForUserRequest {
-    /**
-     * The user email to list authorized resources for.
-     *
-     */
+    /** The user email to list authorized resources for. */
     userEmail: string;
-    /**
-     * The type of resource you want to list. If not specified, all resource types will be listed.
-     *
-     */
+    /** The type of resource you want to list. If not specified, all resource types will be listed. */
     resourceType?: Credal.ResourceType;
-    /**
-     * The maximum number of resources to return. Defaults to 100.
-     *
-     */
+    /** The maximum number of resources to return. Defaults to 100. */
     limit?: number;
-    /**
-     * The offset to use for pagination. If not specified, the first page of results will be returned.
-     *
-     */
+    /** The offset to use for pagination. If not specified, the first page of results will be returned. */
     offset?: number;
 }

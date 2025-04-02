@@ -17,7 +17,7 @@ export const CheckResourceAuthorizationForUserRequest: core.serialization.Schema
 });
 
 export declare namespace CheckResourceAuthorizationForUserRequest {
-    interface Raw {
+    export interface Raw {
         resourceIdentifier: ResourceIdentifier.Raw;
         userEmail: string;
         disableCache?: boolean | null;

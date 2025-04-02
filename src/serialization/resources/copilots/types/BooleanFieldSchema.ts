@@ -16,7 +16,7 @@ export const BooleanFieldSchema: core.serialization.ObjectSchema<
 });
 
 export declare namespace BooleanFieldSchema {
-    interface Raw {
+    export interface Raw {
         field: string;
         operator: "==";
         value: boolean;

@@ -30,7 +30,7 @@ export const ResourceType: core.serialization.Schema<serializers.ResourceType.Ra
     ]);
 
 export declare namespace ResourceType {
-    type Raw =
+    export type Raw =
         | "GOOGLE_DRIVE_ITEM"
         | "MICROSOFT_DRIVE_ITEM"
         | "ZENDESK_TICKET"

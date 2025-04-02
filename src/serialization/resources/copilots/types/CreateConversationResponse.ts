@@ -14,7 +14,7 @@ export const CreateConversationResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace CreateConversationResponse {
-    interface Raw {
+    export interface Raw {
         conversationId: string;
     }
 }

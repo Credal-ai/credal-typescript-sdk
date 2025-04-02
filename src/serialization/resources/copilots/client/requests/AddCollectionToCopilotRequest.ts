@@ -15,7 +15,7 @@ export const AddCollectionToCopilotRequest: core.serialization.Schema<
 });
 
 export declare namespace AddCollectionToCopilotRequest {
-    interface Raw {
+    export interface Raw {
         copilotId: string;
         collectionId: string;
     }

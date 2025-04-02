@@ -14,7 +14,7 @@ export const CheckResourceAuthorizationResponse: core.serialization.ObjectSchema
 });
 
 export declare namespace CheckResourceAuthorizationResponse {
-    interface Raw {
+    export interface Raw {
         authorized: boolean;
     }
 }

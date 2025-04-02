@@ -17,7 +17,7 @@ export const CreateCollectionRequest: core.serialization.Schema<
 });
 
 export declare namespace CreateCollectionRequest {
-    interface Raw {
+    export interface Raw {
         name: string;
         description: string;
         collaborators: Collaborator.Raw[];

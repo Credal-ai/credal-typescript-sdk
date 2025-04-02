@@ -16,7 +16,7 @@ export const AuthorizedResource: core.serialization.ObjectSchema<
 });
 
 export declare namespace AuthorizedResource {
-    interface Raw {
+    export interface Raw {
         credalId: string;
         externalId: ExternalResourceId.Raw;
     }

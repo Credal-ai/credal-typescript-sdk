@@ -12,5 +12,5 @@ export const EndOfMessageChunk: core.serialization.ObjectSchema<
 > = core.serialization.object({});
 
 export declare namespace EndOfMessageChunk {
-    interface Raw {}
+    export interface Raw {}
 }

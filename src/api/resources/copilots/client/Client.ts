@@ -11,19 +11,23 @@ import * as errors from "../../../../errors/index";
 import * as stream from "stream";
 
 export declare namespace Copilots {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.CredalEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -48,22 +52,25 @@ export class Copilots {
      */
     public async createCopilot(
         request: Credal.CreateCopilotRequest,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<Credal.CreateCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/copilots/createCopilot"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/copilots/createCopilot",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -95,7 +102,7 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/createCopilot.");
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -117,22 +124,25 @@ export class Copilots {
      */
     public async createConversation(
         request: Credal.CreateConversationRequest,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<Credal.CreateConversationResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/copilots/createConversation"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/copilots/createConversation",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -164,7 +174,9 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling POST /v0/copilots/createConversation.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -190,22 +202,25 @@ export class Copilots {
      */
     public async provideMessageFeedback(
         request: Credal.ProvideMessageFeedbackRequest,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<void> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/copilots/provideMessageFeedback"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/copilots/provideMessageFeedback",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -232,7 +247,9 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling POST /v0/copilots/provideMessageFeedback.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -260,22 +277,25 @@ export class Copilots {
      */
     public async sendMessage(
         request: Credal.SendMessageRequest,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<Credal.SendAgentMessageResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/copilots/sendMessage"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/copilots/sendMessage",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -307,7 +327,7 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/sendMessage.");
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -320,22 +340,25 @@ export class Copilots {
      */
     public async streamMessage(
         request: Credal.StreamMessageRequest,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<core.Stream<Credal.StreamingChunk>> {
         const _response = await (this._options.fetcher ?? core.fetcher)<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/copilots/streamMessage"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/copilots/streamMessage",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -378,7 +401,7 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/streamMessage.");
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -400,22 +423,25 @@ export class Copilots {
      */
     public async addCollectionToCopilot(
         request: Credal.AddCollectionToCopilotRequest,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<void> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/copilots/addCollectionToCopilot"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/copilots/addCollectionToCopilot",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -442,7 +468,9 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling POST /v0/copilots/addCollectionToCopilot.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -464,22 +492,25 @@ export class Copilots {
      */
     public async removeCollectionFromCopilot(
         request: Credal.RemoveCollectionFromCopilotRequest,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<void> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/copilots/removeCollectionFromCopilot"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/copilots/removeCollectionFromCopilot",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -508,7 +539,9 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling POST /v0/copilots/removeCollectionFromCopilot.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -538,22 +571,25 @@ export class Copilots {
      */
     public async updateConfiguration(
         request: Credal.UpdateConfigurationRequest,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<void> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/copilots/updateConfiguration"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/copilots/updateConfiguration",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -580,7 +616,9 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling POST /v0/copilots/updateConfiguration.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -599,22 +637,25 @@ export class Copilots {
      */
     public async deleteCopilot(
         request: Credal.DeleteCopilotRequest,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<Credal.DeleteCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/copilots/deleteCopilot"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/copilots/deleteCopilot",
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -646,7 +687,7 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError("Timeout exceeded when calling DELETE /v0/copilots/deleteCopilot.");
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -658,7 +699,8 @@ export class Copilots {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["CREDAL_API_KEY"];
         if (bearer == null) {
             throw new errors.CredalError({
-                message: "Please specify CREDAL_API_KEY when instantiating the client.",
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a CREDAL_API_KEY environment variable",
             });
         }
 

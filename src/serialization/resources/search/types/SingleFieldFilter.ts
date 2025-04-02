@@ -17,7 +17,7 @@ export const SingleFieldFilter: core.serialization.ObjectSchema<
 });
 
 export declare namespace SingleFieldFilter {
-    interface Raw {
+    export interface Raw {
         field: string;
         operator: Operator.Raw;
         value: string;

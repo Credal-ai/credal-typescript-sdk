@@ -14,7 +14,7 @@ export const DeleteCopilotRequest: core.serialization.Schema<
 });
 
 export declare namespace DeleteCopilotRequest {
-    interface Raw {
+    export interface Raw {
         id: string;
     }
 }

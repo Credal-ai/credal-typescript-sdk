@@ -17,7 +17,7 @@ export const CreateMongoCollectionSyncRequest: core.serialization.Schema<
 });
 
 export declare namespace CreateMongoCollectionSyncRequest {
-    interface Raw {
+    export interface Raw {
         collectionId: string;
         mongoURI: string;
         config: MongoCollectionSyncConfig.Raw;

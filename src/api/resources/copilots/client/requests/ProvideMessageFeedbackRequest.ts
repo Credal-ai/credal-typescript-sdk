@@ -18,24 +18,12 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface ProvideMessageFeedbackRequest {
-    /**
-     * Credal-generated Copilot ID to specify which agent to route the request to.
-     *
-     */
+    /** Credal-generated Copilot ID to specify which agent to route the request to. */
     agentId: string;
-    /**
-     * The user profile you want to use when providing feedback.
-     *
-     */
+    /** The user profile you want to use when providing feedback. */
     userEmail: string;
-    /**
-     * The message ID for which feedback is being provided.
-     *
-     */
+    /** The message ID for which feedback is being provided. */
     messageId: string;
-    /**
-     * The feedback provided by the user.
-     *
-     */
+    /** The feedback provided by the user. */
     messageFeedback: Credal.MessageFeedback;
 }

@@ -21,7 +21,7 @@ export const DocumentCollectionSearchResult: core.serialization.ObjectSchema<
 });
 
 export declare namespace DocumentCollectionSearchResult {
-    interface Raw {
+    export interface Raw {
         documentId: string;
         documentName: string;
         documentUrl: string;

@@ -12,7 +12,7 @@ export const Group: core.serialization.ObjectSchema<serializers.Group.Raw, Creda
 });
 
 export declare namespace Group {
-    interface Raw {
+    export interface Raw {
         name: string;
         id?: string | null;
     }

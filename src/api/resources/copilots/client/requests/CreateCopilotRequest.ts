@@ -16,19 +16,10 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface CreateCopilotRequest {
-    /**
-     * A descriptive name for the copilot.
-     *
-     */
+    /** A descriptive name for the copilot. */
     name: string;
-    /**
-     * An in depth name for the copilot's function. Useful for routing requests to the right copilot.
-     *
-     */
+    /** An in depth name for the copilot's function. Useful for routing requests to the right copilot. */
     description: string;
-    /**
-     * A list of collaborator emails and roles that will have access to the copilot.
-     *
-     */
+    /** A list of collaborator emails and roles that will have access to the copilot. */
     collaborators: Credal.Collaborator[];
 }

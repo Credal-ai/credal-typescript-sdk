@@ -17,5 +17,5 @@ export const Operator: core.serialization.Schema<serializers.Operator.Raw, Creda
 ]);
 
 export declare namespace Operator {
-    type Raw = "<" | ">" | "<=" | ">=" | "!=" | "==" | "contains";
+    export type Raw = "<" | ">" | "<=" | ">=" | "!=" | "==" | "contains";
 }

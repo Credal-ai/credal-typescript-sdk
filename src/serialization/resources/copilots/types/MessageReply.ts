@@ -25,7 +25,7 @@ export const MessageReply: core.serialization.ObjectSchema<serializers.MessageRe
     });
 
 export declare namespace MessageReply {
-    interface Raw {
+    export interface Raw {
         policy_triggers: PolicyTrigger.Raw[];
         conversationId: string;
         response: ResponseChunk.Raw;

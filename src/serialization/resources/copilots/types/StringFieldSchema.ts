@@ -17,7 +17,7 @@ export const StringFieldSchema: core.serialization.ObjectSchema<
 });
 
 export declare namespace StringFieldSchema {
-    interface Raw {
+    export interface Raw {
         field: string;
         operator: Operator.Raw;
         value: string;

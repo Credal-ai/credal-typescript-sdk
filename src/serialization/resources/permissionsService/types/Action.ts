@@ -11,5 +11,5 @@ export const Action: core.serialization.Schema<serializers.Action.Raw, Credal.Ac
 ]);
 
 export declare namespace Action {
-    type Raw = "READ";
+    export type Raw = "READ";
 }

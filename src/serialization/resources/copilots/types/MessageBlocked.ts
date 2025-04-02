@@ -18,7 +18,7 @@ export const MessageBlocked: core.serialization.ObjectSchema<serializers.Message
     });
 
 export declare namespace MessageBlocked {
-    interface Raw {
+    export interface Raw {
         policy_triggers: PolicyTrigger.Raw[];
         conversationId: string;
         blocks: string[];

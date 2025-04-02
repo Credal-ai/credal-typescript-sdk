@@ -16,7 +16,7 @@ export const BlockedChunk: core.serialization.ObjectSchema<serializers.BlockedCh
     });
 
 export declare namespace BlockedChunk {
-    interface Raw {
+    export interface Raw {
         conversationId: string;
         warnings: string[];
         blocks: string[];

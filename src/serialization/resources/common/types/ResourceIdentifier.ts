@@ -22,13 +22,13 @@ export const ResourceIdentifier: core.serialization.Schema<
     });
 
 export declare namespace ResourceIdentifier {
-    type Raw = ResourceIdentifier.ExternalResourceId | ResourceIdentifier.Url;
+    export type Raw = ResourceIdentifier.ExternalResourceId | ResourceIdentifier.Url;
 
-    interface ExternalResourceId extends ExternalResourceId.Raw {
+    export interface ExternalResourceId extends ExternalResourceId.Raw {
         type: "external-resource-id";
     }
 
-    interface Url extends Url.Raw {
+    export interface Url extends Url.Raw {
         type: "url";
     }
 }

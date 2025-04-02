@@ -15,7 +15,7 @@ export const RemoveCollectionFromCopilotRequest: core.serialization.Schema<
 });
 
 export declare namespace RemoveCollectionFromCopilotRequest {
-    interface Raw {
+    export interface Raw {
         copilotId: string;
         collectionId: string;
     }

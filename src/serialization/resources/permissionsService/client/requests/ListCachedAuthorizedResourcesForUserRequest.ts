@@ -18,7 +18,7 @@ export const ListCachedAuthorizedResourcesForUserRequest: core.serialization.Sch
 });
 
 export declare namespace ListCachedAuthorizedResourcesForUserRequest {
-    interface Raw {
+    export interface Raw {
         userEmail: string;
         resourceType?: ResourceType.Raw | null;
         limit?: number | null;

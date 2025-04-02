@@ -23,7 +23,7 @@ export const UploadDocumentContentsRequest: core.serialization.Schema<
 });
 
 export declare namespace UploadDocumentContentsRequest {
-    interface Raw {
+    export interface Raw {
         documentName: string;
         documentContents: string;
         allowedUsersEmailAddresses: string[];

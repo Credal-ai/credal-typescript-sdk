@@ -16,7 +16,7 @@ export const PrincipalListPage: core.serialization.ObjectSchema<
 });
 
 export declare namespace PrincipalListPage {
-    interface Raw {
+    export interface Raw {
         principals: Principal.Raw[];
         nextPageToken?: string | null;
     }

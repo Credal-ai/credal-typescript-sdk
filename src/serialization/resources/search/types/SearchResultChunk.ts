@@ -17,7 +17,7 @@ export const SearchResultChunk: core.serialization.ObjectSchema<
 });
 
 export declare namespace SearchResultChunk {
-    interface Raw {
+    export interface Raw {
         chunkId: string;
         chunkIndex: number;
         text: string;

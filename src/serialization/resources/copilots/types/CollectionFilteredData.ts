@@ -17,7 +17,7 @@ export const CollectionFilteredData: core.serialization.ObjectSchema<
 });
 
 export declare namespace CollectionFilteredData {
-    interface Raw {
+    export interface Raw {
         collectionId: string;
         filteredDataIds: string[];
         filters: Filter.Raw[];

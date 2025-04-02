@@ -15,7 +15,7 @@ export const DataFilter: core.serialization.ObjectSchema<serializers.DataFilter.
     });
 
 export declare namespace DataFilter {
-    interface Raw {
+    export interface Raw {
         semanticSearchTerms: string[];
         webSearchTerm: string[];
         filteredDataSourcesPerCollection: CollectionFilteredData.Raw[];
