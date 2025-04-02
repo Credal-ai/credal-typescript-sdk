@@ -19,7 +19,7 @@ export const SearchDocumentCollectionResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace SearchDocumentCollectionResponse {
-    interface Raw {
+    export interface Raw {
         searchTermsUsed: string[];
         structuredFiltersApplied: SingleFieldFilter.Raw[];
         searchId: string;

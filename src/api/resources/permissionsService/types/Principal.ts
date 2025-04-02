@@ -6,12 +6,12 @@ import * as Credal from "../../../index";
 
 export type Principal = Credal.Principal.Group | Credal.Principal.User;
 
-export declare namespace Principal {
-    interface Group extends Credal.Group {
+export namespace Principal {
+    export interface Group extends Credal.Group {
         type: "group";
     }
 
-    interface User extends Credal.User {
+    export interface User extends Credal.User {
         type: "user";
     }
 }

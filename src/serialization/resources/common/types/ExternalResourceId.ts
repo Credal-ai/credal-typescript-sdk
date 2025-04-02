@@ -16,7 +16,7 @@ export const ExternalResourceId: core.serialization.ObjectSchema<
 });
 
 export declare namespace ExternalResourceId {
-    interface Raw {
+    export interface Raw {
         externalResourceId: string;
         resourceType: ResourceType.Raw;
     }

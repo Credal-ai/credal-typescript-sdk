@@ -14,7 +14,7 @@ export const InsertedAuditLog: core.serialization.ObjectSchema<
 });
 
 export declare namespace InsertedAuditLog {
-    interface Raw {
+    export interface Raw {
         id: string;
     }
 }

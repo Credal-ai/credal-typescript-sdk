@@ -16,7 +16,7 @@ export const MongoCollectionSyncResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace MongoCollectionSyncResponse {
-    interface Raw {
+    export interface Raw {
         mongoCredentialId: string;
         resourceId: string;
         syncLaunched: boolean;

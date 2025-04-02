@@ -18,7 +18,7 @@ export const MongoCollectionSyncConfig: core.serialization.ObjectSchema<
 });
 
 export declare namespace MongoCollectionSyncConfig {
-    interface Raw {
+    export interface Raw {
         syncName: string;
         collectionName: string;
         filterExpression?: unknown;

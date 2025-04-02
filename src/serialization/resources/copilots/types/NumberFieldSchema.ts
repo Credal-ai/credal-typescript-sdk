@@ -17,7 +17,7 @@ export const NumberFieldSchema: core.serialization.ObjectSchema<
 });
 
 export declare namespace NumberFieldSchema {
-    interface Raw {
+    export interface Raw {
         field: string;
         operator: Operator.Raw;
         value: number;

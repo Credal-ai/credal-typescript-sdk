@@ -14,7 +14,7 @@ export const PolicyTrigger: core.serialization.ObjectSchema<serializers.PolicyTr
     });
 
 export declare namespace PolicyTrigger {
-    interface Raw {
+    export interface Raw {
         id: string;
         name: string;
         description: string;

@@ -12,7 +12,7 @@ export const DataChunk: core.serialization.ObjectSchema<serializers.DataChunk.Ra
     });
 
 export declare namespace DataChunk {
-    interface Raw {
+    export interface Raw {
         chunk: string;
     }
 }

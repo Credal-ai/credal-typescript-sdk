@@ -12,5 +12,5 @@ export const Role: core.serialization.Schema<serializers.Role.Raw, Credal.Role> 
 ]);
 
 export declare namespace Role {
-    type Raw = "viewer" | "editor";
+    export type Raw = "viewer" | "editor";
 }

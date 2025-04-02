@@ -3,7 +3,6 @@
  */
 
 export type FeedbackEnum = "POSITIVE" | "NEGATIVE";
-
 export const FeedbackEnum = {
     Positive: "POSITIVE",
     Negative: "NEGATIVE",

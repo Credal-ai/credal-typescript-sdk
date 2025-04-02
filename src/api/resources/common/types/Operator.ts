@@ -3,7 +3,6 @@
  */
 
 export type Operator = "<" | ">" | "<=" | ">=" | "!=" | "==" | "contains";
-
 export const Operator = {
     LessThan: "<",
     GreaterThan: ">",

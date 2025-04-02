@@ -17,7 +17,7 @@ export const CreateCopilotRequest: core.serialization.Schema<
 });
 
 export declare namespace CreateCopilotRequest {
-    interface Raw {
+    export interface Raw {
         name: string;
         description: string;
         collaborators: Collaborator.Raw[];

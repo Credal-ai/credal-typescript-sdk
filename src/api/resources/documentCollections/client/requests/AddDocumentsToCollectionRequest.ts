@@ -22,9 +22,6 @@ import * as Credal from "../../../../index";
 export interface AddDocumentsToCollectionRequest {
     /** The ID of the document collection you want to add to. */
     collectionId: string;
-    /**
-     * The set of resource identifier for which you want to add to the collection.
-     *
-     */
+    /** The set of resource identifier for which you want to add to the collection. */
     resourceIdentifiers: Credal.ResourceIdentifier[];
 }

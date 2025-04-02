@@ -14,7 +14,7 @@ export const DeleteCollectionResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace DeleteCollectionResponse {
-    interface Raw {
+    export interface Raw {
         collectionId: string;
     }
 }

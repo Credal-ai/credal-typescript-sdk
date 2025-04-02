@@ -10,5 +10,5 @@ export const FeedbackEnum: core.serialization.Schema<serializers.FeedbackEnum.Ra
     core.serialization.enum_(["POSITIVE", "NEGATIVE"]);
 
 export declare namespace FeedbackEnum {
-    type Raw = "POSITIVE" | "NEGATIVE";
+    export type Raw = "POSITIVE" | "NEGATIVE";
 }

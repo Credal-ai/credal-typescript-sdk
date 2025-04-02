@@ -14,7 +14,7 @@ export const SyncSourceByUrlResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace SyncSourceByUrlResponse {
-    interface Raw {
+    export interface Raw {
         sourceId: string;
     }
 }

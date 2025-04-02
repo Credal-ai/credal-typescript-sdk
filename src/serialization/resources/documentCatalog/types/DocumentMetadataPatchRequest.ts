@@ -16,7 +16,7 @@ export const DocumentMetadataPatchRequest: core.serialization.ObjectSchema<
 });
 
 export declare namespace DocumentMetadataPatchRequest {
-    interface Raw {
+    export interface Raw {
         sources: DocumentMetadataPatch.Raw[];
         uploadAsUserEmail: string;
     }

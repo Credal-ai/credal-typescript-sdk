@@ -13,5 +13,5 @@ export const AuthorizedResourceListPage: core.serialization.Schema<
 > = core.serialization.list(AuthorizedResource);
 
 export declare namespace AuthorizedResourceListPage {
-    type Raw = AuthorizedResource.Raw[];
+    export type Raw = AuthorizedResource.Raw[];
 }

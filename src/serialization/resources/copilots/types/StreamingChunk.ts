@@ -10,6 +10,7 @@ import { DataChunk } from "./DataChunk";
 import { EndOfMessageChunk } from "./EndOfMessageChunk";
 import { FinalChunk } from "./FinalChunk";
 import { BlockedChunk } from "./BlockedChunk";
+import { ErrorChunk } from "./ErrorChunk";
 
 export const StreamingChunk: core.serialization.Schema<serializers.StreamingChunk.Raw, Credal.StreamingChunk> =
     core.serialization
@@ -19,6 +20,7 @@ export const StreamingChunk: core.serialization.Schema<serializers.StreamingChun
             end_of_message: EndOfMessageChunk,
             final_chunk: FinalChunk,
             blocked: BlockedChunk,
+            error_chunk: ErrorChunk,
         })
         .transform<Credal.StreamingChunk>({
             transform: (value) => value,
@@ -26,30 +28,35 @@ export const StreamingChunk: core.serialization.Schema<serializers.StreamingChun
         });
 
 export declare namespace StreamingChunk {
-    type Raw =
+    export type Raw =
         | StreamingChunk.Initial
         | StreamingChunk.DataChunk
         | StreamingChunk.EndOfMessage
         | StreamingChunk.FinalChunk
-        | StreamingChunk.Blocked;
+        | StreamingChunk.Blocked
+        | StreamingChunk.ErrorChunk;
 
-    interface Initial extends InitialChunk.Raw {
+    export interface Initial extends InitialChunk.Raw {
         event: "initial";
     }
 
-    interface DataChunk extends DataChunk.Raw {
+    export interface DataChunk extends DataChunk.Raw {
         event: "data_chunk";
     }
 
-    interface EndOfMessage extends EndOfMessageChunk.Raw {
+    export interface EndOfMessage extends EndOfMessageChunk.Raw {
         event: "end_of_message";
     }
 
-    interface FinalChunk extends FinalChunk.Raw {
+    export interface FinalChunk extends FinalChunk.Raw {
         event: "final_chunk";
     }
 
-    interface Blocked extends BlockedChunk.Raw {
+    export interface Blocked extends BlockedChunk.Raw {
         event: "blocked";
+    }
+
+    export interface ErrorChunk extends ErrorChunk.Raw {
+        event: "error_chunk";
     }
 }

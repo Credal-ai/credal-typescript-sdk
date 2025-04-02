@@ -19,7 +19,7 @@ export const DocumentCollectionSearchOptions: core.serialization.ObjectSchema<
 });
 
 export declare namespace DocumentCollectionSearchOptions {
-    interface Raw {
+    export interface Raw {
         maxChunks?: number | null;
         mergeContents?: boolean | null;
         threshold?: number | null;

@@ -10,19 +10,23 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace DocumentCollections {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.CredalEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -51,22 +55,25 @@ export class DocumentCollections {
      */
     public async addDocumentsToCollection(
         request: Credal.AddDocumentsToCollectionRequest,
-        requestOptions?: DocumentCollections.RequestOptions
+        requestOptions?: DocumentCollections.RequestOptions,
     ): Promise<void> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/documentCollections/addDocumentsToCollection"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/documentCollections/addDocumentsToCollection",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -93,7 +100,9 @@ export class DocumentCollections {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling POST /v0/documentCollections/addDocumentsToCollection.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -123,22 +132,25 @@ export class DocumentCollections {
      */
     public async removeDocumentsFromCollection(
         request: Credal.RemoveDocumentsFromCollectionRequest,
-        requestOptions?: DocumentCollections.RequestOptions
+        requestOptions?: DocumentCollections.RequestOptions,
     ): Promise<void> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/documentCollections/removeDocumentsFromCollection"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/documentCollections/removeDocumentsFromCollection",
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -167,7 +179,9 @@ export class DocumentCollections {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling DELETE /v0/documentCollections/removeDocumentsFromCollection.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -193,22 +207,25 @@ export class DocumentCollections {
      */
     public async createCollection(
         request: Credal.CreateCollectionRequest,
-        requestOptions?: DocumentCollections.RequestOptions
+        requestOptions?: DocumentCollections.RequestOptions,
     ): Promise<Credal.CreateCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/documentCollections/createCollection"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/documentCollections/createCollection",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -240,7 +257,9 @@ export class DocumentCollections {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling POST /v0/documentCollections/createCollection.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -261,22 +280,25 @@ export class DocumentCollections {
      */
     public async deleteCollection(
         request: Credal.DeleteCollectionRequest,
-        requestOptions?: DocumentCollections.RequestOptions
+        requestOptions?: DocumentCollections.RequestOptions,
     ): Promise<Credal.DeleteCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/documentCollections/deleteCollection"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/documentCollections/deleteCollection",
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -308,7 +330,9 @@ export class DocumentCollections {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling DELETE /v0/documentCollections/deleteCollection.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -345,22 +369,25 @@ export class DocumentCollections {
      */
     public async createMongoCollectionSync(
         request: Credal.CreateMongoCollectionSyncRequest,
-        requestOptions?: DocumentCollections.RequestOptions
+        requestOptions?: DocumentCollections.RequestOptions,
     ): Promise<Credal.MongoCollectionSyncResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/documentCollections/mongodb/createMongoSync"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/documentCollections/mongodb/createMongoSync",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -394,7 +421,9 @@ export class DocumentCollections {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling POST /v0/documentCollections/mongodb/createMongoSync.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -431,22 +460,25 @@ export class DocumentCollections {
      */
     public async updateMongoCollectionSync(
         request: Credal.UpdateMongoCollectionSyncRequest,
-        requestOptions?: DocumentCollections.RequestOptions
+        requestOptions?: DocumentCollections.RequestOptions,
     ): Promise<Credal.MongoCollectionSyncResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/documentCollections/mongodb/updateMongoSync"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/documentCollections/mongodb/updateMongoSync",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -480,7 +512,9 @@ export class DocumentCollections {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling POST /v0/documentCollections/mongodb/updateMongoSync.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -492,7 +526,8 @@ export class DocumentCollections {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["CREDAL_API_KEY"];
         if (bearer == null) {
             throw new errors.CredalError({
-                message: "Please specify CREDAL_API_KEY when instantiating the client.",
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a CREDAL_API_KEY environment variable",
             });
         }
 

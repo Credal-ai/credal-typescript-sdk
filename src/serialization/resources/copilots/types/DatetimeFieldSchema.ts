@@ -17,7 +17,7 @@ export const DatetimeFieldSchema: core.serialization.ObjectSchema<
 });
 
 export declare namespace DatetimeFieldSchema {
-    interface Raw {
+    export interface Raw {
         field: string;
         operator: Operator.Raw;
         value: string;

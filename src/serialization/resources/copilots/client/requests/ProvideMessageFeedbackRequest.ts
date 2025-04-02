@@ -18,7 +18,7 @@ export const ProvideMessageFeedbackRequest: core.serialization.Schema<
 });
 
 export declare namespace ProvideMessageFeedbackRequest {
-    interface Raw {
+    export interface Raw {
         agentId: string;
         userEmail: string;
         messageId: string;

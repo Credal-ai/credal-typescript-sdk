@@ -21,7 +21,7 @@ export const SearchDocumentCollectionRequest: core.serialization.Schema<
 });
 
 export declare namespace SearchDocumentCollectionRequest {
-    interface Raw {
+    export interface Raw {
         collectionId: string;
         searchQuery: string;
         userEmail: string;

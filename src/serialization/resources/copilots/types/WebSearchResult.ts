@@ -14,7 +14,7 @@ export const WebSearchResult: core.serialization.ObjectSchema<serializers.WebSea
     });
 
 export declare namespace WebSearchResult {
-    interface Raw {
+    export interface Raw {
         title: string;
         url: string;
         contents: string;

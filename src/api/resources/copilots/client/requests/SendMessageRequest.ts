@@ -20,29 +20,14 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface SendMessageRequest {
-    /**
-     * Credal-generated Copilot ID to specify which agent to route the request to.
-     *
-     */
+    /** Credal-generated Copilot ID to specify which agent to route the request to. */
     agentId: string;
-    /**
-     * The message you want to send to your copilot.
-     *
-     */
+    /** The message you want to send to your copilot. */
     message: string;
-    /**
-     * The user profile you want to use when sending the message.
-     *
-     */
+    /** The user profile you want to use when sending the message. */
     userEmail: string;
-    /**
-     * Credal-generated conversation ID for sending follow up messages. Conversation ID is returned after initial message. Optional, to be left off for first messages on new conversations.
-     *
-     */
+    /** Credal-generated conversation ID for sending follow up messages. Conversation ID is returned after initial message. Optional, to be left off for first messages on new conversations. */
     conversationId?: string;
-    /**
-     * Optional input variables to be used in the message. Map the name of the variable to a list of urls.
-     *
-     */
+    /** Optional input variables to be used in the message. Map the name of the variable to a list of urls. */
     inputVariables?: Credal.InputVariable[];
 }

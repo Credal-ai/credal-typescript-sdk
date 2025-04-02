@@ -13,5 +13,5 @@ export const CheckBulkResourcesAuthorizationResponse: core.serialization.Schema<
 > = core.serialization.list(ResourceAuthorizationResult);
 
 export declare namespace CheckBulkResourcesAuthorizationResponse {
-    type Raw = ResourceAuthorizationResult.Raw[];
+    export type Raw = ResourceAuthorizationResult.Raw[];
 }

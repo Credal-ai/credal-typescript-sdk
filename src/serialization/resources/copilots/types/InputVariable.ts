@@ -13,7 +13,7 @@ export const InputVariable: core.serialization.ObjectSchema<serializers.InputVar
     });
 
 export declare namespace InputVariable {
-    interface Raw {
+    export interface Raw {
         name: string;
         ids: string[];
     }

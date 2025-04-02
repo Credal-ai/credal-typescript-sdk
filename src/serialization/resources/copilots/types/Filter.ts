@@ -23,21 +23,21 @@ export const Filter: core.serialization.Schema<serializers.Filter.Raw, Credal.Fi
     });
 
 export declare namespace Filter {
-    type Raw = Filter.String | Filter.Number | Filter.Boolean | Filter.Datetime;
+    export type Raw = Filter.String | Filter.Number | Filter.Boolean | Filter.Datetime;
 
-    interface String extends StringFieldSchema.Raw {
+    export interface String extends StringFieldSchema.Raw {
         fieldType: "string";
     }
 
-    interface Number extends NumberFieldSchema.Raw {
+    export interface Number extends NumberFieldSchema.Raw {
         fieldType: "number";
     }
 
-    interface Boolean extends BooleanFieldSchema.Raw {
+    export interface Boolean extends BooleanFieldSchema.Raw {
         fieldType: "boolean";
     }
 
-    interface Datetime extends DatetimeFieldSchema.Raw {
+    export interface Datetime extends DatetimeFieldSchema.Raw {
         fieldType: "datetime";
     }
 }

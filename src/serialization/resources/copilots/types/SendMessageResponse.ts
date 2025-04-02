@@ -22,13 +22,13 @@ export const SendMessageResponse: core.serialization.Schema<
     });
 
 export declare namespace SendMessageResponse {
-    type Raw = SendMessageResponse.AiResponseResult | SendMessageResponse.BlockedResult;
+    export type Raw = SendMessageResponse.AiResponseResult | SendMessageResponse.BlockedResult;
 
-    interface AiResponseResult extends MessageReply.Raw {
+    export interface AiResponseResult extends MessageReply.Raw {
         type: "ai_response_result";
     }
 
-    interface BlockedResult extends MessageBlocked.Raw {
+    export interface BlockedResult extends MessageBlocked.Raw {
         type: "blocked_result";
     }
 }

@@ -15,7 +15,7 @@ export const CreateConversationRequest: core.serialization.Schema<
 });
 
 export declare namespace CreateConversationRequest {
-    interface Raw {
+    export interface Raw {
         agentId: string;
         userEmail: string;
     }

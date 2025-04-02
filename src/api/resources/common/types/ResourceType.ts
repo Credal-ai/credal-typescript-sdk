@@ -22,7 +22,6 @@ export type ResourceType =
     | "SLACK_CHANNEL"
     | "MONGO_COLLECTION_SYNC"
     | "UNKNOWN";
-
 export const ResourceType = {
     GoogleDriveItem: "GOOGLE_DRIVE_ITEM",
     MicrosoftDriveItem: "MICROSOFT_DRIVE_ITEM",

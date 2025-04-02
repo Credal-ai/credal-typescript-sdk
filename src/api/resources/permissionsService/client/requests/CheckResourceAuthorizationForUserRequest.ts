@@ -16,19 +16,10 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface CheckResourceAuthorizationForUserRequest {
-    /**
-     * The resource identifier for which you want to check authorization.
-     *
-     */
+    /** The resource identifier for which you want to check authorization. */
     resourceIdentifier: Credal.ResourceIdentifier;
-    /**
-     * The user email to check authorization for.
-     *
-     */
+    /** The user email to check authorization for. */
     userEmail: string;
-    /**
-     * If specified, Credal will bypass the permissions cache and check current permissions for this resource
-     *
-     */
+    /** If specified, Credal will bypass the permissions cache and check current permissions for this resource */
     disableCache?: boolean;
 }

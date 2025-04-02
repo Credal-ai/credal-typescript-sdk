@@ -19,7 +19,7 @@ export const StreamMessageRequest: core.serialization.Schema<
 });
 
 export declare namespace StreamMessageRequest {
-    interface Raw {
+    export interface Raw {
         copilotId: string;
         message: string;
         email: string;

@@ -16,7 +16,7 @@ export const DocumentMetadataPatch: core.serialization.ObjectSchema<
 });
 
 export declare namespace DocumentMetadataPatch {
-    interface Raw {
+    export interface Raw {
         resourceIdentifier: ResourceIdentifier.Raw;
         metadata?: unknown;
     }

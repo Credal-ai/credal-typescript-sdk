@@ -17,7 +17,7 @@ export const MongoSourceFieldsConfig: core.serialization.ObjectSchema<
 });
 
 export declare namespace MongoSourceFieldsConfig {
-    interface Raw {
+    export interface Raw {
         body: string;
         sourceName: string;
         sourceSystemUpdated?: string | null;

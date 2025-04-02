@@ -10,19 +10,23 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace PermissionsService {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.CredalEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -47,22 +51,25 @@ export class PermissionsService {
      */
     public async checkResourceAuthorizationForUser(
         request: Credal.CheckResourceAuthorizationForUserRequest,
-        requestOptions?: PermissionsService.RequestOptions
+        requestOptions?: PermissionsService.RequestOptions,
     ): Promise<Credal.CheckResourceAuthorizationResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/permissions/checkResourceAuthorizationForUser"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/permissions/checkResourceAuthorizationForUser",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -96,7 +103,9 @@ export class PermissionsService {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling POST /v0/permissions/checkResourceAuthorizationForUser.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -125,22 +134,25 @@ export class PermissionsService {
      */
     public async checkBulkResourcesAuthorizationForUser(
         request: Credal.CheckBulkResourcesAuthorizationForUserRequest,
-        requestOptions?: PermissionsService.RequestOptions
+        requestOptions?: PermissionsService.RequestOptions,
     ): Promise<Credal.CheckBulkResourcesAuthorizationResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/permissions/checkBulkResourcesAuthorizationForUser"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/permissions/checkBulkResourcesAuthorizationForUser",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -174,7 +186,9 @@ export class PermissionsService {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling POST /v0/permissions/checkBulkResourcesAuthorizationForUser.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -195,22 +209,25 @@ export class PermissionsService {
      */
     public async listCachedAuthorizedResourcesForUser(
         request: Credal.ListCachedAuthorizedResourcesForUserRequest,
-        requestOptions?: PermissionsService.RequestOptions
+        requestOptions?: PermissionsService.RequestOptions,
     ): Promise<Credal.AuthorizedResourceListPage> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.CredalEnvironment.Production,
-                "/v0/permissions/listCachedAuthorizedResourcesForUser"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/permissions/listCachedAuthorizedResourcesForUser",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.24",
-                "User-Agent": "@credal/sdk/0.0.24",
+                "X-Fern-SDK-Version": "0.0.25",
+                "User-Agent": "@credal/sdk/0.0.25",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -244,7 +261,9 @@ export class PermissionsService {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.CredalTimeoutError();
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling POST /v0/permissions/listCachedAuthorizedResourcesForUser.",
+                );
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
@@ -256,7 +275,8 @@ export class PermissionsService {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["CREDAL_API_KEY"];
         if (bearer == null) {
             throw new errors.CredalError({
-                message: "Please specify CREDAL_API_KEY when instantiating the client.",
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a CREDAL_API_KEY environment variable",
             });
         }
 

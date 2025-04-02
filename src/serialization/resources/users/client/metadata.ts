@@ -11,5 +11,5 @@ export const Request: core.serialization.Schema<serializers.users.metadata.Reque
     core.serialization.list(UserMetadataPatch);
 
 export declare namespace Request {
-    type Raw = UserMetadataPatch.Raw[];
+    export type Raw = UserMetadataPatch.Raw[];
 }

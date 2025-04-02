@@ -6,20 +6,20 @@ import * as Credal from "../../../index";
 
 export type Filter = Credal.Filter.String | Credal.Filter.Number | Credal.Filter.Boolean | Credal.Filter.Datetime;
 
-export declare namespace Filter {
-    interface String extends Credal.StringFieldSchema {
+export namespace Filter {
+    export interface String extends Credal.StringFieldSchema {
         fieldType: "string";
     }
 
-    interface Number extends Credal.NumberFieldSchema {
+    export interface Number extends Credal.NumberFieldSchema {
         fieldType: "number";
     }
 
-    interface Boolean extends Credal.BooleanFieldSchema {
+    export interface Boolean extends Credal.BooleanFieldSchema {
         fieldType: "boolean";
     }
 
-    interface Datetime extends Credal.DatetimeFieldSchema {
+    export interface Datetime extends Credal.DatetimeFieldSchema {
         fieldType: "datetime";
     }
 }

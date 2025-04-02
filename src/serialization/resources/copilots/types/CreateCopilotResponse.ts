@@ -14,7 +14,7 @@ export const CreateCopilotResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace CreateCopilotResponse {
-    interface Raw {
+    export interface Raw {
         agentId: string;
     }
 }

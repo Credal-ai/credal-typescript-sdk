@@ -19,7 +19,7 @@ export const SendMessageRequest: core.serialization.Schema<
 });
 
 export declare namespace SendMessageRequest {
-    interface Raw {
+    export interface Raw {
         agentId: string;
         message: string;
         userEmail: string;

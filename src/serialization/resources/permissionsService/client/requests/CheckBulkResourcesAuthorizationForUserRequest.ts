@@ -17,7 +17,7 @@ export const CheckBulkResourcesAuthorizationForUserRequest: core.serialization.S
 });
 
 export declare namespace CheckBulkResourcesAuthorizationForUserRequest {
-    interface Raw {
+    export interface Raw {
         resourceIdentifiers: ResourceIdentifier.Raw[];
         userEmail: string;
         disableCache?: boolean | null;

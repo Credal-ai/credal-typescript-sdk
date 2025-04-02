@@ -20,10 +20,7 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface UpdateConfigurationRequest {
-    /**
-     * Credal-generated copilot ID to add the collection to.
-     *
-     */
+    /** Credal-generated copilot ID to add the collection to. */
     copilotId: string;
     configuration: Credal.Configuration;
 }

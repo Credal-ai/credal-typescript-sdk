@@ -17,7 +17,7 @@ export const ResourceAuthorizationResult: core.serialization.ObjectSchema<
 });
 
 export declare namespace ResourceAuthorizationResult {
-    interface Raw {
+    export interface Raw {
         externalResourceId: ExternalResourceId.Raw;
         inputUrl?: string | null;
         authorized: boolean;

@@ -14,7 +14,7 @@ export const UploadDocumentResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace UploadDocumentResponse {
-    interface Raw {
+    export interface Raw {
         documentId: string;
     }
 }

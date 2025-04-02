@@ -17,7 +17,7 @@ export const UpdateMongoCollectionSyncRequest: core.serialization.Schema<
 });
 
 export declare namespace UpdateMongoCollectionSyncRequest {
-    interface Raw {
+    export interface Raw {
         mongoCredentialId: string;
         mongoURI: string;
         config: MongoCollectionSyncConfig.Raw;

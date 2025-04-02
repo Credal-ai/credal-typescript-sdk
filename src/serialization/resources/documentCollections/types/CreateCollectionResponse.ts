@@ -14,7 +14,7 @@ export const CreateCollectionResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace CreateCollectionResponse {
-    interface Raw {
+    export interface Raw {
         collectionId: string;
     }
 }

@@ -16,7 +16,7 @@ export const AddDocumentsToCollectionRequest: core.serialization.Schema<
 });
 
 export declare namespace AddDocumentsToCollectionRequest {
-    interface Raw {
+    export interface Raw {
         collectionId: string;
         resourceIdentifiers: ResourceIdentifier.Raw[];
     }

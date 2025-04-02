@@ -13,7 +13,7 @@ export const ResponseChunk: core.serialization.ObjectSchema<serializers.Response
     });
 
 export declare namespace ResponseChunk {
-    interface Raw {
+    export interface Raw {
         message: string;
         dataChunk: string;
     }

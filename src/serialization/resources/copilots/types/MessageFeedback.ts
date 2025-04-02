@@ -15,7 +15,7 @@ export const MessageFeedback: core.serialization.ObjectSchema<serializers.Messag
     });
 
 export declare namespace MessageFeedback {
-    interface Raw {
+    export interface Raw {
         feedback: FeedbackEnum.Raw;
         suggestedAnswer?: string | null;
         descriptiveFeedback?: string | null;

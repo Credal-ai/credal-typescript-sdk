@@ -13,7 +13,7 @@ export const User: core.serialization.ObjectSchema<serializers.User.Raw, Credal.
 });
 
 export declare namespace User {
-    interface Raw {
+    export interface Raw {
         email: string;
         name?: string | null;
         id?: string | null;

@@ -13,7 +13,7 @@ export const FinalChunk: core.serialization.ObjectSchema<serializers.FinalChunk.
     });
 
 export declare namespace FinalChunk {
-    interface Raw {
+    export interface Raw {
         sources: ReferencedSource.Raw[];
     }
 }

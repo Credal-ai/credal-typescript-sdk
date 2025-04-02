@@ -15,7 +15,7 @@ export const UserMetadataPatch: core.serialization.ObjectSchema<
 });
 
 export declare namespace UserMetadataPatch {
-    interface Raw {
+    export interface Raw {
         userEmail: string;
         metadata?: unknown;
     }

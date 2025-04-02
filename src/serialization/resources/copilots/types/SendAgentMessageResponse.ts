@@ -15,7 +15,7 @@ export const SendAgentMessageResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace SendAgentMessageResponse {
-    interface Raw {
+    export interface Raw {
         sendChatResult: SendMessageResponse.Raw;
     }
 }
