@@ -10,7 +10,7 @@
  *     }
  */
 export interface AddCollectionToCopilotRequest {
-    /** Credal-generated copilot ID to add the collection to. */
+    /** Credal-generated Agent ID to add the collection to. */
     copilotId: string;
     /** Credal-generated collection ID to add. */
     collectionId: string;

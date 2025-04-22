@@ -10,7 +10,7 @@
  *     }
  */
 export interface RemoveCollectionFromCopilotRequest {
-    /** Credal-generated copilot ID to add the collection to. */
+    /** Credal-generated agent ID to add the collection to. */
     copilotId: string;
     /** Credal-generated collection ID to add. */
     collectionId: string;

@@ -48,9 +48,9 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface StreamMessageRequest {
-    /** Credal-generated Copilot ID to specify which agent to route the request to. */
+    /** Credal-generated Agent ID to specify which agent to route the request to. */
     copilotId: string;
-    /** The message you want to send to your copilot. */
+    /** The message you want to send to your agent. */
     message: string;
     /** The user profile you want to use when sending the message. */
     email: string;

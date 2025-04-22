@@ -9,8 +9,8 @@ import * as Credal from "../../../../index";
  *     {
  *         copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
  *         configuration: {
- *             name: "Customer Copilot",
- *             description: "This copilot is used to answer customer requests based on internal documentation.",
+ *             name: "Customer Agent",
+ *             description: "This agent is used to answer customer requests based on internal documentation.",
  *             prompt: "You are a polite, helpful assistant used to answer customer requests.",
  *             aiEndpointConfiguration: {
  *                 baseUrl: "https://api.openai.com/v1/",
@@ -20,7 +20,7 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface UpdateConfigurationRequest {
-    /** Credal-generated copilot ID to add the collection to. */
+    /** Credal-generated agent ID to add the collection to. */
     copilotId: string;
     configuration: Credal.Configuration;
 }

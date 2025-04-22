@@ -7,7 +7,7 @@ import * as Credal from "../../../index";
 export type SendMessageResponse =
     /**
      * Returned when there is a reply
-     * fetched from the copilot. */
+     * fetched from the agent. */
     | Credal.SendMessageResponse.AiResponseResult
     /**
      * Returned when Credal detects possible
