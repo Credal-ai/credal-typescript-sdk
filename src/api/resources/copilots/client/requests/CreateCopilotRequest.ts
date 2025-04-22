@@ -7,8 +7,8 @@ import * as Credal from "../../../../index";
 /**
  * @example
  *     {
- *         name: "Customer Copilot",
- *         description: "This copilot is used to answer customer requests based on internal documentation.",
+ *         name: "Customer Agent",
+ *         description: "This agent is used to answer customer requests based on internal documentation.",
  *         collaborators: [{
  *                 email: "test@gmail.com",
  *                 role: "editor"
@@ -16,10 +16,10 @@ import * as Credal from "../../../../index";
  *     }
  */
 export interface CreateCopilotRequest {
-    /** A descriptive name for the copilot. */
+    /** A descriptive name for the agent. */
     name: string;
-    /** An in depth name for the copilot's function. Useful for routing requests to the right copilot. */
+    /** An in depth name for the agent's function. Useful for routing requests to the right agent. */
     description: string;
-    /** A list of collaborator emails and roles that will have access to the copilot. */
+    /** A list of collaborator emails and roles that will have access to the agent. */
     collaborators: Credal.Collaborator[];
 }

@@ -14,7 +14,7 @@
 <dl>
 <dd>
 
-Create a new copilot. The API key used will be added to the copilot for future Requests
+Create a new agent. The API key used will be added to the agent for future Requests
 
 </dd>
 </dl>
@@ -31,8 +31,8 @@ Create a new copilot. The API key used will be added to the copilot for future R
 
 ```typescript
 await client.copilots.createCopilot({
-    name: "Customer Copilot",
-    description: "This copilot is used to answer customer requests based on internal documentation.",
+    name: "Customer Agent",
+    description: "This agent is used to answer customer requests based on internal documentation.",
     collaborators: [
         {
             email: "test@gmail.com",
@@ -86,7 +86,7 @@ await client.copilots.createCopilot({
 <dl>
 <dd>
 
-OPTIONAL. Create a new conversation with the Copilot. The conversation ID can be used in the `sendMessage` endpoint. The `sendMessage` endpoint automatically creates new conversations upon first request, but calling this endpoint can simplify certain use cases where it is helpful for the application to have the conversation ID before the first message is sent.
+OPTIONAL. Create a new conversation with the Agent. The conversation ID can be used in the `sendMessage` endpoint. The `sendMessage` endpoint automatically creates new conversations upon first request, but calling this endpoint can simplify certain use cases where it is helpful for the application to have the conversation ID before the first message is sent.
 
 </dd>
 </dl>
@@ -271,7 +271,7 @@ await client.copilots.sendMessage({
 <dl>
 <dd>
 
-This endpoint allows you to send a message to a specific copilot and get the response back as a streamed set of Server-Sent Events.
+This endpoint allows you to send a message to a specific agent and get the response back as a streamed set of Server-Sent Events.
 
 </dd>
 </dl>
@@ -351,7 +351,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-Link a collection with a copilot. The API Key used must be added to both the collection and the copilot beforehand.
+Link a collection with a agent. The API Key used must be added to both the collection and the agent beforehand.
 
 </dd>
 </dl>
@@ -417,7 +417,7 @@ await client.copilots.addCollectionToCopilot({
 <dl>
 <dd>
 
-Unlink a collection with a copilot. The API Key used must be added to both the collection and the copilot beforehand.
+Unlink a collection with a agent. The API Key used must be added to both the collection and the agent beforehand.
 
 </dd>
 </dl>
@@ -483,7 +483,7 @@ await client.copilots.removeCollectionFromCopilot({
 <dl>
 <dd>
 
-Update the configuration for a copilot
+Update the configuration for a agent
 
 </dd>
 </dl>
@@ -502,8 +502,8 @@ Update the configuration for a copilot
 await client.copilots.updateConfiguration({
     copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
     configuration: {
-        name: "Customer Copilot",
-        description: "This copilot is used to answer customer requests based on internal documentation.",
+        name: "Customer Agent",
+        description: "This agent is used to answer customer requests based on internal documentation.",
         prompt: "You are a polite, helpful assistant used to answer customer requests.",
         aiEndpointConfiguration: {
             baseUrl: "https://api.openai.com/v1/",
@@ -975,7 +975,7 @@ await client.documentCollections.removeDocumentsFromCollection({
 <dl>
 <dd>
 
-Create a new copilot. The API key used will be added to the copilot for future Requests
+Create a new collection. The API key used will be added to the collection for future Requests
 
 </dd>
 </dl>
@@ -1112,7 +1112,7 @@ await client.documentCollections.deleteCollection({
 <dl>
 <dd>
 
-Credal lets you easily sync your MongoDB data for use in Collections and Copilots. Create a new sync from a MongoDB collection to a Credal collection.
+Credal lets you easily sync your MongoDB data for use in Collections and Agents. Create a new sync from a MongoDB collection to a Credal collection.
 
 </dd>
 </dl>
@@ -1193,7 +1193,7 @@ await client.documentCollections.createMongoCollectionSync({
 <dl>
 <dd>
 
-Credal lets you easily sync your MongoDB data for use in Collections and Copilots. Update an existing sync from a MongoDB collection to a Credal collection via the `mongoCredentialId`, to disambiguate between multiple potential syncs to a given collection.
+Credal lets you easily sync your MongoDB data for use in Collections and Agents. Update an existing sync from a MongoDB collection to a Credal collection via the `mongoCredentialId`, to disambiguate between multiple potential syncs to a given collection.
 
 </dd>
 </dl>

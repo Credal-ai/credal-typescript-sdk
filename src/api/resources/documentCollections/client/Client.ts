@@ -69,8 +69,8 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.25",
-                "User-Agent": "@credal/sdk/0.0.25",
+                "X-Fern-SDK-Version": "0.0.26",
+                "User-Agent": "@credal/sdk/0.0.26",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -146,8 +146,8 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.25",
-                "User-Agent": "@credal/sdk/0.0.25",
+                "X-Fern-SDK-Version": "0.0.26",
+                "User-Agent": "@credal/sdk/0.0.26",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -190,7 +190,7 @@ export class DocumentCollections {
     }
 
     /**
-     * Create a new copilot. The API key used will be added to the copilot for future Requests
+     * Create a new collection. The API key used will be added to the collection for future Requests
      *
      * @param {Credal.CreateCollectionRequest} request
      * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
@@ -221,8 +221,8 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.25",
-                "User-Agent": "@credal/sdk/0.0.25",
+                "X-Fern-SDK-Version": "0.0.26",
+                "User-Agent": "@credal/sdk/0.0.26",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -294,8 +294,8 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.25",
-                "User-Agent": "@credal/sdk/0.0.25",
+                "X-Fern-SDK-Version": "0.0.26",
+                "User-Agent": "@credal/sdk/0.0.26",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -341,7 +341,7 @@ export class DocumentCollections {
     }
 
     /**
-     * Credal lets you easily sync your MongoDB data for use in Collections and Copilots. Create a new sync from a MongoDB collection to a Credal collection.
+     * Credal lets you easily sync your MongoDB data for use in Collections and Agents. Create a new sync from a MongoDB collection to a Credal collection.
      *
      * @param {Credal.CreateMongoCollectionSyncRequest} request
      * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
@@ -383,8 +383,8 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.25",
-                "User-Agent": "@credal/sdk/0.0.25",
+                "X-Fern-SDK-Version": "0.0.26",
+                "User-Agent": "@credal/sdk/0.0.26",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -432,7 +432,7 @@ export class DocumentCollections {
     }
 
     /**
-     * Credal lets you easily sync your MongoDB data for use in Collections and Copilots. Update an existing sync from a MongoDB collection to a Credal collection via the `mongoCredentialId`, to disambiguate between multiple potential syncs to a given collection.
+     * Credal lets you easily sync your MongoDB data for use in Collections and Agents. Update an existing sync from a MongoDB collection to a Credal collection via the `mongoCredentialId`, to disambiguate between multiple potential syncs to a given collection.
      *
      * @param {Credal.UpdateMongoCollectionSyncRequest} request
      * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
@@ -474,8 +474,8 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.25",
-                "User-Agent": "@credal/sdk/0.0.25",
+                "X-Fern-SDK-Version": "0.0.26",
+                "User-Agent": "@credal/sdk/0.0.26",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

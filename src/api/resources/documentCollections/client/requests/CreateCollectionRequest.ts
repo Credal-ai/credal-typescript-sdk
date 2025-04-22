@@ -18,8 +18,8 @@ import * as Credal from "../../../../index";
 export interface CreateCollectionRequest {
     /** A descriptive name for the collection. */
     name: string;
-    /** An in depth name for the copilot's function. Useful for routing requests to the right copilot. */
+    /** An in depth name for the agent's function. Useful for routing requests to the right agent. */
     description: string;
-    /** A list of collaborator emails and roles that will have access to the copilot. */
+    /** A list of collaborator emails and roles that will have access to the agent. */
     collaborators: Credal.Collaborator[];
 }
