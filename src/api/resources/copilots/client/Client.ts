@@ -50,10 +50,17 @@ export class Copilots {
      *             }]
      *     })
      */
-    public async createCopilot(
+    public createCopilot(
         request: Credal.CreateCopilotRequest,
         requestOptions?: Copilots.RequestOptions,
-    ): Promise<Credal.CreateCopilotResponse> {
+    ): core.HttpResponsePromise<Credal.CreateCopilotResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__createCopilot(request, requestOptions));
+    }
+
+    private async __createCopilot(
+        request: Credal.CreateCopilotRequest,
+        requestOptions?: Copilots.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.CreateCopilotResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -66,8 +73,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -80,18 +87,22 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CreateCopilotResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.CreateCopilotResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -100,12 +111,14 @@ export class Copilots {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/createCopilot.");
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -122,10 +135,17 @@ export class Copilots {
      *         userEmail: "ravin@credal.ai"
      *     })
      */
-    public async createConversation(
+    public createConversation(
         request: Credal.CreateConversationRequest,
         requestOptions?: Copilots.RequestOptions,
-    ): Promise<Credal.CreateConversationResponse> {
+    ): core.HttpResponsePromise<Credal.CreateConversationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__createConversation(request, requestOptions));
+    }
+
+    private async __createConversation(
+        request: Credal.CreateConversationRequest,
+        requestOptions?: Copilots.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.CreateConversationResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -138,8 +158,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -152,18 +172,22 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CreateConversationResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.CreateConversationResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -172,6 +196,7 @@ export class Copilots {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -180,6 +205,7 @@ export class Copilots {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -200,10 +226,17 @@ export class Copilots {
      *         }
      *     })
      */
-    public async provideMessageFeedback(
+    public provideMessageFeedback(
         request: Credal.ProvideMessageFeedbackRequest,
         requestOptions?: Copilots.RequestOptions,
-    ): Promise<void> {
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__provideMessageFeedback(request, requestOptions));
+    }
+
+    private async __provideMessageFeedback(
+        request: Credal.ProvideMessageFeedbackRequest,
+        requestOptions?: Copilots.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -216,8 +249,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -230,13 +263,14 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -245,6 +279,7 @@ export class Copilots {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -253,6 +288,7 @@ export class Copilots {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -275,10 +311,17 @@ export class Copilots {
      *             }]
      *     })
      */
-    public async sendMessage(
+    public sendMessage(
         request: Credal.SendMessageRequest,
         requestOptions?: Copilots.RequestOptions,
-    ): Promise<Credal.SendAgentMessageResponse> {
+    ): core.HttpResponsePromise<Credal.SendAgentMessageResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__sendMessage(request, requestOptions));
+    }
+
+    private async __sendMessage(
+        request: Credal.SendMessageRequest,
+        requestOptions?: Copilots.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.SendAgentMessageResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -291,8 +334,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -305,18 +348,22 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.SendAgentMessageResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.SendAgentMessageResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -325,12 +372,14 @@ export class Copilots {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/sendMessage.");
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -338,10 +387,17 @@ export class Copilots {
     /**
      * This endpoint allows you to send a message to a specific agent and get the response back as a streamed set of Server-Sent Events.
      */
-    public async streamMessage(
+    public streamMessage(
         request: Credal.StreamMessageRequest,
         requestOptions?: Copilots.RequestOptions,
-    ): Promise<core.Stream<Credal.StreamingChunk>> {
+    ): core.HttpResponsePromise<core.Stream<Credal.StreamingChunk>> {
+        return core.HttpResponsePromise.fromPromise(this.__streamMessage(request, requestOptions));
+    }
+
+    private async __streamMessage(
+        request: Credal.StreamMessageRequest,
+        requestOptions?: Copilots.RequestOptions,
+    ): Promise<core.WithRawResponse<core.Stream<Credal.StreamingChunk>>> {
         const _response = await (this._options.fetcher ?? core.fetcher)<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -354,8 +410,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -369,28 +425,32 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return new core.Stream({
-                stream: _response.body,
-                parse: async (data) => {
-                    return serializers.StreamingChunk.parseOrThrow(data, {
-                        unrecognizedObjectKeys: "passthrough",
-                        allowUnrecognizedUnionMembers: true,
-                        allowUnrecognizedEnumValues: true,
-                        breadcrumbsPrefix: ["response"],
-                    });
-                },
-                signal: requestOptions?.abortSignal,
-                eventShape: {
-                    type: "sse",
-                    streamTerminator: "[DONE]",
-                },
-            });
+            return {
+                data: new core.Stream({
+                    stream: _response.body,
+                    parse: async (data) => {
+                        return serializers.StreamingChunk.parseOrThrow(data, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        });
+                    },
+                    signal: requestOptions?.abortSignal,
+                    eventShape: {
+                        type: "sse",
+                        streamTerminator: "[DONE]",
+                    },
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -399,12 +459,14 @@ export class Copilots {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/streamMessage.");
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -421,10 +483,17 @@ export class Copilots {
      *         collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e"
      *     })
      */
-    public async addCollectionToCopilot(
+    public addCollectionToCopilot(
         request: Credal.AddCollectionToCopilotRequest,
         requestOptions?: Copilots.RequestOptions,
-    ): Promise<void> {
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__addCollectionToCopilot(request, requestOptions));
+    }
+
+    private async __addCollectionToCopilot(
+        request: Credal.AddCollectionToCopilotRequest,
+        requestOptions?: Copilots.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -437,8 +506,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -451,13 +520,14 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -466,6 +536,7 @@ export class Copilots {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -474,6 +545,7 @@ export class Copilots {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -490,10 +562,17 @@ export class Copilots {
      *         collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e"
      *     })
      */
-    public async removeCollectionFromCopilot(
+    public removeCollectionFromCopilot(
         request: Credal.RemoveCollectionFromCopilotRequest,
         requestOptions?: Copilots.RequestOptions,
-    ): Promise<void> {
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__removeCollectionFromCopilot(request, requestOptions));
+    }
+
+    private async __removeCollectionFromCopilot(
+        request: Credal.RemoveCollectionFromCopilotRequest,
+        requestOptions?: Copilots.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -506,8 +585,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -522,13 +601,14 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -537,6 +617,7 @@ export class Copilots {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -545,6 +626,7 @@ export class Copilots {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -569,10 +651,17 @@ export class Copilots {
      *         }
      *     })
      */
-    public async updateConfiguration(
+    public updateConfiguration(
         request: Credal.UpdateConfigurationRequest,
         requestOptions?: Copilots.RequestOptions,
-    ): Promise<void> {
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__updateConfiguration(request, requestOptions));
+    }
+
+    private async __updateConfiguration(
+        request: Credal.UpdateConfigurationRequest,
+        requestOptions?: Copilots.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -585,8 +674,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -599,13 +688,14 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -614,6 +704,7 @@ export class Copilots {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -622,6 +713,7 @@ export class Copilots {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -635,10 +727,17 @@ export class Copilots {
      *         id: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a"
      *     })
      */
-    public async deleteCopilot(
+    public deleteCopilot(
         request: Credal.DeleteCopilotRequest,
         requestOptions?: Copilots.RequestOptions,
-    ): Promise<Credal.DeleteCopilotResponse> {
+    ): core.HttpResponsePromise<Credal.DeleteCopilotResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__deleteCopilot(request, requestOptions));
+    }
+
+    private async __deleteCopilot(
+        request: Credal.DeleteCopilotRequest,
+        requestOptions?: Copilots.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.DeleteCopilotResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -651,8 +750,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -665,18 +764,22 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.DeleteCopilotResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.DeleteCopilotResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -685,12 +788,14 @@ export class Copilots {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError("Timeout exceeded when calling DELETE /v0/copilots/deleteCopilot.");
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

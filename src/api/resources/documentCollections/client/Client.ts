@@ -53,10 +53,17 @@ export class DocumentCollections {
      *             }]
      *     })
      */
-    public async addDocumentsToCollection(
+    public addDocumentsToCollection(
         request: Credal.AddDocumentsToCollectionRequest,
         requestOptions?: DocumentCollections.RequestOptions,
-    ): Promise<void> {
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__addDocumentsToCollection(request, requestOptions));
+    }
+
+    private async __addDocumentsToCollection(
+        request: Credal.AddDocumentsToCollectionRequest,
+        requestOptions?: DocumentCollections.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -69,8 +76,8 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -83,13 +90,14 @@ export class DocumentCollections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -98,6 +106,7 @@ export class DocumentCollections {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -106,6 +115,7 @@ export class DocumentCollections {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -130,10 +140,17 @@ export class DocumentCollections {
      *             }]
      *     })
      */
-    public async removeDocumentsFromCollection(
+    public removeDocumentsFromCollection(
         request: Credal.RemoveDocumentsFromCollectionRequest,
         requestOptions?: DocumentCollections.RequestOptions,
-    ): Promise<void> {
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__removeDocumentsFromCollection(request, requestOptions));
+    }
+
+    private async __removeDocumentsFromCollection(
+        request: Credal.RemoveDocumentsFromCollectionRequest,
+        requestOptions?: DocumentCollections.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -146,8 +163,8 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -162,13 +179,14 @@ export class DocumentCollections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -177,6 +195,7 @@ export class DocumentCollections {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -185,6 +204,7 @@ export class DocumentCollections {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -205,10 +225,17 @@ export class DocumentCollections {
      *             }]
      *     })
      */
-    public async createCollection(
+    public createCollection(
         request: Credal.CreateCollectionRequest,
         requestOptions?: DocumentCollections.RequestOptions,
-    ): Promise<Credal.CreateCollectionResponse> {
+    ): core.HttpResponsePromise<Credal.CreateCollectionResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__createCollection(request, requestOptions));
+    }
+
+    private async __createCollection(
+        request: Credal.CreateCollectionRequest,
+        requestOptions?: DocumentCollections.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.CreateCollectionResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -221,8 +248,8 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -235,18 +262,22 @@ export class DocumentCollections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CreateCollectionResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.CreateCollectionResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -255,6 +286,7 @@ export class DocumentCollections {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -263,6 +295,7 @@ export class DocumentCollections {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -278,10 +311,17 @@ export class DocumentCollections {
      *         collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a"
      *     })
      */
-    public async deleteCollection(
+    public deleteCollection(
         request: Credal.DeleteCollectionRequest,
         requestOptions?: DocumentCollections.RequestOptions,
-    ): Promise<Credal.DeleteCollectionResponse> {
+    ): core.HttpResponsePromise<Credal.DeleteCollectionResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__deleteCollection(request, requestOptions));
+    }
+
+    private async __deleteCollection(
+        request: Credal.DeleteCollectionRequest,
+        requestOptions?: DocumentCollections.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.DeleteCollectionResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -294,8 +334,8 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -308,18 +348,22 @@ export class DocumentCollections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.DeleteCollectionResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.DeleteCollectionResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -328,6 +372,7 @@ export class DocumentCollections {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -336,6 +381,7 @@ export class DocumentCollections {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -367,10 +413,17 @@ export class DocumentCollections {
      *         }
      *     })
      */
-    public async createMongoCollectionSync(
+    public createMongoCollectionSync(
         request: Credal.CreateMongoCollectionSyncRequest,
         requestOptions?: DocumentCollections.RequestOptions,
-    ): Promise<Credal.MongoCollectionSyncResponse> {
+    ): core.HttpResponsePromise<Credal.MongoCollectionSyncResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__createMongoCollectionSync(request, requestOptions));
+    }
+
+    private async __createMongoCollectionSync(
+        request: Credal.CreateMongoCollectionSyncRequest,
+        requestOptions?: DocumentCollections.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.MongoCollectionSyncResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -383,8 +436,8 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -399,18 +452,22 @@ export class DocumentCollections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.MongoCollectionSyncResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.MongoCollectionSyncResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -419,6 +476,7 @@ export class DocumentCollections {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -427,6 +485,7 @@ export class DocumentCollections {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -458,10 +517,17 @@ export class DocumentCollections {
      *         }
      *     })
      */
-    public async updateMongoCollectionSync(
+    public updateMongoCollectionSync(
         request: Credal.UpdateMongoCollectionSyncRequest,
         requestOptions?: DocumentCollections.RequestOptions,
-    ): Promise<Credal.MongoCollectionSyncResponse> {
+    ): core.HttpResponsePromise<Credal.MongoCollectionSyncResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__updateMongoCollectionSync(request, requestOptions));
+    }
+
+    private async __updateMongoCollectionSync(
+        request: Credal.UpdateMongoCollectionSyncRequest,
+        requestOptions?: DocumentCollections.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.MongoCollectionSyncResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -474,8 +540,8 @@ export class DocumentCollections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -490,18 +556,22 @@ export class DocumentCollections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.MongoCollectionSyncResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.MongoCollectionSyncResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -510,6 +580,7 @@ export class DocumentCollections {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -518,6 +589,7 @@ export class DocumentCollections {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
