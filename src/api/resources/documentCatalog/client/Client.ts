@@ -46,10 +46,17 @@ export class DocumentCatalog {
      *         uploadAsUserEmail: "jack@credal.ai"
      *     })
      */
-    public async uploadDocumentContents(
+    public uploadDocumentContents(
         request: Credal.UploadDocumentContentsRequest,
         requestOptions?: DocumentCatalog.RequestOptions,
-    ): Promise<Credal.UploadDocumentResponse> {
+    ): core.HttpResponsePromise<Credal.UploadDocumentResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__uploadDocumentContents(request, requestOptions));
+    }
+
+    private async __uploadDocumentContents(
+        request: Credal.UploadDocumentContentsRequest,
+        requestOptions?: DocumentCatalog.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.UploadDocumentResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -62,8 +69,8 @@ export class DocumentCatalog {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -76,18 +83,22 @@ export class DocumentCatalog {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.UploadDocumentResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.UploadDocumentResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -96,6 +107,7 @@ export class DocumentCatalog {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -104,6 +116,7 @@ export class DocumentCatalog {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -120,10 +133,17 @@ export class DocumentCatalog {
      *         uploadAsUserEmail: "ria@credal.ai"
      *     })
      */
-    public async syncSourceByUrl(
+    public syncSourceByUrl(
         request: Credal.SyncSourceByUrlRequest,
         requestOptions?: DocumentCatalog.RequestOptions,
-    ): Promise<Credal.SyncSourceByUrlResponse> {
+    ): core.HttpResponsePromise<Credal.SyncSourceByUrlResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__syncSourceByUrl(request, requestOptions));
+    }
+
+    private async __syncSourceByUrl(
+        request: Credal.SyncSourceByUrlRequest,
+        requestOptions?: DocumentCatalog.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.SyncSourceByUrlResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -136,8 +156,8 @@ export class DocumentCatalog {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -150,18 +170,22 @@ export class DocumentCatalog {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.SyncSourceByUrlResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.SyncSourceByUrlResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -170,12 +194,14 @@ export class DocumentCatalog {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/catalog/syncSourceByUrl.");
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -212,10 +238,17 @@ export class DocumentCatalog {
      *         uploadAsUserEmail: "ben@credal.ai"
      *     })
      */
-    public async metadata(
+    public metadata(
         request: Credal.DocumentMetadataPatchRequest,
         requestOptions?: DocumentCatalog.RequestOptions,
-    ): Promise<void> {
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__metadata(request, requestOptions));
+    }
+
+    private async __metadata(
+        request: Credal.DocumentMetadataPatchRequest,
+        requestOptions?: DocumentCatalog.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -228,8 +261,8 @@ export class DocumentCatalog {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -242,13 +275,14 @@ export class DocumentCatalog {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -257,12 +291,14 @@ export class DocumentCatalog {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError("Timeout exceeded when calling PATCH /v0/catalog/metadata.");
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

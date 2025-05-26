@@ -49,10 +49,17 @@ export class PermissionsService {
      *         userEmail: "john.smith@foo.com"
      *     })
      */
-    public async checkResourceAuthorizationForUser(
+    public checkResourceAuthorizationForUser(
         request: Credal.CheckResourceAuthorizationForUserRequest,
         requestOptions?: PermissionsService.RequestOptions,
-    ): Promise<Credal.CheckResourceAuthorizationResponse> {
+    ): core.HttpResponsePromise<Credal.CheckResourceAuthorizationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__checkResourceAuthorizationForUser(request, requestOptions));
+    }
+
+    private async __checkResourceAuthorizationForUser(
+        request: Credal.CheckResourceAuthorizationForUserRequest,
+        requestOptions?: PermissionsService.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.CheckResourceAuthorizationResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -65,8 +72,8 @@ export class PermissionsService {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -81,18 +88,22 @@ export class PermissionsService {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CheckResourceAuthorizationResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.CheckResourceAuthorizationResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -101,6 +112,7 @@ export class PermissionsService {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -109,6 +121,7 @@ export class PermissionsService {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -132,10 +145,19 @@ export class PermissionsService {
      *         userEmail: "john.smith@foo.com"
      *     })
      */
-    public async checkBulkResourcesAuthorizationForUser(
+    public checkBulkResourcesAuthorizationForUser(
         request: Credal.CheckBulkResourcesAuthorizationForUserRequest,
         requestOptions?: PermissionsService.RequestOptions,
-    ): Promise<Credal.CheckBulkResourcesAuthorizationResponse> {
+    ): core.HttpResponsePromise<Credal.CheckBulkResourcesAuthorizationResponse> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__checkBulkResourcesAuthorizationForUser(request, requestOptions),
+        );
+    }
+
+    private async __checkBulkResourcesAuthorizationForUser(
+        request: Credal.CheckBulkResourcesAuthorizationForUserRequest,
+        requestOptions?: PermissionsService.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.CheckBulkResourcesAuthorizationResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -148,8 +170,8 @@ export class PermissionsService {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -164,18 +186,22 @@ export class PermissionsService {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CheckBulkResourcesAuthorizationResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.CheckBulkResourcesAuthorizationResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -184,6 +210,7 @@ export class PermissionsService {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -192,6 +219,7 @@ export class PermissionsService {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -207,10 +235,19 @@ export class PermissionsService {
      *         userEmail: "john.smith@foo.com"
      *     })
      */
-    public async listCachedAuthorizedResourcesForUser(
+    public listCachedAuthorizedResourcesForUser(
         request: Credal.ListCachedAuthorizedResourcesForUserRequest,
         requestOptions?: PermissionsService.RequestOptions,
-    ): Promise<Credal.AuthorizedResourceListPage> {
+    ): core.HttpResponsePromise<Credal.AuthorizedResourceListPage> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__listCachedAuthorizedResourcesForUser(request, requestOptions),
+        );
+    }
+
+    private async __listCachedAuthorizedResourcesForUser(
+        request: Credal.ListCachedAuthorizedResourcesForUserRequest,
+        requestOptions?: PermissionsService.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.AuthorizedResourceListPage>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -223,8 +260,8 @@ export class PermissionsService {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -239,18 +276,22 @@ export class PermissionsService {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AuthorizedResourceListPage.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.AuthorizedResourceListPage.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -259,6 +300,7 @@ export class PermissionsService {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -267,6 +309,7 @@ export class PermissionsService {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

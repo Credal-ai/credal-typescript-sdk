@@ -54,7 +54,17 @@ export class Users {
      *             userEmail: "jack@credal.ai"
      *         }])
      */
-    public async metadata(request: Credal.UserMetadataPatch[], requestOptions?: Users.RequestOptions): Promise<void> {
+    public metadata(
+        request: Credal.UserMetadataPatch[],
+        requestOptions?: Users.RequestOptions,
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__metadata(request, requestOptions));
+    }
+
+    private async __metadata(
+        request: Credal.UserMetadataPatch[],
+        requestOptions?: Users.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -67,8 +77,8 @@ export class Users {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -81,13 +91,14 @@ export class Users {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -96,12 +107,14 @@ export class Users {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError("Timeout exceeded when calling PATCH /v0/users/metadata.");
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

@@ -59,10 +59,17 @@ export class Search {
      *         }
      *     })
      */
-    public async searchDocumentCollection(
+    public searchDocumentCollection(
         request: Credal.SearchDocumentCollectionRequest,
         requestOptions?: Search.RequestOptions,
-    ): Promise<Credal.SearchDocumentCollectionResponse> {
+    ): core.HttpResponsePromise<Credal.SearchDocumentCollectionResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__searchDocumentCollection(request, requestOptions));
+    }
+
+    private async __searchDocumentCollection(
+        request: Credal.SearchDocumentCollectionRequest,
+        requestOptions?: Search.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.SearchDocumentCollectionResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -75,8 +82,8 @@ export class Search {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@credal/sdk",
-                "X-Fern-SDK-Version": "0.0.27",
-                "User-Agent": "@credal/sdk/0.0.27",
+                "X-Fern-SDK-Version": "0.0.28",
+                "User-Agent": "@credal/sdk/0.0.28",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -89,18 +96,22 @@ export class Search {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.SearchDocumentCollectionResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return {
+                data: serializers.SearchDocumentCollectionResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.CredalError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -109,6 +120,7 @@ export class Search {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.CredalTimeoutError(
@@ -117,6 +129,7 @@ export class Search {
             case "unknown":
                 throw new errors.CredalError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
