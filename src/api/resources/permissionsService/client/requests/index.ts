@@ -1,3 +1,3 @@
-export { type CheckResourceAuthorizationForUserRequest } from "./CheckResourceAuthorizationForUserRequest";
-export { type CheckBulkResourcesAuthorizationForUserRequest } from "./CheckBulkResourcesAuthorizationForUserRequest";
-export { type ListCachedAuthorizedResourcesForUserRequest } from "./ListCachedAuthorizedResourcesForUserRequest";
+export { type CheckResourceAuthorizationForUserRequest } from "./CheckResourceAuthorizationForUserRequest.js";
+export { type CheckBulkResourcesAuthorizationForUserRequest } from "./CheckBulkResourcesAuthorizationForUserRequest.js";
+export { type ListCachedAuthorizedResourcesForUserRequest } from "./ListCachedAuthorizedResourcesForUserRequest.js";

@@ -1129,7 +1129,7 @@ Credal lets you easily sync your MongoDB data for use in Collections and Agents.
 
 ```typescript
 await client.documentCollections.createMongoCollectionSync({
-    mongoUri: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
+    mongoURI: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
     collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
     config: {
         syncName: "My sales transcripts",
@@ -1210,7 +1210,7 @@ Credal lets you easily sync your MongoDB data for use in Collections and Agents.
 
 ```typescript
 await client.documentCollections.updateMongoCollectionSync({
-    mongoUri: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
+    mongoURI: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
     mongoCredentialId: "5988ed76-6ee1-11ef-97dd-1fca54b7c4bc",
     config: {
         syncName: "My recent summarized sales transcripts",

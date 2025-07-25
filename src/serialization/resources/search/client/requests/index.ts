@@ -1,1 +1,0 @@
-export { SearchDocumentCollectionRequest } from "./SearchDocumentCollectionRequest";

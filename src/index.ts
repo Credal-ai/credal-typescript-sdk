@@ -1,5 +1,4 @@
-export * as Credal from "./api";
-export { CredalClient } from "./Client";
-export { CredalEnvironment } from "./environments";
-export { CredalError, CredalTimeoutError } from "./errors";
-export * as serialization from "./serialization";
+export * as Credal from "./api/index.js";
+export { CredalError, CredalTimeoutError } from "./errors/index.js";
+export { CredalClient } from "./Client.js";
+export { CredalEnvironment } from "./environments.js";
