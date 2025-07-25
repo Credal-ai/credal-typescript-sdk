@@ -1,1 +1,1 @@
-export * from "./UserMetadataPatch";
+export * from "./UserMetadataPatch.js";
