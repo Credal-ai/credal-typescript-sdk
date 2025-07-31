@@ -1,2 +1,2 @@
-export { CredalError } from "./CredalError";
-export { CredalTimeoutError } from "./CredalTimeoutError";
+export { CredalError } from "./CredalError.js";
+export { CredalTimeoutError } from "./CredalTimeoutError.js";
