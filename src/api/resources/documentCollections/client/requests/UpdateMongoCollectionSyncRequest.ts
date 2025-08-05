@@ -7,7 +7,7 @@ import * as Credal from "../../../../index.js";
 /**
  * @example
  *     {
- *         mongoURI: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
+ *         mongoURI: "mongodb+srv://cluster0.abcdefg.mongodb.net/Cluster0?retryWrites=true&w=majority",
  *         mongoCredentialId: "5988ed76-6ee1-11ef-97dd-1fca54b7c4bc",
  *         config: {
  *             syncName: "My recent summarized sales transcripts",

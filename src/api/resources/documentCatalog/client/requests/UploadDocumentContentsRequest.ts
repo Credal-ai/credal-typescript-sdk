@@ -6,7 +6,7 @@
  * @example
  *     {
  *         documentName: "My Document",
- *         documentContents: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+ *         documentContents: "Lorem ipsum...",
  *         documentExternalId: "73eead26-d124-4940-b329-5f068a0a8db9",
  *         allowedUsersEmailAddresses: ["jack@credal.ai", "ravin@credal.ai"],
  *         uploadAsUserEmail: "jack@credal.ai"
@@ -25,7 +25,7 @@ export interface UploadDocumentContentsRequest {
     documentExternalId: string;
     /** The external URL of the document you want to upload. If provided Credal will link to this URL. */
     documentExternalUrl?: string;
-    /** Optional JSON representing any custom metdata for this document */
+    /** Optional JSON representing any custom metadata for this document */
     customMetadata?: unknown;
     /** If specified, document will also be added to a particular document collection */
     collectionId?: string;
