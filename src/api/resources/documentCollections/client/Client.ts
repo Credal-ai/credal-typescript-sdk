@@ -367,7 +367,7 @@ export class DocumentCollections {
      *
      * @example
      *     await client.documentCollections.createMongoCollectionSync({
-     *         mongoURI: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
+     *         mongoURI: "mongodb+srv://cluster0.abcdefg.mongodb.net/Cluster0?retryWrites=true&w=majority",
      *         collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
      *         config: {
      *             syncName: "My sales transcripts",
@@ -457,7 +457,7 @@ export class DocumentCollections {
      *
      * @example
      *     await client.documentCollections.updateMongoCollectionSync({
-     *         mongoURI: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
+     *         mongoURI: "mongodb+srv://cluster0.abcdefg.mongodb.net/Cluster0?retryWrites=true&w=majority",
      *         mongoCredentialId: "5988ed76-6ee1-11ef-97dd-1fca54b7c4bc",
      *         config: {
      *             syncName: "My recent summarized sales transcripts",

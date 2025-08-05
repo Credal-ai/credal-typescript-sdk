@@ -5,4 +5,5 @@
 export interface ResponseChunk {
     message: string;
     dataChunk: string;
+    structuredOutput?: unknown;
 }

@@ -612,8 +612,7 @@ await client.copilots.deleteCopilot({
 ```typescript
 await client.documentCatalog.uploadDocumentContents({
     documentName: "My Document",
-    documentContents:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    documentContents: "Lorem ipsum...",
     documentExternalId: "73eead26-d124-4940-b329-5f068a0a8db9",
     allowedUsersEmailAddresses: ["jack@credal.ai", "ravin@credal.ai"],
     uploadAsUserEmail: "jack@credal.ai",
@@ -1129,7 +1128,7 @@ Credal lets you easily sync your MongoDB data for use in Collections and Agents.
 
 ```typescript
 await client.documentCollections.createMongoCollectionSync({
-    mongoURI: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
+    mongoURI: "mongodb+srv://cluster0.abcdefg.mongodb.net/Cluster0?retryWrites=true&w=majority",
     collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
     config: {
         syncName: "My sales transcripts",
@@ -1210,7 +1209,7 @@ Credal lets you easily sync your MongoDB data for use in Collections and Agents.
 
 ```typescript
 await client.documentCollections.updateMongoCollectionSync({
-    mongoURI: "mongodb+srv://cluster0.hzwklqn.mongodb.net/Cluster0?retryWrites=true&w=majority",
+    mongoURI: "mongodb+srv://cluster0.abcdefg.mongodb.net/Cluster0?retryWrites=true&w=majority",
     mongoCredentialId: "5988ed76-6ee1-11ef-97dd-1fca54b7c4bc",
     config: {
         syncName: "My recent summarized sales transcripts",
