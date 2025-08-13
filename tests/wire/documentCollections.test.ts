@@ -96,6 +96,51 @@ describe("DocumentCollections", () => {
         expect(response).toEqual(undefined);
     });
 
+    test("listDocumentsInCollection", async () => {
+        const server = mockServerPool.createServer();
+        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            resourceIdentifiers: [
+                {
+                    type: "external-resource-id",
+                    externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
+                    resourceType: "GOOGLE_DRIVE_ITEM",
+                },
+                {
+                    type: "external-resource-id",
+                    externalResourceId: "398KAHdfkjsdf09r54UvyslPVWkQFOA0lOiu34in923",
+                    resourceType: "GOOGLE_DRIVE_ITEM",
+                },
+            ],
+        };
+        server
+            .mockEndpoint()
+            .get("/v0/documentCollections/listDocumentsInCollection")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.documentCollections.listDocumentsInCollection({
+            collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+        });
+        expect(response).toEqual({
+            resourceIdentifiers: [
+                {
+                    type: "external-resource-id",
+                    externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
+                    resourceType: "GOOGLE_DRIVE_ITEM",
+                },
+                {
+                    type: "external-resource-id",
+                    externalResourceId: "398KAHdfkjsdf09r54UvyslPVWkQFOA0lOiu34in923",
+                    resourceType: "GOOGLE_DRIVE_ITEM",
+                },
+            ],
+        });
+    });
+
     test("createCollection", async () => {
         const server = mockServerPool.createServer();
         const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });

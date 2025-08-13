@@ -962,6 +962,71 @@ await client.documentCollections.removeDocumentsFromCollection({
 </dl>
 </details>
 
+<details><summary><code>client.documentCollections.<a href="/src/api/resources/documentCollections/client/Client.ts">listDocumentsInCollection</a>({ ...params }) -> Credal.ListDocumentsInCollectionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List documents in a collection
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.documentCollections.listDocumentsInCollection({
+    collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Credal.ListDocumentsInCollectionRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DocumentCollections.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.documentCollections.<a href="/src/api/resources/documentCollections/client/Client.ts">createCollection</a>({ ...params }) -> Credal.CreateCollectionResponse</code></summary>
 <dl>
 <dd>
