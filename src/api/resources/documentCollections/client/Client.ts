@@ -207,6 +207,83 @@ export class DocumentCollections {
     }
 
     /**
+     * List documents in a collection
+     *
+     * @param {Credal.ListDocumentsInCollectionRequest} request
+     * @param {DocumentCollections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.documentCollections.listDocumentsInCollection({
+     *         collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24"
+     *     })
+     */
+    public listDocumentsInCollection(
+        request: Credal.ListDocumentsInCollectionRequest,
+        requestOptions?: DocumentCollections.RequestOptions,
+    ): core.HttpResponsePromise<Credal.ListDocumentsInCollectionResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listDocumentsInCollection(request, requestOptions));
+    }
+
+    private async __listDocumentsInCollection(
+        request: Credal.ListDocumentsInCollectionRequest,
+        requestOptions?: DocumentCollections.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.ListDocumentsInCollectionResponse>> {
+        const { collectionId } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        _queryParams["collectionId"] = collectionId;
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/documentCollections/listDocumentsInCollection",
+            ),
+            method: "GET",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+                requestOptions?.headers,
+            ),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as Credal.ListDocumentsInCollectionResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError(
+                    "Timeout exceeded when calling GET /v0/documentCollections/listDocumentsInCollection.",
+                );
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
      * Create a new collection. The API key used will be added to the collection for future Requests
      *
      * @param {Credal.CreateCollectionRequest} request
