@@ -67,6 +67,11 @@ export class PermissionsService {
         request: Credal.CheckResourceAuthorizationForUserRequest,
         requestOptions?: PermissionsService.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.CheckResourceAuthorizationResponse>> {
+        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -75,11 +80,7 @@ export class PermissionsService {
                 "/v0/permissions/checkResourceAuthorizationForUser",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
             requestType: "json",
@@ -154,6 +155,11 @@ export class PermissionsService {
         request: Credal.CheckBulkResourcesAuthorizationForUserRequest,
         requestOptions?: PermissionsService.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.CheckBulkResourcesAuthorizationResponse>> {
+        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -162,11 +168,7 @@ export class PermissionsService {
                 "/v0/permissions/checkBulkResourcesAuthorizationForUser",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
             requestType: "json",
@@ -233,6 +235,11 @@ export class PermissionsService {
         request: Credal.ListCachedAuthorizedResourcesForUserRequest,
         requestOptions?: PermissionsService.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.AuthorizedResourceListPage>> {
+        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -241,11 +248,7 @@ export class PermissionsService {
                 "/v0/permissions/listCachedAuthorizedResourcesForUser",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
             requestType: "json",

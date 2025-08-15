@@ -26,7 +26,7 @@ export interface UploadDocumentContentsRequest {
     /** The external URL of the document you want to upload. If provided Credal will link to this URL. */
     documentExternalUrl?: string;
     /** Optional JSON representing any custom metadata for this document */
-    customMetadata?: unknown;
+    customMetadata?: Record<string, unknown>;
     /** If specified, document will also be added to a particular document collection */
     collectionId?: string;
     /** If specified, document contents will be re-uploaded and re-embedded even if the document already exists in Credal */

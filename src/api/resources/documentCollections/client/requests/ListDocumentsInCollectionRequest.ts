@@ -9,8 +9,6 @@
  *     }
  */
 export interface ListDocumentsInCollectionRequest {
-    /**
-     * The ID of the document collection to list documents from.
-     */
+    /** The ID of the document collection to list documents from. */
     collectionId: string;
 }

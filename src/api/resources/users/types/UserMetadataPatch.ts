@@ -5,5 +5,5 @@
 export interface UserMetadataPatch {
     userEmail: string;
     /** Key-value object of metadata for user. Keys will be merged with any existing values but can also be set to `null` to effectively remove */
-    metadata?: unknown;
+    metadata: Record<string, unknown>;
 }

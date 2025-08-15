@@ -53,8 +53,8 @@ export class CredalClient {
                 {
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "@credal/sdk",
-                    "X-Fern-SDK-Version": "0.1.2",
-                    "User-Agent": "@credal/sdk/0.1.2",
+                    "X-Fern-SDK-Version": "0.1.3",
+                    "User-Agent": "@credal/sdk/0.1.3",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
