@@ -5,3 +5,4 @@ export * from "./ResourceType.js";
 export * from "./Collaborator.js";
 export * from "./Role.js";
 export * from "./Operator.js";
+export * from "./CustomMetadataValue.js";

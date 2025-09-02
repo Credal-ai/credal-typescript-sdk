@@ -64,7 +64,7 @@ export class DocumentCatalog {
         request: Credal.UploadDocumentContentsRequest,
         requestOptions?: DocumentCatalog.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.UploadDocumentResponse>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -140,7 +140,7 @@ export class DocumentCatalog {
         request: Credal.SyncSourceByUrlRequest,
         requestOptions?: DocumentCatalog.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.SyncSourceByUrlResponse>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -234,7 +234,7 @@ export class DocumentCatalog {
         request: Credal.DocumentMetadataPatchRequest,
         requestOptions?: DocumentCatalog.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
