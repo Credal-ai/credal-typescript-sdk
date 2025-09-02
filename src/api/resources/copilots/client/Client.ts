@@ -67,7 +67,7 @@ export class Copilots {
         request: Credal.CreateCopilotRequest,
         requestOptions?: Copilots.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.CreateCopilotResponse>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -141,7 +141,7 @@ export class Copilots {
         request: Credal.CreateConversationRequest,
         requestOptions?: Copilots.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.CreateConversationResponse>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -221,7 +221,7 @@ export class Copilots {
         request: Credal.ProvideMessageFeedbackRequest,
         requestOptions?: Copilots.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -303,7 +303,7 @@ export class Copilots {
         request: Credal.SendMessageRequest,
         requestOptions?: Copilots.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.SendAgentMessageResponse>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -368,7 +368,7 @@ export class Copilots {
         request: Credal.StreamMessageRequest,
         requestOptions?: Copilots.RequestOptions,
     ): Promise<core.WithRawResponse<core.Stream<Credal.StreamingChunk>>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -454,7 +454,7 @@ export class Copilots {
         request: Credal.AddCollectionToCopilotRequest,
         requestOptions?: Copilots.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -530,7 +530,7 @@ export class Copilots {
         request: Credal.RemoveCollectionFromCopilotRequest,
         requestOptions?: Copilots.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -614,7 +614,7 @@ export class Copilots {
         request: Credal.UpdateConfigurationRequest,
         requestOptions?: Copilots.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -687,7 +687,7 @@ export class Copilots {
         request: Credal.DeleteCopilotRequest,
         requestOptions?: Copilots.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.DeleteCopilotResponse>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,

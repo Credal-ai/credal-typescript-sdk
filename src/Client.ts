@@ -8,7 +8,6 @@ import { mergeHeaders } from "./core/headers.js";
 import { Copilots } from "./api/resources/copilots/client/Client.js";
 import { DocumentCatalog } from "./api/resources/documentCatalog/client/Client.js";
 import { DocumentCollections } from "./api/resources/documentCollections/client/Client.js";
-import { PermissionsService } from "./api/resources/permissionsService/client/Client.js";
 import { Search } from "./api/resources/search/client/Client.js";
 import { Users } from "./api/resources/users/client/Client.js";
 
@@ -42,7 +41,6 @@ export class CredalClient {
     protected _copilots: Copilots | undefined;
     protected _documentCatalog: DocumentCatalog | undefined;
     protected _documentCollections: DocumentCollections | undefined;
-    protected _permissionsService: PermissionsService | undefined;
     protected _search: Search | undefined;
     protected _users: Users | undefined;
 
@@ -53,8 +51,8 @@ export class CredalClient {
                 {
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "@credal/sdk",
-                    "X-Fern-SDK-Version": "0.1.3",
-                    "User-Agent": "@credal/sdk/0.1.3",
+                    "X-Fern-SDK-Version": "0.1.4",
+                    "User-Agent": "@credal/sdk/0.1.4",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -73,10 +71,6 @@ export class CredalClient {
 
     public get documentCollections(): DocumentCollections {
         return (this._documentCollections ??= new DocumentCollections(this._options));
-    }
-
-    public get permissionsService(): PermissionsService {
-        return (this._permissionsService ??= new PermissionsService(this._options));
     }
 
     public get search(): Search {

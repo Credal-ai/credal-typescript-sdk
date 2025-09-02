@@ -77,7 +77,7 @@ export class Search {
         request: Credal.SearchDocumentCollectionRequest,
         requestOptions?: Search.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.SearchDocumentCollectionResponse>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,

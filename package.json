@@ -1,6 +1,6 @@
 {
     "name": "@credal/sdk",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "private": false,
     "repository": "github:credal-ai/credal-typescript-sdk",
     "type": "commonjs",

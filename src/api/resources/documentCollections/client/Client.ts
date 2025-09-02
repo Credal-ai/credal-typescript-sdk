@@ -71,7 +71,7 @@ export class DocumentCollections {
         request: Credal.AddDocumentsToCollectionRequest,
         requestOptions?: DocumentCollections.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -155,7 +155,7 @@ export class DocumentCollections {
         request: Credal.RemoveDocumentsFromCollectionRequest,
         requestOptions?: DocumentCollections.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -233,7 +233,7 @@ export class DocumentCollections {
         const { collectionId } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams["collectionId"] = collectionId;
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -313,7 +313,7 @@ export class DocumentCollections {
         request: Credal.CreateCollectionRequest,
         requestOptions?: DocumentCollections.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.CreateCollectionResponse>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -388,7 +388,7 @@ export class DocumentCollections {
         request: Credal.DeleteCollectionRequest,
         requestOptions?: DocumentCollections.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.DeleteCollectionResponse>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -479,7 +479,7 @@ export class DocumentCollections {
         request: Credal.CreateMongoCollectionSyncRequest,
         requestOptions?: DocumentCollections.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.MongoCollectionSyncResponse>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
@@ -570,7 +570,7 @@ export class DocumentCollections {
         request: Credal.UpdateMongoCollectionSyncRequest,
         requestOptions?: DocumentCollections.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.MongoCollectionSyncResponse>> {
-        var _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
             requestOptions?.headers,
