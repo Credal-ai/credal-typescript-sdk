@@ -8,7 +8,6 @@ export * from "./WebSearchResult.js";
 export * from "./ResponseChunk.js";
 export * from "./InsertedAuditLog.js";
 export * from "./MessageBlocked.js";
-export * from "./PolicyTrigger.js";
 export * from "./FeedbackEnum.js";
 export * from "./MessageFeedback.js";
 export * from "./Configuration.js";
