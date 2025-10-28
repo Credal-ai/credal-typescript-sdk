@@ -1,1 +1,1 @@
-export { type SearchDocumentCollectionRequest } from "./SearchDocumentCollectionRequest.js";
+export type { SearchDocumentCollectionRequest } from "./SearchDocumentCollectionRequest.js";
