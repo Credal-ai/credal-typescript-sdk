@@ -1,7 +1,5 @@
 # Reference
-
 ## Copilots
-
 <details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">createCopilot</a>({ ...params }) -> Credal.CreateCopilotResponse</code></summary>
 <dl>
 <dd>
@@ -15,7 +13,6 @@
 <dd>
 
 Create a new agent. The API key used will be added to the agent for future Requests
-
 </dd>
 </dl>
 </dd>
@@ -33,15 +30,13 @@ Create a new agent. The API key used will be added to the agent for future Reque
 await client.copilots.createCopilot({
     name: "Customer Agent",
     description: "This agent is used to answer customer requests based on internal documentation.",
-    collaborators: [
-        {
+    collaborators: [{
             email: "test@gmail.com",
-            role: "editor",
-        },
-    ],
+            role: "editor"
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -55,20 +50,21 @@ await client.copilots.createCopilot({
 <dl>
 <dd>
 
-**request:** `Credal.CreateCopilotRequest`
-
+**request:** `Credal.CreateCopilotRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -87,7 +83,6 @@ await client.copilots.createCopilot({
 <dd>
 
 OPTIONAL. Create a new conversation with the Agent. The conversation ID can be used in the `sendMessage` endpoint. The `sendMessage` endpoint automatically creates new conversations upon first request, but calling this endpoint can simplify certain use cases where it is helpful for the application to have the conversation ID before the first message is sent.
-
 </dd>
 </dl>
 </dd>
@@ -104,10 +99,10 @@ OPTIONAL. Create a new conversation with the Agent. The conversation ID can be u
 ```typescript
 await client.copilots.createConversation({
     agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
-    userEmail: "ravin@credal.ai",
+    userEmail: "ravin@credal.ai"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -121,20 +116,21 @@ await client.copilots.createConversation({
 <dl>
 <dd>
 
-**request:** `Credal.CreateConversationRequest`
-
+**request:** `Credal.CreateConversationRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -160,11 +156,11 @@ await client.copilots.provideMessageFeedback({
     messageFeedback: {
         feedback: "NEGATIVE",
         suggestedAnswer: "Yes, Credal is SOC 2 compliant.",
-        descriptiveFeedback: "The response should be extremely clear and concise.",
-    },
+        descriptiveFeedback: "The response should be extremely clear and concise."
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -178,20 +174,21 @@ await client.copilots.provideMessageFeedback({
 <dl>
 <dd>
 
-**request:** `Credal.ProvideMessageFeedbackRequest`
-
+**request:** `Credal.ProvideMessageFeedbackRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -214,19 +211,16 @@ await client.copilots.sendMessage({
     agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
     message: "Is Credal SOC 2 compliant?",
     userEmail: "ravin@credal.ai",
-    inputVariables: [
-        {
+    inputVariables: [{
             name: "input1",
-            ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c24"],
-        },
-        {
+            ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c24"]
+        }, {
             name: "input2",
-            ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c25", "82e4b12a-6990-45d4-8ebd-85c00e030c26"],
-        },
-    ],
+            ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c25", "82e4b12a-6990-45d4-8ebd-85c00e030c26"]
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -240,20 +234,21 @@ await client.copilots.sendMessage({
 <dl>
 <dd>
 
-**request:** `Credal.SendMessageRequest`
-
+**request:** `Credal.SendMessageRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -272,7 +267,6 @@ await client.copilots.sendMessage({
 <dd>
 
 This endpoint allows you to send a message to a specific agent and get the response back as a streamed set of Server-Sent Events.
-
 </dd>
 </dl>
 </dd>
@@ -291,22 +285,19 @@ const response = await client.copilots.streamMessage({
     copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
     message: "Is Credal SOC 2 compliant?",
     email: "ravin@credal.ai",
-    inputVariables: [
-        {
+    inputVariables: [{
             name: "input1",
-            ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c24"],
-        },
-        {
+            ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c24"]
+        }, {
             name: "input2",
-            ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c25", "82e4b12a-6990-45d4-8ebd-85c00e030c26"],
-        },
-    ],
+            ids: ["82e4b12a-6990-45d4-8ebd-85c00e030c25", "82e4b12a-6990-45d4-8ebd-85c00e030c26"]
+        }]
 });
 for await (const item of response) {
     console.log(item);
 }
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -320,20 +311,21 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**request:** `Credal.StreamMessageRequest`
-
+**request:** `Credal.StreamMessageRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -352,7 +344,6 @@ for await (const item of response) {
 <dd>
 
 Link a collection with a agent. The API Key used must be added to both the collection and the agent beforehand.
-
 </dd>
 </dl>
 </dd>
@@ -369,10 +360,10 @@ Link a collection with a agent. The API Key used must be added to both the colle
 ```typescript
 await client.copilots.addCollectionToCopilot({
     copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
-    collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e",
+    collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -386,20 +377,21 @@ await client.copilots.addCollectionToCopilot({
 <dl>
 <dd>
 
-**request:** `Credal.AddCollectionToCopilotRequest`
-
+**request:** `Credal.AddCollectionToCopilotRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -418,7 +410,6 @@ await client.copilots.addCollectionToCopilot({
 <dd>
 
 Unlink a collection with a agent. The API Key used must be added to both the collection and the agent beforehand.
-
 </dd>
 </dl>
 </dd>
@@ -435,10 +426,10 @@ Unlink a collection with a agent. The API Key used must be added to both the col
 ```typescript
 await client.copilots.removeCollectionFromCopilot({
     copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
-    collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e",
+    collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -452,20 +443,21 @@ await client.copilots.removeCollectionFromCopilot({
 <dl>
 <dd>
 
-**request:** `Credal.RemoveCollectionFromCopilotRequest`
-
+**request:** `Credal.RemoveCollectionFromCopilotRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -484,7 +476,6 @@ await client.copilots.removeCollectionFromCopilot({
 <dd>
 
 Update the configuration for a agent
-
 </dd>
 </dl>
 </dd>
@@ -507,12 +498,12 @@ await client.copilots.updateConfiguration({
         prompt: "You are a polite, helpful assistant used to answer customer requests.",
         aiEndpointConfiguration: {
             baseUrl: "https://api.openai.com/v1/",
-            apiKey: "<YOUR_API_KEY_HERE>",
-        },
-    },
+            apiKey: "<YOUR_API_KEY_HERE>"
+        }
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -526,20 +517,21 @@ await client.copilots.updateConfiguration({
 <dl>
 <dd>
 
-**request:** `Credal.UpdateConfigurationRequest`
-
+**request:** `Credal.UpdateConfigurationRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -559,10 +551,10 @@ await client.copilots.updateConfiguration({
 
 ```typescript
 await client.copilots.deleteCopilot({
-    id: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
+    id: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -576,27 +568,27 @@ await client.copilots.deleteCopilot({
 <dl>
 <dd>
 
-**request:** `Credal.DeleteCopilotRequest`
-
+**request:** `Credal.DeleteCopilotRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## DocumentCatalog
-
 <details><summary><code>client.documentCatalog.<a href="/src/api/resources/documentCatalog/client/Client.ts">uploadDocumentContents</a>({ ...params }) -> Credal.UploadDocumentResponse</code></summary>
 <dl>
 <dd>
@@ -615,10 +607,10 @@ await client.documentCatalog.uploadDocumentContents({
     documentContents: "Lorem ipsum...",
     documentExternalId: "73eead26-d124-4940-b329-5f068a0a8db9",
     allowedUsersEmailAddresses: ["jack@credal.ai", "ravin@credal.ai"],
-    uploadAsUserEmail: "jack@credal.ai",
+    uploadAsUserEmail: "jack@credal.ai"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -632,20 +624,21 @@ await client.documentCatalog.uploadDocumentContents({
 <dl>
 <dd>
 
-**request:** `Credal.UploadDocumentContentsRequest`
-
+**request:** `Credal.UploadDocumentContentsRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCatalog.RequestOptions`
+**requestOptions:** `DocumentCatalog.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -664,7 +657,6 @@ await client.documentCatalog.uploadDocumentContents({
 <dd>
 
 Sync a document from a source URL. Does not support recursive web search. Reach out to a Credal representative for access.
-
 </dd>
 </dl>
 </dd>
@@ -681,10 +673,10 @@ Sync a document from a source URL. Does not support recursive web search. Reach 
 ```typescript
 await client.documentCatalog.syncSourceByUrl({
     sourceUrl: "https://drive.google.com/file/d/123456/view",
-    uploadAsUserEmail: "ria@credal.ai",
+    uploadAsUserEmail: "ria@credal.ai"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -698,20 +690,21 @@ await client.documentCatalog.syncSourceByUrl({
 <dl>
 <dd>
 
-**request:** `Credal.SyncSourceByUrlRequest`
-
+**request:** `Credal.SyncSourceByUrlRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCatalog.RequestOptions`
+**requestOptions:** `DocumentCatalog.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -730,7 +723,6 @@ await client.documentCatalog.syncSourceByUrl({
 <dd>
 
 Bulk patch metadata for documents, synced natively by Credal or manual API uploads
-
 </dd>
 </dl>
 </dd>
@@ -746,34 +738,31 @@ Bulk patch metadata for documents, synced natively by Credal or manual API uploa
 
 ```typescript
 await client.documentCatalog.metadata({
-    sources: [
-        {
+    sources: [{
             metadata: {
-                Department: "HR",
-                Country: "United States",
+                "Department": "HR",
+                "Country": "United States"
             },
             resourceIdentifier: {
                 type: "external-resource-id",
                 externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
-                resourceType: "GOOGLE_DRIVE_ITEM",
-            },
-        },
-        {
+                resourceType: "GOOGLE_DRIVE_ITEM"
+            }
+        }, {
             metadata: {
-                Department: "Sales",
-                Vertical: "Healthcare",
+                "Department": "Sales",
+                "Vertical": "Healthcare"
             },
             resourceIdentifier: {
                 type: "external-resource-id",
                 externalResourceId: "123456",
-                resourceType: "ZENDESK_TICKET",
-            },
-        },
-    ],
-    uploadAsUserEmail: "ben@credal.ai",
+                resourceType: "ZENDESK_TICKET"
+            }
+        }],
+    uploadAsUserEmail: "ben@credal.ai"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -787,27 +776,27 @@ await client.documentCatalog.metadata({
 <dl>
 <dd>
 
-**request:** `Credal.DocumentMetadataPatchRequest`
-
+**request:** `Credal.DocumentMetadataPatchRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCatalog.RequestOptions`
+**requestOptions:** `DocumentCatalog.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## DocumentCollections
-
 <details><summary><code>client.documentCollections.<a href="/src/api/resources/documentCollections/client/Client.ts">addDocumentsToCollection</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
@@ -821,7 +810,6 @@ await client.documentCatalog.metadata({
 <dd>
 
 Add documents to a document collection. Note that the documents must already exist in the document catalog to use this endpoint. If you want to upload a new document to a collection, use the `uploadDocumentContents` endpoint.
-
 </dd>
 </dl>
 </dd>
@@ -838,21 +826,18 @@ Add documents to a document collection. Note that the documents must already exi
 ```typescript
 await client.documentCollections.addDocumentsToCollection({
     collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
-    resourceIdentifiers: [
-        {
+    resourceIdentifiers: [{
             type: "external-resource-id",
             externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
-            resourceType: "GOOGLE_DRIVE_ITEM",
-        },
-        {
+            resourceType: "GOOGLE_DRIVE_ITEM"
+        }, {
             type: "external-resource-id",
             externalResourceId: "398KAHdfkjsdf09r54UvyslPVWkQFOA0lOiu34in923",
-            resourceType: "GOOGLE_DRIVE_ITEM",
-        },
-    ],
+            resourceType: "GOOGLE_DRIVE_ITEM"
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -866,20 +851,21 @@ await client.documentCollections.addDocumentsToCollection({
 <dl>
 <dd>
 
-**request:** `Credal.AddDocumentsToCollectionRequest`
-
+**request:** `Credal.AddDocumentsToCollectionRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions`
+**requestOptions:** `DocumentCollections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -898,7 +884,6 @@ await client.documentCollections.addDocumentsToCollection({
 <dd>
 
 Remove documents from a collection
-
 </dd>
 </dl>
 </dd>
@@ -915,21 +900,18 @@ Remove documents from a collection
 ```typescript
 await client.documentCollections.removeDocumentsFromCollection({
     collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
-    resourceIdentifiers: [
-        {
+    resourceIdentifiers: [{
             type: "external-resource-id",
             externalResourceId: "170NrBm0Do7gdzvr54UvyslPVWkQFOA0lgNycFmdZJQr",
-            resourceType: "GOOGLE_DRIVE_ITEM",
-        },
-        {
+            resourceType: "GOOGLE_DRIVE_ITEM"
+        }, {
             type: "external-resource-id",
             externalResourceId: "398KAHdfkjsdf09r54UvyslPVWkQFOA0lOiu34in923",
-            resourceType: "GOOGLE_DRIVE_ITEM",
-        },
-    ],
+            resourceType: "GOOGLE_DRIVE_ITEM"
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -943,20 +925,21 @@ await client.documentCollections.removeDocumentsFromCollection({
 <dl>
 <dd>
 
-**request:** `Credal.RemoveDocumentsFromCollectionRequest`
-
+**request:** `Credal.RemoveDocumentsFromCollectionRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions`
+**requestOptions:** `DocumentCollections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -975,7 +958,6 @@ await client.documentCollections.removeDocumentsFromCollection({
 <dd>
 
 List documents in a collection
-
 </dd>
 </dl>
 </dd>
@@ -991,10 +973,10 @@ List documents in a collection
 
 ```typescript
 await client.documentCollections.listDocumentsInCollection({
-    collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
+    collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1008,20 +990,21 @@ await client.documentCollections.listDocumentsInCollection({
 <dl>
 <dd>
 
-**request:** `Credal.ListDocumentsInCollectionRequest`
-
+**request:** `Credal.ListDocumentsInCollectionRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions`
+**requestOptions:** `DocumentCollections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1040,7 +1023,6 @@ await client.documentCollections.listDocumentsInCollection({
 <dd>
 
 Create a new collection. The API key used will be added to the collection for future Requests
-
 </dd>
 </dl>
 </dd>
@@ -1058,15 +1040,13 @@ Create a new collection. The API key used will be added to the collection for fu
 await client.documentCollections.createCollection({
     name: "Customer Collection",
     description: "This collection is used to answer customer requests based on internal documentation.",
-    collaborators: [
-        {
+    collaborators: [{
             email: "test@gmail.com",
-            role: "editor",
-        },
-    ],
+            role: "editor"
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1080,20 +1060,21 @@ await client.documentCollections.createCollection({
 <dl>
 <dd>
 
-**request:** `Credal.CreateCollectionRequest`
-
+**request:** `Credal.CreateCollectionRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions`
+**requestOptions:** `DocumentCollections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1112,7 +1093,6 @@ await client.documentCollections.createCollection({
 <dd>
 
 Delete the collection.
-
 </dd>
 </dl>
 </dd>
@@ -1128,10 +1108,10 @@ Delete the collection.
 
 ```typescript
 await client.documentCollections.deleteCollection({
-    collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
+    collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1145,20 +1125,21 @@ await client.documentCollections.deleteCollection({
 <dl>
 <dd>
 
-**request:** `Credal.DeleteCollectionRequest`
-
+**request:** `Credal.DeleteCollectionRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions`
+**requestOptions:** `DocumentCollections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1177,7 +1158,6 @@ await client.documentCollections.deleteCollection({
 <dd>
 
 Credal lets you easily sync your MongoDB data for use in Collections and Agents. Create a new sync from a MongoDB collection to a Credal collection.
-
 </dd>
 </dl>
 </dd>
@@ -1199,20 +1179,20 @@ await client.documentCollections.createMongoCollectionSync({
         syncName: "My sales transcripts",
         collectionName: "myCollection",
         filterExpression: {
-            status: {
-                $ne: "disabled",
-            },
+            "status": {
+                "$ne": "disabled"
+            }
         },
         sourceFields: {
             body: "body",
             sourceName: "meetingName",
             sourceSystemUpdated: "transcriptDatetime",
-            sourceUrl: "link",
-        },
-    },
+            sourceUrl: "link"
+        }
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1226,20 +1206,21 @@ await client.documentCollections.createMongoCollectionSync({
 <dl>
 <dd>
 
-**request:** `Credal.CreateMongoCollectionSyncRequest`
-
+**request:** `Credal.CreateMongoCollectionSyncRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions`
+**requestOptions:** `DocumentCollections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1258,7 +1239,6 @@ await client.documentCollections.createMongoCollectionSync({
 <dd>
 
 Credal lets you easily sync your MongoDB data for use in Collections and Agents. Update an existing sync from a MongoDB collection to a Credal collection via the `mongoCredentialId`, to disambiguate between multiple potential syncs to a given collection.
-
 </dd>
 </dl>
 </dd>
@@ -1280,20 +1260,20 @@ await client.documentCollections.updateMongoCollectionSync({
         syncName: "My recent summarized sales transcripts",
         collectionName: "myCollection",
         filterExpression: {
-            transcriptDatetime: {
-                $gt: "2023-01-01T00:00:00.000Z",
-            },
+            "transcriptDatetime": {
+                "$gt": "2023-01-01T00:00:00.000Z"
+            }
         },
         sourceFields: {
             body: "transcriptSummary",
             sourceName: "meetingName",
             sourceSystemUpdated: "transcriptDatetime",
-            sourceUrl: "link",
-        },
-    },
+            sourceUrl: "link"
+        }
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1307,27 +1287,27 @@ await client.documentCollections.updateMongoCollectionSync({
 <dl>
 <dd>
 
-**request:** `Credal.UpdateMongoCollectionSyncRequest`
-
+**request:** `Credal.UpdateMongoCollectionSyncRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions`
+**requestOptions:** `DocumentCollections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Search
-
 <details><summary><code>client.search.<a href="/src/api/resources/search/client/Client.ts">searchDocumentCollection</a>({ ...params }) -> Credal.SearchDocumentCollectionResponse</code></summary>
 <dl>
 <dd>
@@ -1341,7 +1321,6 @@ await client.documentCollections.updateMongoCollectionSync({
 <dd>
 
 Search across all documents in a document collection using the document metadata and contents.
-
 </dd>
 </dl>
 </dd>
@@ -1359,13 +1338,11 @@ Search across all documents in a document collection using the document metadata
 await client.search.searchDocumentCollection({
     collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
     searchQuery: "ABC Corp",
-    structuredQueryFilters: [
-        {
+    structuredQueryFilters: [{
             field: "status",
             operator: "==",
-            value: "Open",
-        },
-    ],
+            value: "Open"
+        }],
     userEmail: "jack@credal.ai",
     searchOptions: {
         maxChunks: 10,
@@ -1373,11 +1350,11 @@ await client.search.searchDocumentCollection({
         threshold: 0.8,
         enableSmartFiltering: true,
         enableQueryExtraction: true,
-        enableReranking: true,
-    },
+        enableReranking: true
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1391,27 +1368,27 @@ await client.search.searchDocumentCollection({
 <dl>
 <dd>
 
-**request:** `Credal.SearchDocumentCollectionRequest`
-
+**request:** `Credal.SearchDocumentCollectionRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Search.RequestOptions`
+**requestOptions:** `Search.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Users
-
 <details><summary><code>client.users.<a href="/src/api/resources/users/client/Client.ts">metadata</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
@@ -1425,7 +1402,6 @@ await client.search.searchDocumentCollection({
 <dd>
 
 Bulk patch metadata for users
-
 </dd>
 </dl>
 </dd>
@@ -1440,24 +1416,21 @@ Bulk patch metadata for users
 <dd>
 
 ```typescript
-await client.users.metadata([
-    {
+await client.users.metadata([{
         metadata: {
-            State: "NY",
-            "Job Role": "CEO",
+            "State": "NY",
+            "Job Role": "CEO"
         },
-        userEmail: "ravin@credal.ai",
-    },
-    {
+        userEmail: "ravin@credal.ai"
+    }, {
         metadata: {
-            State: "NY",
-            Department: "Engineering",
+            "State": "NY",
+            "Department": "Engineering"
         },
-        userEmail: "jack@credal.ai",
-    },
-]);
-```
+        userEmail: "jack@credal.ai"
+    }]);
 
+```
 </dd>
 </dl>
 </dd>
@@ -1471,20 +1444,21 @@ await client.users.metadata([
 <dl>
 <dd>
 
-**request:** `Credal.UserMetadataPatch[]`
-
+**request:** `Credal.UserMetadataPatch[]` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Users.RequestOptions`
+**requestOptions:** `Users.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
