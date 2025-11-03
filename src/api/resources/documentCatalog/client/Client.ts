@@ -98,6 +98,118 @@ export class DocumentCatalog {
     }
 
     /**
+     * Upload a file (PDF, Word, Excel, CSV, PowerPoint) to Credal. Unlike uploadDocumentContents which requires pre-parsed text, this endpoint accepts actual file uploads and automatically parses them using Credal's parsing service.
+     *
+     * @param {Credal.UploadFileRequest} request
+     * @param {DocumentCatalog.RequestOptions} requestOptions - Request-specific configuration.
+     */
+    public uploadFile(
+        request: Credal.UploadFileRequest,
+        requestOptions?: DocumentCatalog.RequestOptions,
+    ): core.HttpResponsePromise<Credal.UploadDocumentResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__uploadFile(request, requestOptions));
+    }
+
+    private async __uploadFile(
+        request: Credal.UploadFileRequest,
+        requestOptions?: DocumentCatalog.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.UploadDocumentResponse>> {
+        const _request = await core.newFormData();
+        await _request.appendFile("file", request.file);
+        if (request.documentName != null) {
+            _request.append("documentName", request.documentName);
+        }
+
+        _request.append("uploadAsUserEmail", request.uploadAsUserEmail);
+        _request.append("documentExternalId", request.documentExternalId);
+        if (request.allowedUsersEmailAddresses != null) {
+            _request.append("allowedUsersEmailAddresses", request.allowedUsersEmailAddresses);
+        }
+
+        if (request.documentExternalUrl != null) {
+            _request.append("documentExternalUrl", request.documentExternalUrl);
+        }
+
+        if (request.customMetadata != null) {
+            _request.append("customMetadata", request.customMetadata);
+        }
+
+        if (request.collectionId != null) {
+            _request.append("collectionId", request.collectionId);
+        }
+
+        if (request.forceUpdate != null) {
+            _request.append("forceUpdate", request.forceUpdate);
+        }
+
+        if (request.internalPublic != null) {
+            _request.append("internalPublic", request.internalPublic);
+        }
+
+        if (request.sourceSystemUpdated != null) {
+            _request.append("sourceSystemUpdated", request.sourceSystemUpdated);
+        }
+
+        if (request.awaitVectorStoreSync != null) {
+            _request.append("awaitVectorStoreSync", request.awaitVectorStoreSync);
+        }
+
+        const _maybeEncodedRequest = await _request.getRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                Authorization: await this._getAuthorizationHeader(),
+                ..._maybeEncodedRequest.headers,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/catalog/uploadFile",
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            requestType: "file",
+            duplex: _maybeEncodedRequest.duplex,
+            body: _maybeEncodedRequest.body,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Credal.UploadDocumentResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/catalog/uploadFile.");
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
      * Sync a document from a source URL. Does not support recursive web search. Reach out to a Credal representative for access.
      *
      * @param {Credal.SyncSourceByUrlRequest} request
