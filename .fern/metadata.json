@@ -1,0 +1,10 @@
+{
+    "cliVersion": "1.1.0",
+    "generatorName": "fernapi/fern-typescript-node-sdk",
+    "generatorVersion": "3.29.2",
+    "generatorConfig": {
+        "namespaceExport": "Credal",
+        "includeApiReference": true,
+        "allowCustomFetcher": true
+    }
+}

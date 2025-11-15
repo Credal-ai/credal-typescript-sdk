@@ -26,12 +26,13 @@ export class CredalClient {
     constructor(_options: CredalClient.Options = {}) {
         this._options = {
             ..._options,
+            logging: core.logging.createLogger(_options?.logging),
             headers: mergeHeaders(
                 {
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "@credal/sdk",
-                    "X-Fern-SDK-Version": "0.1.10",
-                    "User-Agent": "@credal/sdk/0.1.10",
+                    "X-Fern-SDK-Version": "0.1.11",
+                    "User-Agent": "@credal/sdk/0.1.11",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
