@@ -58,7 +58,7 @@ await client.copilots.createCopilot({
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions` 
+**requestOptions:** `CopilotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -124,7 +124,7 @@ await client.copilots.createConversation({
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions` 
+**requestOptions:** `CopilotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -182,7 +182,7 @@ await client.copilots.provideMessageFeedback({
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions` 
+**requestOptions:** `CopilotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -242,7 +242,7 @@ await client.copilots.sendMessage({
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions` 
+**requestOptions:** `CopilotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -319,7 +319,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions` 
+**requestOptions:** `CopilotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -385,7 +385,7 @@ await client.copilots.addCollectionToCopilot({
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions` 
+**requestOptions:** `CopilotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -451,7 +451,7 @@ await client.copilots.removeCollectionFromCopilot({
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions` 
+**requestOptions:** `CopilotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -525,7 +525,7 @@ await client.copilots.updateConfiguration({
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions` 
+**requestOptions:** `CopilotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -576,7 +576,7 @@ await client.copilots.deleteCopilot({
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions` 
+**requestOptions:** `CopilotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -632,7 +632,7 @@ await client.documentCatalog.uploadDocumentContents({
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCatalog.RequestOptions` 
+**requestOptions:** `DocumentCatalogClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -698,7 +698,7 @@ await client.documentCatalog.syncSourceByUrl({
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCatalog.RequestOptions` 
+**requestOptions:** `DocumentCatalogClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -784,7 +784,7 @@ await client.documentCatalog.metadata({
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCatalog.RequestOptions` 
+**requestOptions:** `DocumentCatalogClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -859,7 +859,7 @@ await client.documentCollections.addDocumentsToCollection({
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions` 
+**requestOptions:** `DocumentCollectionsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -933,7 +933,7 @@ await client.documentCollections.removeDocumentsFromCollection({
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions` 
+**requestOptions:** `DocumentCollectionsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -998,7 +998,7 @@ await client.documentCollections.listDocumentsInCollection({
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions` 
+**requestOptions:** `DocumentCollectionsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1068,7 +1068,7 @@ await client.documentCollections.createCollection({
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions` 
+**requestOptions:** `DocumentCollectionsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1133,7 +1133,7 @@ await client.documentCollections.deleteCollection({
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions` 
+**requestOptions:** `DocumentCollectionsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1214,7 +1214,7 @@ await client.documentCollections.createMongoCollectionSync({
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions` 
+**requestOptions:** `DocumentCollectionsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1295,7 +1295,7 @@ await client.documentCollections.updateMongoCollectionSync({
 <dl>
 <dd>
 
-**requestOptions:** `DocumentCollections.RequestOptions` 
+**requestOptions:** `DocumentCollectionsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1376,7 +1376,7 @@ await client.search.searchDocumentCollection({
 <dl>
 <dd>
 
-**requestOptions:** `Search.RequestOptions` 
+**requestOptions:** `SearchClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1452,7 +1452,7 @@ await client.users.metadata([{
 <dl>
 <dd>
 
-**requestOptions:** `Users.RequestOptions` 
+**requestOptions:** `UsersClient.RequestOptions` 
     
 </dd>
 </dl>

@@ -3,7 +3,7 @@
 import { CredalClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("Search", () => {
+describe("SearchClient", () => {
     test("searchDocumentCollection", async () => {
         const server = mockServerPool.createServer();
         const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
