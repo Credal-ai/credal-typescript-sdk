@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("DocumentCollectionsClient", () => {
     test("addDocumentsToCollection", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
             resourceIdentifiers: [
@@ -51,7 +51,7 @@ describe("DocumentCollectionsClient", () => {
 
     test("removeDocumentsFromCollection", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
             resourceIdentifiers: [
@@ -96,7 +96,7 @@ describe("DocumentCollectionsClient", () => {
 
     test("listDocumentsInCollection", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             resourceIdentifiers: [
@@ -141,7 +141,7 @@ describe("DocumentCollectionsClient", () => {
 
     test("createCollection", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             name: "Customer Collection",
             description: "This collection is used to answer customer requests based on internal documentation.",
@@ -174,7 +174,7 @@ describe("DocumentCollectionsClient", () => {
 
     test("deleteCollection", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a" };
         const rawResponseBody = { collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a" };
         server
@@ -196,7 +196,7 @@ describe("DocumentCollectionsClient", () => {
 
     test("createMongoCollectionSync", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             mongoURI: "mongodb+srv://cluster0.abcdefg.mongodb.net/Cluster0?retryWrites=true&w=majority",
             collectionId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
@@ -254,7 +254,7 @@ describe("DocumentCollectionsClient", () => {
 
     test("updateMongoCollectionSync", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             mongoURI: "mongodb+srv://cluster0.abcdefg.mongodb.net/Cluster0?retryWrites=true&w=majority",
             mongoCredentialId: "5988ed76-6ee1-11ef-97dd-1fca54b7c4bc",

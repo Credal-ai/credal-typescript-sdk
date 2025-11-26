@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("CopilotsClient", () => {
     test("createCopilot", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             name: "Customer Agent",
             description: "This agent is used to answer customer requests based on internal documentation.",
@@ -39,7 +39,7 @@ describe("CopilotsClient", () => {
 
     test("createConversation", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24", userEmail: "ravin@credal.ai" };
         const rawResponseBody = { conversationId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a" };
         server
@@ -62,7 +62,7 @@ describe("CopilotsClient", () => {
 
     test("provideMessageFeedback", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             userEmail: "ravin@credal.ai",
             messageId: "dd721cd8-4bf2-4b94-9869-258df3dab9dc",
@@ -97,7 +97,7 @@ describe("CopilotsClient", () => {
 
     test("sendMessage", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             agentId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
             message: "Is Credal SOC 2 compliant?",
@@ -235,7 +235,7 @@ describe("CopilotsClient", () => {
 
     test("addCollectionToCopilot", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
             collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e",
@@ -258,7 +258,7 @@ describe("CopilotsClient", () => {
 
     test("removeCollectionFromCopilot", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
             collectionId: "def1055f-83c5-43d6-b558-f7a38e7b299e",
@@ -281,7 +281,7 @@ describe("CopilotsClient", () => {
 
     test("updateConfiguration", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             copilotId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
             configuration: {
@@ -317,7 +317,7 @@ describe("CopilotsClient", () => {
 
     test("deleteCopilot", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { id: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a" };
         const rawResponseBody = { copilotId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a" };
         server

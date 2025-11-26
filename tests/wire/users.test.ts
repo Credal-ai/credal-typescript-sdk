@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("UsersClient", () => {
     test("metadata", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = [
             { metadata: { State: "NY", "Job Role": "CEO" }, userEmail: "ravin@credal.ai" },
             { metadata: { State: "NY", Department: "Engineering" }, userEmail: "jack@credal.ai" },

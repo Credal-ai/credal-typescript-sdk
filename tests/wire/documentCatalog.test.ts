@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("DocumentCatalogClient", () => {
     test("uploadDocumentContents", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             documentName: "My Document",
             documentContents: "Lorem ipsum...",
@@ -38,7 +38,7 @@ describe("DocumentCatalogClient", () => {
 
     test("syncSourceByUrl", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             sourceUrl: "https://drive.google.com/file/d/123456/view",
             uploadAsUserEmail: "ria@credal.ai",
@@ -64,7 +64,7 @@ describe("DocumentCatalogClient", () => {
 
     test("metadata", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             sources: [
                 {
