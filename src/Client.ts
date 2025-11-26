@@ -6,7 +6,7 @@ import { DocumentCollectionsClient } from "./api/resources/documentCollections/c
 import { SearchClient } from "./api/resources/search/client/Client.js";
 import { UsersClient } from "./api/resources/users/client/Client.js";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
-import { normalizeClientOptions } from "./BaseClient.js";
+import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "./BaseClient.js";
 
 export declare namespace CredalClient {
     export interface Options extends BaseClientOptions {}
@@ -15,7 +15,7 @@ export declare namespace CredalClient {
 }
 
 export class CredalClient {
-    protected readonly _options: CredalClient.Options;
+    protected readonly _options: NormalizedClientOptionsWithAuth<CredalClient.Options>;
     protected _copilots: CopilotsClient | undefined;
     protected _documentCatalog: DocumentCatalogClient | undefined;
     protected _documentCollections: DocumentCollectionsClient | undefined;
@@ -23,7 +23,7 @@ export class CredalClient {
     protected _users: UsersClient | undefined;
 
     constructor(options: CredalClient.Options = {}) {
-        this._options = normalizeClientOptions(options);
+        this._options = normalizeClientOptionsWithAuth(options);
     }
 
     public get copilots(): CopilotsClient {

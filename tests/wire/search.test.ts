@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("SearchClient", () => {
     test("searchDocumentCollection", async () => {
         const server = mockServerPool.createServer();
-        const client = new CredalClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             collectionId: "82e4b12a-6990-45d4-8ebd-85c00e030c24",
             searchQuery: "ABC Corp",
