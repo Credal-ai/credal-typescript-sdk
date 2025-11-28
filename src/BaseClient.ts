@@ -50,8 +50,8 @@ export function normalizeClientOptions<T extends BaseClientOptions>(options: T):
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "@credal/sdk",
-            "X-Fern-SDK-Version": "0.1.13",
-            "User-Agent": "@credal/sdk/0.1.13",
+            "X-Fern-SDK-Version": "0.1.14",
+            "User-Agent": "@credal/sdk/0.1.14",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
         },

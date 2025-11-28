@@ -588,6 +588,78 @@ await client.copilots.deleteCopilot({
 </dl>
 </details>
 
+<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">export</a>({ ...params }) -> Credal.ExportCopilotsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export copilot configurations for backup or migration purposes.
+
+**IMPORTANT**: This endpoint requires:
+- Admin privileges
+- The 'ai-usage-analytics-log.export' scope on the API key
+
+Returns all deployed copilots with their full configuration including model settings, tools, and deployment details. Optional date filters can be applied to narrow down results.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.copilots.export({
+    agentCreatedFrom: "2024-01-01T00:00:00Z",
+    agentCreatedTo: "2024-12-31T23:59:59Z"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Credal.ExportCopilotsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CopilotsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## DocumentCatalog
 <details><summary><code>client.documentCatalog.<a href="/src/api/resources/documentCatalog/client/Client.ts">uploadDocumentContents</a>({ ...params }) -> Credal.UploadDocumentResponse</code></summary>
 <dl>
