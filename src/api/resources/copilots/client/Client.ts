@@ -745,4 +745,87 @@ export class CopilotsClient {
                 });
         }
     }
+
+    /**
+     * Export copilot configurations for backup or migration purposes.
+     *
+     * **IMPORTANT**: This endpoint requires:
+     * - Admin privileges
+     * - The 'ai-usage-analytics-log.export' scope on the API key
+     *
+     * Returns all deployed copilots with their full configuration including model settings, tools, and deployment details. Optional date filters can be applied to narrow down results.
+     *
+     * @param {Credal.ExportCopilotsRequest} request
+     * @param {CopilotsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.copilots.export({
+     *         agentCreatedFrom: "2024-01-01T00:00:00Z",
+     *         agentCreatedTo: "2024-12-31T23:59:59Z"
+     *     })
+     */
+    public export(
+        request: Credal.ExportCopilotsRequest = {},
+        requestOptions?: CopilotsClient.RequestOptions,
+    ): core.HttpResponsePromise<Credal.ExportCopilotsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__export(request, requestOptions));
+    }
+
+    private async __export(
+        request: Credal.ExportCopilotsRequest = {},
+        requestOptions?: CopilotsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Credal.ExportCopilotsResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.CredalEnvironment.Production,
+                "/v0/copilots/export",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Credal.ExportCopilotsResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.CredalError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/export.");
+            case "unknown":
+                throw new errors.CredalError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
 }

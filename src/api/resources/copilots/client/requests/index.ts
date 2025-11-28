@@ -2,6 +2,7 @@ export type { AddCollectionToCopilotRequest } from "./AddCollectionToCopilotRequ
 export type { CreateConversationRequest } from "./CreateConversationRequest.js";
 export type { CreateCopilotRequest } from "./CreateCopilotRequest.js";
 export type { DeleteCopilotRequest } from "./DeleteCopilotRequest.js";
+export type { ExportCopilotsRequest } from "./ExportCopilotsRequest.js";
 export type { ProvideMessageFeedbackRequest } from "./ProvideMessageFeedbackRequest.js";
 export type { RemoveCollectionFromCopilotRequest } from "./RemoveCollectionFromCopilotRequest.js";
 export type { SendMessageRequest } from "./SendMessageRequest.js";

@@ -336,4 +336,69 @@ describe("CopilotsClient", () => {
             copilotId: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
         });
     });
+
+    test("export", async () => {
+        const server = mockServerPool.createServer();
+        const client = new CredalClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { agentCreatedFrom: "2024-01-01T00:00:00Z", agentCreatedTo: "2024-12-31T23:59:59Z" };
+        const rawResponseBody = {
+            data: [
+                {
+                    id: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
+                    name: "Customer Support Agent",
+                    description: "Handles customer inquiries based on internal documentation",
+                    modelConfiguration: { modelProvider: "openai", modelName: "gpt-4", temperature: 0.7 },
+                    aiEndpointConfiguration: { baseUrl: "https://api.openai.com/v1/" },
+                    toolConfigurations: [],
+                    inputs: [],
+                    deploymentConfiguration: { isDeployed: true },
+                    agentCreatedDatetime: "2024-06-15T10:30:00Z",
+                    versionCreatedDatetime: "2024-06-20T14:45:00Z",
+                    isDeployed: true,
+                },
+            ],
+            hasMore: true,
+            nextCursor: "bc30e7ca-1caf-22fg-c36b-fgdb84eg5d4b",
+        };
+        server
+            .mockEndpoint()
+            .post("/v0/copilots/export")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.copilots.export({
+            agentCreatedFrom: "2024-01-01T00:00:00Z",
+            agentCreatedTo: "2024-12-31T23:59:59Z",
+        });
+        expect(response).toEqual({
+            data: [
+                {
+                    id: "ac20e6ba-0bae-11ef-b25a-efca73df4c3a",
+                    name: "Customer Support Agent",
+                    description: "Handles customer inquiries based on internal documentation",
+                    modelConfiguration: {
+                        modelProvider: "openai",
+                        modelName: "gpt-4",
+                        temperature: 0.7,
+                    },
+                    aiEndpointConfiguration: {
+                        baseUrl: "https://api.openai.com/v1/",
+                    },
+                    toolConfigurations: [],
+                    inputs: [],
+                    deploymentConfiguration: {
+                        isDeployed: true,
+                    },
+                    agentCreatedDatetime: "2024-06-15T10:30:00Z",
+                    versionCreatedDatetime: "2024-06-20T14:45:00Z",
+                    isDeployed: true,
+                },
+            ],
+            hasMore: true,
+            nextCursor: "bc30e7ca-1caf-22fg-c36b-fgdb84eg5d4b",
+        });
+    });
 });

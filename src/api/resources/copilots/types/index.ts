@@ -12,6 +12,8 @@ export * from "./DeleteCopilotResponse.js";
 export * from "./EndOfMessageChunk.js";
 export * from "./ErrorChunk.js";
 export * from "./ErrorChunkData.js";
+export * from "./ExportCopilotsResponse.js";
+export * from "./ExportedCopilot.js";
 export * from "./FeedbackEnum.js";
 export * from "./Filter.js";
 export * from "./FinalChunk.js";
