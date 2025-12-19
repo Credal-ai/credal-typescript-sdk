@@ -5,11 +5,12 @@ import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } 
 import { mergeHeaders } from "../../../../core/headers.js";
 import * as core from "../../../../core/index.js";
 import * as environments from "../../../../environments.js";
+import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import type * as Credal from "../../../index.js";
 
 export declare namespace CopilotsClient {
-    export interface Options extends BaseClientOptions {}
+    export type Options = BaseClientOptions;
 
     export interface RequestOptions extends BaseRequestOptions {}
 }
@@ -85,26 +86,7 @@ export class CopilotsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/createCopilot.");
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v0/copilots/createCopilot");
     }
 
     /**
@@ -167,28 +149,12 @@ export class CopilotsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling POST /v0/copilots/createConversation.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v0/copilots/createConversation",
+        );
     }
 
     /**
@@ -255,28 +221,12 @@ export class CopilotsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling POST /v0/copilots/provideMessageFeedback.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v0/copilots/provideMessageFeedback",
+        );
     }
 
     /**
@@ -345,26 +295,7 @@ export class CopilotsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/sendMessage.");
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v0/copilots/sendMessage");
     }
 
     /**
@@ -430,26 +361,7 @@ export class CopilotsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/streamMessage.");
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v0/copilots/streamMessage");
     }
 
     /**
@@ -512,28 +424,12 @@ export class CopilotsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling POST /v0/copilots/addCollectionToCopilot.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v0/copilots/addCollectionToCopilot",
+        );
     }
 
     /**
@@ -596,28 +492,12 @@ export class CopilotsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling POST /v0/copilots/removeCollectionFromCopilot.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v0/copilots/removeCollectionFromCopilot",
+        );
     }
 
     /**
@@ -688,28 +568,12 @@ export class CopilotsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling POST /v0/copilots/updateConfiguration.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v0/copilots/updateConfiguration",
+        );
     }
 
     /**
@@ -769,26 +633,7 @@ export class CopilotsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError("Timeout exceeded when calling DELETE /v0/copilots/deleteCopilot.");
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/v0/copilots/deleteCopilot");
     }
 
     /**
@@ -857,25 +702,6 @@ export class CopilotsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/export.");
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v0/copilots/export");
     }
 }

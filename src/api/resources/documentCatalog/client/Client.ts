@@ -5,11 +5,12 @@ import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } 
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
 import * as core from "../../../../core/index.js";
 import * as environments from "../../../../environments.js";
+import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import type * as Credal from "../../../index.js";
 
 export declare namespace DocumentCatalogClient {
-    export interface Options extends BaseClientOptions {}
+    export type Options = BaseClientOptions;
 
     export interface RequestOptions extends BaseRequestOptions {}
 }
@@ -82,28 +83,12 @@ export class DocumentCatalogClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling POST /v0/catalog/uploadDocumentContents.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v0/catalog/uploadDocumentContents",
+        );
     }
 
     /**
@@ -202,26 +187,7 @@ export class DocumentCatalogClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/catalog/uploadFile.");
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v0/catalog/uploadFile");
     }
 
     /**
@@ -284,26 +250,7 @@ export class DocumentCatalogClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/catalog/syncSourceByUrl.");
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v0/catalog/syncSourceByUrl");
     }
 
     /**
@@ -386,25 +333,6 @@ export class DocumentCatalogClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError("Timeout exceeded when calling PATCH /v0/catalog/metadata.");
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "PATCH", "/v0/catalog/metadata");
     }
 }
