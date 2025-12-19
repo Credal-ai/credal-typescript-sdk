@@ -50,8 +50,8 @@ export function normalizeClientOptions<T extends BaseClientOptions>(options: T):
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "@credal/sdk",
-            "X-Fern-SDK-Version": "0.1.14",
-            "User-Agent": "@credal/sdk/0.1.14",
+            "X-Fern-SDK-Version": "0.1.15",
+            "User-Agent": "@credal/sdk/0.1.15",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
         },
@@ -69,6 +69,16 @@ export function normalizeClientOptionsWithAuth<T extends BaseClientOptions>(
     options: T,
 ): NormalizedClientOptionsWithAuth<T> {
     const normalized = normalizeClientOptions(options) as NormalizedClientOptionsWithAuth<T>;
-    normalized.authProvider ??= new BearerAuthProvider(options);
+    const normalizedWithNoOpAuthProvider = withNoOpAuthProvider(normalized);
+    normalized.authProvider ??= new BearerAuthProvider(normalizedWithNoOpAuthProvider);
     return normalized;
+}
+
+function withNoOpAuthProvider<T extends BaseClientOptions>(
+    options: NormalizedClientOptions<T>,
+): NormalizedClientOptionsWithAuth<T> {
+    return {
+        ...options,
+        authProvider: new core.NoOpAuthProvider(),
+    };
 }

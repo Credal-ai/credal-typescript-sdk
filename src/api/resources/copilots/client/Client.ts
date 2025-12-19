@@ -92,6 +92,11 @@ export class CopilotsClient {
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    rawResponse: _response.rawResponse,
+                });
             case "timeout":
                 throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/createCopilot.");
             case "unknown":
@@ -167,6 +172,11 @@ export class CopilotsClient {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
@@ -250,6 +260,11 @@ export class CopilotsClient {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
@@ -337,6 +352,11 @@ export class CopilotsClient {
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    rawResponse: _response.rawResponse,
+                });
             case "timeout":
                 throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/sendMessage.");
             case "unknown":
@@ -417,6 +437,11 @@ export class CopilotsClient {
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    rawResponse: _response.rawResponse,
+                });
             case "timeout":
                 throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/copilots/streamMessage.");
             case "unknown":
@@ -492,6 +517,11 @@ export class CopilotsClient {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
@@ -571,6 +601,11 @@ export class CopilotsClient {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
@@ -660,6 +695,11 @@ export class CopilotsClient {
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    rawResponse: _response.rawResponse,
+                });
             case "timeout":
                 throw new errors.CredalTimeoutError(
                     "Timeout exceeded when calling POST /v0/copilots/updateConfiguration.",
@@ -734,6 +774,11 @@ export class CopilotsClient {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
@@ -817,6 +862,11 @@ export class CopilotsClient {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":

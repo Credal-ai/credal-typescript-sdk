@@ -89,6 +89,11 @@ export class DocumentCatalogClient {
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    rawResponse: _response.rawResponse,
+                });
             case "timeout":
                 throw new errors.CredalTimeoutError(
                     "Timeout exceeded when calling POST /v0/catalog/uploadDocumentContents.",
@@ -204,6 +209,11 @@ export class DocumentCatalogClient {
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    rawResponse: _response.rawResponse,
+                });
             case "timeout":
                 throw new errors.CredalTimeoutError("Timeout exceeded when calling POST /v0/catalog/uploadFile.");
             case "unknown":
@@ -279,6 +289,11 @@ export class DocumentCatalogClient {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
@@ -376,6 +391,11 @@ export class DocumentCatalogClient {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":

@@ -97,6 +97,11 @@ export class UsersClient {
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    rawResponse: _response.rawResponse,
+                });
             case "timeout":
                 throw new errors.CredalTimeoutError("Timeout exceeded when calling PATCH /v0/users/metadata.");
             case "unknown":

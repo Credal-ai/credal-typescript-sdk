@@ -96,6 +96,11 @@ export class DocumentCollectionsClient {
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    rawResponse: _response.rawResponse,
+                });
             case "timeout":
                 throw new errors.CredalTimeoutError(
                     "Timeout exceeded when calling POST /v0/documentCollections/addDocumentsToCollection.",
@@ -183,6 +188,11 @@ export class DocumentCollectionsClient {
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    rawResponse: _response.rawResponse,
+                });
             case "timeout":
                 throw new errors.CredalTimeoutError(
                     "Timeout exceeded when calling DELETE /v0/documentCollections/removeDocumentsFromCollection.",
@@ -262,6 +272,11 @@ export class DocumentCollectionsClient {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
@@ -347,6 +362,11 @@ export class DocumentCollectionsClient {
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    rawResponse: _response.rawResponse,
+                });
             case "timeout":
                 throw new errors.CredalTimeoutError(
                     "Timeout exceeded when calling POST /v0/documentCollections/createCollection.",
@@ -423,6 +443,11 @@ export class DocumentCollectionsClient {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
@@ -519,6 +544,11 @@ export class DocumentCollectionsClient {
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
+                    rawResponse: _response.rawResponse,
+                });
             case "timeout":
                 throw new errors.CredalTimeoutError(
                     "Timeout exceeded when calling POST /v0/documentCollections/mongodb/createMongoSync.",
@@ -611,6 +641,11 @@ export class DocumentCollectionsClient {
                 throw new errors.CredalError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "body-is-null":
+                throw new errors.CredalError({
+                    statusCode: _response.error.statusCode,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
