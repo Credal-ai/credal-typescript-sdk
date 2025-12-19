@@ -358,7 +358,7 @@ describe("CopilotsClient", () => {
                 },
             ],
             hasMore: true,
-            nextCursor: "bc30e7ca-1caf-22fg-c36b-fgdb84eg5d4b",
+            nextCursor: "bc30e7ca-1caf-42fa-c36b-fadb84ef5d4b",
         };
         server
             .mockEndpoint()
@@ -398,7 +398,7 @@ describe("CopilotsClient", () => {
                 },
             ],
             hasMore: true,
-            nextCursor: "bc30e7ca-1caf-22fg-c36b-fgdb84eg5d4b",
+            nextCursor: "bc30e7ca-1caf-42fa-c36b-fadb84ef5d4b",
         });
     });
 });
