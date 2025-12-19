@@ -5,11 +5,12 @@ import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } 
 import { mergeHeaders } from "../../../../core/headers.js";
 import * as core from "../../../../core/index.js";
 import * as environments from "../../../../environments.js";
+import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import type * as Credal from "../../../index.js";
 
 export declare namespace DocumentCollectionsClient {
-    export interface Options extends BaseClientOptions {}
+    export type Options = BaseClientOptions;
 
     export interface RequestOptions extends BaseRequestOptions {}
 }
@@ -89,28 +90,12 @@ export class DocumentCollectionsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling POST /v0/documentCollections/addDocumentsToCollection.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v0/documentCollections/addDocumentsToCollection",
+        );
     }
 
     /**
@@ -181,28 +166,12 @@ export class DocumentCollectionsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling DELETE /v0/documentCollections/removeDocumentsFromCollection.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "DELETE",
+            "/v0/documentCollections/removeDocumentsFromCollection",
+        );
     }
 
     /**
@@ -267,28 +236,12 @@ export class DocumentCollectionsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling GET /v0/documentCollections/listDocumentsInCollection.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v0/documentCollections/listDocumentsInCollection",
+        );
     }
 
     /**
@@ -355,28 +308,12 @@ export class DocumentCollectionsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling POST /v0/documentCollections/createCollection.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v0/documentCollections/createCollection",
+        );
     }
 
     /**
@@ -438,28 +375,12 @@ export class DocumentCollectionsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling DELETE /v0/documentCollections/deleteCollection.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "DELETE",
+            "/v0/documentCollections/deleteCollection",
+        );
     }
 
     /**
@@ -537,28 +458,12 @@ export class DocumentCollectionsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling POST /v0/documentCollections/mongodb/createMongoSync.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v0/documentCollections/mongodb/createMongoSync",
+        );
     }
 
     /**
@@ -636,27 +541,11 @@ export class DocumentCollectionsClient {
             });
         }
 
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "body-is-null":
-                throw new errors.CredalError({
-                    statusCode: _response.error.statusCode,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.CredalTimeoutError(
-                    "Timeout exceeded when calling POST /v0/documentCollections/mongodb/updateMongoSync.",
-                );
-            case "unknown":
-                throw new errors.CredalError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v0/documentCollections/mongodb/updateMongoSync",
+        );
     }
 }
