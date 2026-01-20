@@ -108,47 +108,47 @@ export class DocumentCatalogClient {
         request: Credal.UploadFileRequest,
         requestOptions?: DocumentCatalogClient.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.UploadDocumentResponse>> {
-        const _request = await core.newFormData();
-        await _request.appendFile("file", request.file);
+        const _body = await core.newFormData();
+        await _body.appendFile("file", request.file);
         if (request.documentName != null) {
-            _request.append("documentName", request.documentName);
+            _body.append("documentName", request.documentName);
         }
 
-        _request.append("uploadAsUserEmail", request.uploadAsUserEmail);
-        _request.append("documentExternalId", request.documentExternalId);
+        _body.append("uploadAsUserEmail", request.uploadAsUserEmail);
+        _body.append("documentExternalId", request.documentExternalId);
         if (request.allowedUsersEmailAddresses != null) {
-            _request.append("allowedUsersEmailAddresses", request.allowedUsersEmailAddresses);
+            _body.append("allowedUsersEmailAddresses", request.allowedUsersEmailAddresses);
         }
 
         if (request.documentExternalUrl != null) {
-            _request.append("documentExternalUrl", request.documentExternalUrl);
+            _body.append("documentExternalUrl", request.documentExternalUrl);
         }
 
         if (request.customMetadata != null) {
-            _request.append("customMetadata", request.customMetadata);
+            _body.append("customMetadata", request.customMetadata);
         }
 
         if (request.collectionId != null) {
-            _request.append("collectionId", request.collectionId);
+            _body.append("collectionId", request.collectionId);
         }
 
         if (request.forceUpdate != null) {
-            _request.append("forceUpdate", request.forceUpdate);
+            _body.append("forceUpdate", request.forceUpdate);
         }
 
         if (request.internalPublic != null) {
-            _request.append("internalPublic", request.internalPublic);
+            _body.append("internalPublic", request.internalPublic);
         }
 
         if (request.sourceSystemUpdated != null) {
-            _request.append("sourceSystemUpdated", request.sourceSystemUpdated);
+            _body.append("sourceSystemUpdated", request.sourceSystemUpdated);
         }
 
         if (request.awaitVectorStoreSync != null) {
-            _request.append("awaitVectorStoreSync", request.awaitVectorStoreSync);
+            _body.append("awaitVectorStoreSync", request.awaitVectorStoreSync);
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
