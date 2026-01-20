@@ -197,8 +197,9 @@ export class DocumentCollectionsClient {
         requestOptions?: DocumentCollectionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Credal.ListDocumentsInCollectionResponse>> {
         const { collectionId } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.collectionId = collectionId;
+        const _queryParams: Record<string, unknown> = {
+            collectionId,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
