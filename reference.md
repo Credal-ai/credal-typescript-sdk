@@ -254,7 +254,7 @@ await client.copilots.sendMessage({
 </dl>
 </details>
 
-<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">streamMessage</a>({ ...params }) -> core.Stream<Credal.StreamingChunk></code></summary>
+<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">streamMessage</a>({ ...params }) -> core.Stream&lt;Credal.StreamingChunk&gt;</code></summary>
 <dl>
 <dd>
 
